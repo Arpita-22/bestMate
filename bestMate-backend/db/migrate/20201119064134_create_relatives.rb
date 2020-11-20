@@ -5,7 +5,7 @@ class CreateRelatives < ActiveRecord::Migration[6.0]
       t.string :address
       t.integer :age
       t.string :relationship
-      t.string :distance
+      t.integer :distance
       t.belongs_to :user, null: false, foreign_key: true
 
       t.timestamps

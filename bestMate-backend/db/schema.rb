@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2020_11_19_172635) do
   end
 
   create_table "notes", force: :cascade do |t|
-    t.string "description"
+    t.text "description"
     t.bigint "relative_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_11_19_172635) do
     t.string "address"
     t.integer "age"
     t.string "relationship"
-    t.string "distance"
+    t.integer "distance"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
