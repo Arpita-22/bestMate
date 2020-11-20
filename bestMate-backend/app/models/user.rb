@@ -4,5 +4,10 @@ class User < ApplicationRecord
     has_many :allowed_foods
     has_many :food_restaurants, through: :allowed_foods
     has_many :restaurants, through: :food_restaurants
+
     has_secure_password
+
+    # validates :name, uniqueness: { case_sensitive: false }
+    # validates :password, confirmation: true, unless: -> { password.blank? }
+
 end

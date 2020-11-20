@@ -13,7 +13,7 @@ Relative.destroy_all
 Restaurant.destroy_all
 User.destroy_all
 
-u1 = User.create(name: "Anita", address: "Seattle", age: 60, password: "Anita" )
+u1 = User.create(name: "Anita", address: "Seattle", age: 60, password: "Anita@60" )
 
 re1 = Relative.create(name: "Dan", address: "California", age: 45, relationship: "cousin", distance: 2, user_id: u1.id)
 re2 = Relative.create(name: "Brown", address: "Denver", age: 75, relationship: "husband", distance: 1, user_id: u1.id)
