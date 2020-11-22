@@ -8,17 +8,17 @@ import InteractionMode from './InteractionMode';
 
 
 
-const initialState={
-   count:0,
-   value:1
-}
+// const initialState={
+//    count:0,
+//    value:1
+// }
 
-const reducer = (state = initialState, action) =>{
-  // console.log( state,  action)
-  return state
-}
+// const reducer = (state = initialState, action) =>{
+//   // console.log( state,  action)
+//   return state
+// }
 
-export const store = createStore(reducer)
+// export const store = createStore(reducer)
 export class MainContainer extends React.Component {
   render(){
   return (

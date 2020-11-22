@@ -2,11 +2,12 @@ import React from 'react';
 // import './App.css';
 import Header from './container/Header'
 import {MainContainer} from './container/MainContainer';
-import {  BrowserRouter as Router,Route} from 'react-router-dom';
+import {BrowserRouter as Router,Route} from 'react-router-dom';
 import SignUp from './container/SignUp';
 import Login from './container/Login';
+import allReducers from './reducers';
 
-// import {createStore} from 'redux';
+import {createStore} from 'redux';
 
 
 const initialState={
@@ -14,12 +15,12 @@ const initialState={
    token:""
 }
 
-// const reducer = (state = initialState, action) =>{
-//   console.log( state,  action)
-//   return state
-// }
+const reducer = (state = initialState, action) =>{
+  console.log( state,  action)
+  return state
+}
 
-// export const store = createStore(reducer)
+export const store = createStore(reducer)
 export class App extends React.Component {
   render(){
   return (

@@ -8,8 +8,8 @@ export class Login extends React.Component {
       <form>
         <h1>Login</h1>
         <div>
-          <input type="text" name="username" placeholder="Username" />
-          <label htmlFor="username">Username</label>
+          <input type="text" name="name" placeholder="name" />
+          <label htmlFor="name">name</label>
         </div>
         <div>
           <input type="password" name="password" placeholder="Password" />
