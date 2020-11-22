@@ -7,7 +7,6 @@ export class InteractionMode extends React.Component {
 
    return(
       <div>
-         Hi
       </div>
    )
 }

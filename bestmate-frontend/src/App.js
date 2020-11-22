@@ -2,14 +2,17 @@ import React from 'react';
 // import './App.css';
 import Header from './container/Header'
 import {MainContainer} from './container/MainContainer';
+import {  BrowserRouter as Router,Route} from 'react-router-dom';
+import SignUp from './container/SignUp';
+import Login from './container/Login';
 
 // import {createStore} from 'redux';
 
 
-// const initialState={
-//    count:0,
-//    value:1
-// }
+const initialState={
+   user:"",
+   token:""
+}
 
 // const reducer = (state = initialState, action) =>{
 //   console.log( state,  action)
@@ -20,16 +23,16 @@ import {MainContainer} from './container/MainContainer';
 export class App extends React.Component {
   render(){
   return (
+    <Router>
     <div className="app" >
       <Header />
+      <Route exact path="/" />
+      <Route exact path="/SignUp" component={SignUp} />
+      <Route exact path="/Login" component={Login} />
+      {/* <Route exact path="/" component={MainContainer} /> */}
       <MainContainer />
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header> */}
     </div>
+    </Router>
   );
   }
 }
