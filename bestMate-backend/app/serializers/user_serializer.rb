@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :address, :age
+  attributes :id, :name, :address, :age, :password_digest
 
   # def relatives
   #   object.relatives

@@ -7,10 +7,10 @@ class SignUp extends React.Component {
         super();
         this.state = {
           user:{
-          name: "" ,
-          address: "",
-          age: "",
-          password:""
+            name: "" ,
+            address: "",
+            age: "",
+            password_digest:"",
         },
         token:""
         // family:{
@@ -51,7 +51,7 @@ class SignUp extends React.Component {
       handlePassword = (e) =>{
         this.setState({
             user:{
-                ...this.state, password: e.target.value
+                ...this.state.user, password_digest: e.target.value
             }
         });
       }
@@ -59,12 +59,7 @@ class SignUp extends React.Component {
 
     handleSignUp = (e) =>{
         e.preventDefault();
-        console.log(this.state.user)
-        //    User:{
-        //     name:e.target.name.value,
-        //     address:e.target.address.value,
-        //     age:e.target.age.value
-        // }
+        console.log("111111111", this.state.user)
         fetch('http://localhost:3000/api/v1/users', {
             method: 'POST', 
             headers: {
@@ -72,16 +67,14 @@ class SignUp extends React.Component {
             },
             body: JSON.stringify(
                 this.state.user
-                // user = {
-                //     name:e.target.name.value,
-                //     address:e.target.address.value,
-                //     age:e.target.age.value
-                // }
-            //    console.log( this.state.user)
             ),
         })
         .then(response => response.json())
         .then(data => {
+            // this.setState({
+            //     user: data.user
+            // })
+            // this.props.history.push('/')
             console.log("signUp", data);    
         })
         .catch((error) => {
@@ -123,7 +116,7 @@ class SignUp extends React.Component {
         </div> */}
 
         <div>
-          <input type="password" name="password" placeholder="Password" onChange={(e) => this.handlePassword(e)} value={this.state.password}/>
+          <input type="password" name="password_digest" placeholder="Password" onChange={(e) => this.handlePassword(e)} />
           <label htmlFor="password">Password</label>
         </div>
         <input type="submit" value="SignUp" />

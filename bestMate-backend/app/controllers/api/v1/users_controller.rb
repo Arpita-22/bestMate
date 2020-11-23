@@ -21,8 +21,9 @@ class Api::V1::UsersController < ApplicationController
     # end
 # we can also write User.new(user_params) and if user.save
     def create
-        @user = User.create(user_params)
-        if @user.valid?
+        @user = User.new(user_params)
+        #byebug
+        if @user.save
             @token = encode_token(user_id: @user.id)
             render json: {user: UserSerializer.new(@user), jwt: @token} , status: :created
         else
@@ -33,6 +34,6 @@ class Api::V1::UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:name,:address,:age,:password)
+        params.require(:user).permit(:id,:name,:address,:age,:password_digest)
     end
 end
