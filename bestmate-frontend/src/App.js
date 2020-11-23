@@ -8,21 +8,28 @@ import Login from './container/Login';
 import {connect} from 'react-redux';
 import { isLoggedAction } from './actions/';
 import { Forbidden } from './container/errors/Forbidden';
+import InteractionMode from './container/InteractionMode';
+
 
 
 class App extends React.Component {
 
+  displayUser = (user) =>{
+    console.log(user)
+  }
+
+
   render(){
     const isLogged = this.props.isLogged
-    console.log("!!!!!!!!!!!!!!!! Logged in - ", isLogged);
+    // console.log("!!!!!!!!!!!!!!!! Logged in - ", isLogged);
     return (
       <Router>
         <div className="app" >
           <Header />
           <Route exact path="/" component={MainContainer}/>
-          <Route exact path="/Login" component={Login} />
-          {isLogged === false? <Route exact path="/SignUp" component={SignUp} /> : <Route exact path="/" component={MainContainer} /> }
-          {/* <Route exact path="/SignUp" component={SignUp} /> */}
+          <Route exact path="/Login" render={props => <Login displayUser={this.displayUser}/> }  />
+          {isLogged === false? <Route exact path="/SignUp" component={SignUp} /> : <Route exact path="/InteractionMode" render={props => <InteractionMode displayUser={this.displayUser} />} /> }
+          {/* <Route exact path="/InteractionMode" render={props => <InteractionMode displayUser={this.displayUser} />} /> */}
         </div>
       </Router>
     );

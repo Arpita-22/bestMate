@@ -6,24 +6,6 @@ import{store} from './MainContainer';
 // import {Router} from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
-// let handleSignUp = () =>{
-//     console.log("signup")
-// }
-
-// let handleLogin = () =>{
-//     console.log("login")
-// }
-
-
-// function Header(){
-//     return(
-//         <div className="nav-bar">
-//             {/* {store.getState().count} */}
-//         <button onClick={() => handleSignUp()}>SignUp </button>
-//         <button onClick={() => handleLogin()}>Login</button>
-//         </div>
-//     )
-// }
 
 const Header = () => {
   return (

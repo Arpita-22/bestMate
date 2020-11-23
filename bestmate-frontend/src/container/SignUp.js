@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import { Redirect } from "react-router-dom";
+import { isLoggedAction } from '../actions/';
  
 class SignUp extends React.Component {
 
@@ -10,9 +12,10 @@ class SignUp extends React.Component {
             name: "" ,
             address: "",
             age: "",
-            password_digest:"",
+            password:""
         },
-        token:""
+        token:"",
+        signedIn: false
         // family:{
         //     name: "" ,
         //     address: "",
@@ -20,6 +23,7 @@ class SignUp extends React.Component {
         //     relationship:"",
         //     distance:""
         // }
+        
         };
       }
        
@@ -51,7 +55,7 @@ class SignUp extends React.Component {
       handlePassword = (e) =>{
         this.setState({
             user:{
-                ...this.state.user, password_digest: e.target.value
+                ...this.state.user, password: e.target.value
             }
         });
       }
@@ -66,64 +70,90 @@ class SignUp extends React.Component {
             'Content-Type': 'application/json',
             },
             body: JSON.stringify(
-                this.state.user
+                {user:this.state.user}
             ),
         })
         .then(response => response.json())
         .then(data => {
-            // this.setState({
-            //     user: data.user
-            // })
+            this.setState({
+                user: data.user
+            })
             // this.props.history.push('/')
             console.log("signUp", data);    
+            //dispatch true to redux state
+            // this.props.isLogged
+            
+            this.setState({ signedIn: true });
         })
         .catch((error) => {
             console.error('Error:', error);
         });
+        
     }
 
     
   render() {
+    // console.log(this.props.isLogged)
+    // console.log(this.state.isLogged)
+    if (this.state.signedIn) {
+      return <Redirect to='/Login' />
+    }
     return (
-        <div>
-      <form onSubmit={(e) => this.handleSignUp(e)}>
-        <h1>SignUp</h1>
-        {/* <h2>Personal Details</h2> */}
-        <div>
-          <input type="text" name="name" placeholder="name" onChange={(e) => this.handleName(e)} value={this.state.name} />
-          <label htmlFor="name">Name</label>
-        </div>
-        <div>
-          <input type="text" name="address" placeholder="address" onChange={(e) => this.handleAddress(e)} value={this.state.address}/>
-          <label htmlFor="">Address</label>
-        </div>
-        <div>
-          <input type="integer" name="age" placeholder="age" onChange={(e) => this.handleAge(e)} value={this.state.age} />
-          <label htmlFor="age">Age</label>
-        </div>
-        {/* <h2>Family Details</h2>
-        <div>
-          <input type="text" name="name" placeholder="name" onChange={(e) => this.handleName(e)} value={this.state.name} />
-          <label htmlFor="name">Name</label>
-        </div>
-        <div>
-          <input type="text" name="address" placeholder="address" onChange={(e) => this.handleAddress(e)} value={this.state.address}/>
-          <label htmlFor="">Address</label>
-        </div>
-        <div>
-          <input type="integer" name="age" placeholder="age" onChange={(e) => this.handleAge(e)} value={this.state.age}/>
-          <label htmlFor="age">Age</label>
-        </div> */}
+      <div>
+        <form onSubmit={(e) => this.handleSignUp(e)}>
+          <h1>SignUp</h1>
+          {/* <h2>Personal Details</h2> */}
+          <div>
+            <input type="text" name="name" placeholder="name" onChange={(e) => this.handleName(e)} value={this.state.name} />
+            <label htmlFor="name">Name</label>
+          </div>
+          <div>
+            <input type="text" name="address" placeholder="address" onChange={(e) => this.handleAddress(e)} value={this.state.address}/>
+            <label htmlFor="">Address</label>
+          </div>
+          <div>
+            <input type="integer" name="age" placeholder="age" onChange={(e) => this.handleAge(e)} value={this.state.age} />
+            <label htmlFor="age">Age</label>
+          </div>
+          {/* <h2>Family Details</h2>
+          <div>
+            <input type="text" name="name" placeholder="name" onChange={(e) => this.handleName(e)} value={this.state.name} />
+            <label htmlFor="name">Name</label>
+          </div>
+          <div>
+            <input type="text" name="address" placeholder="address" onChange={(e) => this.handleAddress(e)} value={this.state.address}/>
+            <label htmlFor="">Address</label>
+          </div>
+          <div>
+            <input type="integer" name="age" placeholder="age" onChange={(e) => this.handleAge(e)} value={this.state.age}/>
+            <label htmlFor="age">Age</label>
+          </div> */}
 
-        <div>
-          <input type="password" name="password_digest" placeholder="Password" onChange={(e) => this.handlePassword(e)} />
-          <label htmlFor="password">Password</label>
-        </div>
-        <input type="submit" value="SignUp" />
-      </form>
+          <div>
+            <input type="password" name="password" placeholder="Password" onChange={(e) => this.handlePassword(e)} />
+            <label htmlFor="password">Password</label>
+          </div>
+          <input type="submit" value="SignUp" />
+        </form>
       </div>
     );
   }
 }
- export default SignUp;
-// export default connect(null, mapDispatchToProps)(SignUp);
+
+const mapStateToProps = (state) => {
+  return {
+    isLogged : state.isLogged
+  };
+};
+ 
+const mapDispatchToProps = () => {
+  return {
+    isLoggedAction
+  };
+};
+ 
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps()
+)(SignUp);
+//  export default SignUp;
