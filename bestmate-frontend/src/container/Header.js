@@ -29,7 +29,7 @@ const Header = () => {
   return (
     <div className="header">
       {/*{code here}*/}
-      {/* <NavLink to="/" >Home</NavLink> */}
+      <NavLink to="/" >Home</NavLink>
       <NavLink to="/SignUp" > SignUp   </NavLink>
       <NavLink to="/Login" >  Login </NavLink>
       {/* <NavLink  to="/InteractionMode" > InteractionMode</NavLink> */}

@@ -5,37 +5,45 @@ import {MainContainer} from './container/MainContainer';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
 import SignUp from './container/SignUp';
 import Login from './container/Login';
-import allReducers from './reducers';
+import {connect} from 'react-redux';
+import { isLoggedAction } from './actions/';
+import { Forbidden } from './container/errors/Forbidden';
 
-import {createStore} from 'redux';
 
+class App extends React.Component {
 
-const initialState={
-   user:"",
-   token:""
-}
-
-const reducer = (state = initialState, action) =>{
-  console.log( state,  action)
-  return state
-}
-
-export const store = createStore(reducer)
-export class App extends React.Component {
   render(){
-  return (
-    <Router>
-    <div className="app" >
-      <Header />
-      <Route exact path="/" />
-      <Route exact path="/SignUp" component={SignUp} />
-      <Route exact path="/Login" component={Login} />
-      {/* <Route exact path="/" component={MainContainer} /> */}
-      <MainContainer />
-    </div>
-    </Router>
-  );
+    const isLogged = this.props.isLogged
+    console.log("!!!!!!!!!!!!!!!! Logged in - ", isLogged);
+    return (
+      <Router>
+        <div className="app" >
+          <Header />
+          <Route exact path="/" component={MainContainer}/>
+          <Route exact path="/Login" component={Login} />
+          {isLogged === false? <Route exact path="/SignUp" component={SignUp} /> : <Route exact path="/" component={MainContainer} /> }
+          {/* <Route exact path="/SignUp" component={SignUp} /> */}
+        </div>
+      </Router>
+    );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isLogged : state.isLogged
+  };
+};
+ 
+const mapDispatchToProps = () => {
+  return {
+    isLoggedAction
+  };
+};
+ 
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps()
+)(App);
+
+//export default App;
