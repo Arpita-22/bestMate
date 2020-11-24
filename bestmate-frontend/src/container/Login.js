@@ -3,6 +3,7 @@ import React from 'react'
 import {connect} from 'react-redux';
 import { Redirect } from "react-router-dom";
 import { isLoggedAction } from '../actions/';
+import {store} from '../index.js'
 
 
 export class Login extends React.Component {
@@ -54,6 +55,7 @@ handleLogin = (e) =>{
 
 
   render() {
+    // console.log(store.getState().isLogged)
     if (this.props.isLogged) {
       return <Redirect to='/MainContainer' />
     }

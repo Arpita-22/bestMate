@@ -9,18 +9,33 @@ import { isLoggedAction } from './actions/';
 import { Forbidden } from './container/errors/Forbidden';
 import InteractionMode from './container/InteractionMode';
 import FrontPage from './container/FrontPage';
+import {store} from './index.js'
 
 
 
 class App extends React.Component {
 
-  displayUser = (user) =>{
-     //console.log(user)
+
+  componentDidMount(){
+  fetch('http://localhost:3000/api/v1/users')
+  .then(response => response.json())
+  .then(users => users.map(user =>{
+    this.props.user.id = user.id
+    this.props.user.name = user.name
+    this.props.user.address = user.address
+    this.props.user.age = user.age
+    this.props.user.password = user.password
+  }) 
+  );
+  }
+
+  displayUser = (data) =>{
+    console.log(data)
   }
 
 
   render(){
-      
+    console.log(this.props.user)
     const isLogged = this.props.isLogged
     return (
       <Router>
@@ -37,7 +52,8 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    isLogged : state.isLogged
+    isLogged : state.isLogged,
+    user: state.user.user
   };
 };
  

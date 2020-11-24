@@ -9,7 +9,6 @@ import NavBar from './NavBar';
 
 export class MainContainer extends React.Component {
   render(){
-    console.log("########",this.props.displayUser)
     return (
     <div className="container">
       <NavBar displayUser={this.props.displayUser} />

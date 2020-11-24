@@ -1,10 +1,24 @@
-const loggedReducer = (state = '', action) =>{
+const initialState={
+     user:{
+        id:'',
+        name:"",
+        address:"",
+        age: '',
+        allowed_foods:[],
+        relatives:[],
+        password:"",
+        token:""
+
+    }
+}
+const userReducer = (state = initialState, action) =>{
     switch(action.type){
-        case 'display':
-            return true
+        case 'displayUser':
+            return {...state}
         default:
             return state
     }
+
 }
 
-export default loggedReducer
+export default userReducer
