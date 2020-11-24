@@ -32,6 +32,7 @@ handleLogin = (e) =>{
     method: 'POST', 
     headers: {
     'Content-Type': 'application/json',
+    'Authorization':`Bearer ${this.state.token}`
     },
     body: JSON.stringify(
         {user:this.state.user}
@@ -42,6 +43,9 @@ handleLogin = (e) =>{
       this.props.displayUser(data) 
       //dispatch true to redux state
       this.props.isLoggedAction(true);
+      const token = data.jwt
+      localStorage.setItem("token", token)
+      localStorage.getItem("token")
   })
   .catch((error) => {
       console.error('Error:', error);
