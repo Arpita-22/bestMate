@@ -1,7 +1,7 @@
 const loggedReducer = (state = false, action) =>{
     switch(action.type){
         case 'LogIn':
-            return true
+            return action.payload
         default:
             return state
     }

@@ -6,7 +6,7 @@ export class FrontPage extends React.Component {
 
    return(
       <div>
-         
+          <h1>Welcome to BestMate!</h1>   
       </div>
    )
 }

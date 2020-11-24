@@ -7,14 +7,21 @@ import{store} from './MainContainer';
 import { NavLink } from 'react-router-dom';
 
 
+const link = {
+  width: '100px',
+  padding: '12px',
+  margin: '0 6px 6px',
+  background: 'grey',
+  textDecoration: 'none',
+  color: 'white',
+}
+
 const Header = () => {
   return (
     <div className="header">
-      {/*{code here}*/}
-      <NavLink to="/" >Home</NavLink>
-      <NavLink to="/SignUp" > SignUp   </NavLink>
-      <NavLink to="/Login" >  Login </NavLink>
-      {/* <NavLink  to="/InteractionMode" > InteractionMode</NavLink> */}
+      <NavLink to="/" exact style={link} >Home</NavLink>
+      <NavLink to="/SignUp" exact style={link}> SignUp   </NavLink>
+      <NavLink to="/Login" exact  style={link}>  Login </NavLink>
     </div>
   );
 };

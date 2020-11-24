@@ -4,13 +4,15 @@ import { Router } from 'react-router-dom';
 import {createStore} from 'redux';
 import FrontPage from './FrontPage';
 import InteractionMode from './InteractionMode';
+import NavBar from './NavBar';
 
 
 export class MainContainer extends React.Component {
   render(){
+    console.log("########",this.props.displayUser)
     return (
     <div className="container">
-      <h1>Welcome to BestMate!</h1>
+      <NavBar displayUser={this.props.displayUser} />
       <InteractionMode />
     </div>
   );

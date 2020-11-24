@@ -3,12 +3,10 @@
 import React from 'react';
 
 
-
 export class NavBar extends React.Component {
 
    handlePersonalDetails = () =>{
-      this.props.diplayUser()
-
+   console.log("hi")
    }
 
    handleFamilyDetails = () =>{
@@ -19,8 +17,10 @@ export class NavBar extends React.Component {
 
    return(
       <div>
-          <button onClick={() => this.handlePersonalDetails()}>Personal Details</button>
-          <button onClick={() => this.handleFamilyDetails()}>Family Details</button>
+         <h3>
+          <li onClick={() => this.handlePersonalDetails()}>Personal Details</li>
+          <li onClick={() => this.handleFamilyDetails()}>Family Details</li>
+          </h3>
       </div>
    )
 }
