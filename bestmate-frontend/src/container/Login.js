@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import { Redirect } from "react-router-dom";
 import { isLoggedAction } from '../actions/';
 import {store} from '../index.js'
-import {setUser} from '../actions/useraction'
+import {setUser,signOut} from '../actions/useraction'
 
 
 export class Login extends React.Component {
@@ -16,7 +16,7 @@ export class Login extends React.Component {
         name: "" ,
         password:""
     },
-    signedIn: true
+    message:false
   }
 }
 
@@ -43,19 +43,21 @@ handleLogin = (e) =>{
   })
   .then(response => response.json())
   .then(data => {
-      // this.props.displayUser(data) 
       //dispatch true to redux state
-      console.log(data.message)
       if (data.message){
-        this.state.signedIn = false
-        this.props.isLoggedAction(false);
+        this.setState({
+          message:!this.state.message
+        })
       }
       if(data.user){
       this.props.isLoggedAction(true);
       this.props.setUser(data.user)
-      }
       const token = data.jwt
       localStorage.setItem("token", token)
+      }
+      else{
+
+      }
   })
   .catch((error) => {
       console.error('Error:', error);
@@ -64,13 +66,12 @@ handleLogin = (e) =>{
 
 
   render() {
-    // console.log(store.getState().isLogged)
     if (this.props.isLogged) {
       return <Redirect to='/MainContainer' />
     }
-    // if (this.state.signedIn === false){
-    //   return <div>Please Sign up</div>
-    // }
+    if(this.state.message === true){
+      return <div>Invalid Name or Password</div>
+    }
     return (
       <form onSubmit={(e) => this.handleLogin(e)} >
         <h1>Login</h1>
@@ -90,14 +91,16 @@ handleLogin = (e) =>{
 
 const mapStateToProps = (state) => {
   return {
-    isLogged : state.isLogged
+    isLogged : state.isLogged,
+    user: state.user.user
   };
 };
  
 const mapDispatchToProps = (Log_In) => {
   return {
     isLoggedAction,
-    setUser
+    setUser,
+    signOut
   };
 };
  

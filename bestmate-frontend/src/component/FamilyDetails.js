@@ -7,6 +7,7 @@ const handleFamilyDetails = () =>{
 const FamilyDetails = () =>{
     return(
         <div>
+            <h1>Currently Empty</h1>
             {/* <h3>
             <li onClick={() => handleFamilyDetails()}>Family Details</li>
             </h3> */}

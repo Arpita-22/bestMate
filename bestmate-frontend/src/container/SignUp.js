@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
+
  
 class SignUp extends React.Component {
 
@@ -44,6 +45,7 @@ class SignUp extends React.Component {
           })
           this.setState({ signedUp: true });            
       })
+
       .catch((error) => {
           console.error('Error:', error);
       });
@@ -55,6 +57,7 @@ class SignUp extends React.Component {
     if (this.state.signedUp) {
       return <Redirect to='/Login' />
     }
+ 
     return (
       <div>
         <form onSubmit={(e) => this.handleSignUp(e)}>
@@ -82,5 +85,6 @@ class SignUp extends React.Component {
     );
   }
 }
+
 
 export default SignUp;
