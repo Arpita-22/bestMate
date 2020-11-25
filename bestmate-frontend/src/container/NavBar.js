@@ -10,9 +10,11 @@ import {connect} from 'react-redux';
 import {setUser, signOut} from '../actions/useraction'
 
 
-const handleUpdate = () =>{
 
-}
+
+// const handleUpdate = (user) =>{
+// console.log(user)
+// }
 
 const handleDelete = (user,signOut, isLoggedAction) =>{
  fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
@@ -35,7 +37,8 @@ const NavBar = ({signOut, isLoggedAction}) => {
             <li>
                <button  className="button" onClick={() => dispatch(interactionAction("personalDetails"))}>Personal Details</button>
                <button  className="button" onClick={() => dispatch(interactionAction("familyDetails"))}>Family Details</button>
-               {/* <button className="button" onClick={() => handleUpdate()}> Update User</button> */}
+               {/* <button className="button" onClick={() => handleUpdate(user)}> Update User</button> */}
+               <button className="button" onClick={() => dispatch(interactionAction("UpdateUser")) }> Update User</button>
                <button className="button" onClick={() => handleDelete(user,signOut,isLoggedAction)}> Delete User</button>
 
                {/* <button onClick={() => dispatch(interactionAction("foodDetails"))}>Food Details</button>

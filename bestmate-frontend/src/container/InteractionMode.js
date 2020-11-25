@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux';
 import PersonalDetails from '../component/PersonalDetails';
 import FamilyDetails from '../component/FamilyDetails';
 import FoodRestaurant from '../component/FoodRestaurant';
-
+import UpdateUser from '../component/UpdateUser';
 import'../assets/bestmate.css'
 
 const InteractionMode = () =>{
@@ -16,6 +16,7 @@ const InteractionMode = () =>{
            <h3>
                {interactionMode === "personalDetails" ? <PersonalDetails/> : ''}  
                {interactionMode === "familyDetails" ? <FamilyDetails/>: ''}  
+               {interactionMode === "UpdateUser" ? <UpdateUser/>: ''}  
                {/* {interactionMode === "foodDetails" ? <FoodRestaurant/>: ''}   */}
                {/* {interactionMode === "questionansDetails" ? <QuestionAnswers/>: ''}   */}
            </h3>
