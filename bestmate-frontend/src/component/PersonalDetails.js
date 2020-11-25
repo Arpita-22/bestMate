@@ -1,17 +1,39 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import { isLoggedAction, } from '../actions/';
+import {setUser} from '../actions/useraction'
 
 const handlePersonalDetails = () =>{
-    console.log("hi")
+
 }
 
 const PersonalDetails = () =>{
     return(
         <div>
             <h3>
-            <li onClick={() => handlePersonalDetails()}>Personal Details</li>
+            <li onClick={() => handlePersonalDetails()}>PersonalDetails</li>
             </h3>
         </div>
     )
 }
 
-export default PersonalDetails;
+const mapStateToProps = (state) => {
+    return {
+      isLogged : state.isLogged,
+      user: state.user.user
+    };
+  };
+   
+  const mapDispatchToProps = () => {
+    return {
+      isLoggedAction,
+      setUser
+    };
+  };
+   
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps()
+  )(PersonalDetails);
+
+// export default PersonalDetails;

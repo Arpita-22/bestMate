@@ -7,9 +7,9 @@ const handleFamilyDetails = () =>{
 const FamilyDetails = () =>{
     return(
         <div>
-            <h3>
+            {/* <h3>
             <li onClick={() => handleFamilyDetails()}>Family Details</li>
-            </h3>
+            </h3> */}
         </div>
     )
 }

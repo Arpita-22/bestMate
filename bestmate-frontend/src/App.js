@@ -5,11 +5,12 @@ import {BrowserRouter as Router,Route} from 'react-router-dom';
 import SignUp from './container/SignUp';
 import Login from './container/Login';
 import {connect} from 'react-redux';
-import { isLoggedAction } from './actions/';
+import { isLoggedAction, } from './actions/';
 import { Forbidden } from './container/errors/Forbidden';
 import InteractionMode from './container/InteractionMode';
 import FrontPage from './container/FrontPage';
 import {store} from './index.js'
+import {setUser} from './actions/useraction'
 
 
 
@@ -17,21 +18,28 @@ class App extends React.Component {
 
 
   componentDidMount(){
-  fetch('http://localhost:3000/api/v1/users')
-  .then(response => response.json())
-  .then(users => users.map(user =>{
-    this.props.user.id = user.id
-    this.props.user.name = user.name
-    this.props.user.address = user.address
-    this.props.user.age = user.age
-    this.props.user.password = user.password
-  }) 
-  );
+    const token = localStorage.getItem("token");
+    if (token){
+      //make fetch request to backend route profile or whichever route with authorization set user state
+      return fetch("http://localhost:3000/api/v1/users/profile", {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(resp => resp.json())
+        .then(data => {
+          this.props.setUser(data.user)
+          this.props.isLoggedAction(true);
+        })
+    }
   }
 
-  displayUser = (data) =>{
-    console.log(data)
-  }
+
+  
+
 
 
   render(){
@@ -59,7 +67,8 @@ const mapStateToProps = (state) => {
  
 const mapDispatchToProps = () => {
   return {
-    isLoggedAction
+    isLoggedAction,
+    setUser
   };
 };
  

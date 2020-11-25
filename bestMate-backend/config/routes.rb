@@ -10,7 +10,7 @@ Rails.application.routes.draw do
         resources :restaurants
         resources :food_restaurants
         post '/login', to: 'auth#create'
-        get '/profile', to: 'users#profile'
+        get '/profile', to: 'users#show'
       end
     end
   end

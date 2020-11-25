@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import { Redirect } from "react-router-dom";
 import { isLoggedAction } from '../actions/';
 import {store} from '../index.js'
+import {setUser} from '../actions/useraction'
 
 
 export class Login extends React.Component {
@@ -43,10 +44,12 @@ handleLogin = (e) =>{
   .then(data => {
       this.props.displayUser(data) 
       //dispatch true to redux state
+      if(data.user){
       this.props.isLoggedAction(true);
+      this.props.setUser(data.user)
+      }
       const token = data.jwt
       localStorage.setItem("token", token)
-      localStorage.getItem("token")
   })
   .catch((error) => {
       console.error('Error:', error);
@@ -84,7 +87,8 @@ const mapStateToProps = (state) => {
  
 const mapDispatchToProps = (Log_In) => {
   return {
-    isLoggedAction
+    isLoggedAction,
+    setUser
   };
 };
  

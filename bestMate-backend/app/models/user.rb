@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
     has_secure_password
 
-    #validates :name, uniqueness: { case_sensitive: false }
-    #validates :password, confirmation: true, unless: -> { password.blank? }
+    validates :name, uniqueness: { case_sensitive: false }
+    validates :password, confirmation: { case_sensitive: true }
 
 end
