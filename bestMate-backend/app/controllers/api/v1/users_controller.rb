@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-    skip_before_action :authorized, only: [:create, :index]
+    skip_before_action :authorized, only: [:create, :index, :destroy]
 
     def index
          @users = User.all
@@ -32,6 +32,12 @@ class Api::V1::UsersController < ApplicationController
         else
             render json: {error: " failed to create user"}, status: :not_acceptable
         end
+    end
+
+    def destroy
+        @user = User.find(params[:id])
+        @user.destroy
+        render json: {message:"Zap! user deleted"}
     end
 
     private
