@@ -15,10 +15,6 @@ import {setUser, signOut} from './actions/useraction'
 
 class App extends React.Component {
 
-  state = {
-    redirected: false
-  }
-
 
   componentDidMount(){
     const token = localStorage.getItem("token");
@@ -42,6 +38,10 @@ class App extends React.Component {
 
   // action that would call the reducer action do not need map
   
+  logout = () => {
+    this.props.signOut();
+    this.props.isLoggedAction(false);
+  }
 
 
   render(){
@@ -49,12 +49,12 @@ class App extends React.Component {
     return (
       <Router>
         <div className="app" >
-          <Header  signOut={this.props.signOut}/>
+          {/* <Header signOut={this.props.signOut}/> */}
+          <Header logout={this.logout} isUserLoggedIn={isLogged}/>
           <Route exact path="/" component={FrontPage}/>
           <Route exact path="/Login" render={props => <Login displayUser={this.displayUser}/> }  />
-          {isLogged === false? <Route exact path="/SignUp" component={SignUp} /> : <Route exact path="/MainContainer" render={props => <MainContainer {...props} displayUser={this.displayUser} />} /> }
+          {isLogged === false? <Route exact path="/SignUp" component={SignUp} /> : <Route exact path="/MainContainer" render={(props) => <MainContainer {...props} displayUser={this.displayUser} />} /> }
           {/* <Route exact path="/Logout" render={() => window.localStorage.clear()} /> */}
-
         </div>
       </Router>
     );

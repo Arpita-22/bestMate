@@ -1,22 +1,25 @@
 //PersonalDetails, FamilyDetails, FoodRestaurant
 
 import React from 'react';
-import PersonalDetails from '../component/PersonalDetails';
-import FamilyDetails from '../component/FamilyDetails';
+import {useSelector, useDispatch} from 'react-redux';
+import {interactionAction} from '../actions/interactionAction';
 
-
-export class NavBar extends React.Component {
-
-  
-   render(){
-
+const NavBar = () => {
+   const user = useSelector(state => state.user.user);
+   const dispatch = useDispatch();
    return(
       <div>
-          <PersonalDetails />
-          <FamilyDetails />
+         <h1>Welcome {user.name} !</h1>
+         <ul>
+            <li>
+               <button  className="button" onClick={() => dispatch(interactionAction("personalDetails"))}>Personal Details</button>
+               <button  className="button" onClick={() => dispatch(interactionAction("familyDetails"))}>Family Details</button>
+               {/* <button onClick={() => dispatch(interactionAction("foodDetails"))}>Food Details</button>
+               <button onClick={() => dispatch(interactionAction("questionansDetails"))}>Question answers</button> */}
+            </li>
+         </ul>
       </div>
    )
-}
 }
 
 export default NavBar;

@@ -16,13 +16,15 @@ const link = {
   color: 'white',
 }
 
-const Header = ({signOut}) => {
+const Header = ({logout, isUserLoggedIn}) => {
   return (
     <div className="header">
       <NavLink to="/" exact style={link} >Home</NavLink>
-      <NavLink to="/SignUp" exact style={link}> SignUp   </NavLink>
-      <NavLink to="/Login" exact  style={link}>  Login </NavLink>
-      <NavLink to="/" exact  style={link}><h3 onClick={signOut}>Logout</h3></NavLink>
+      {!isUserLoggedIn ? <NavLink to="/SignUp" exact style={link}> SignUp </NavLink> : ''}
+      {
+        !isUserLoggedIn ? <NavLink to="/Login" exact  style={link}> Login </NavLink> : 
+        <NavLink to="/" exact ><h3 onClick={logout}>Logout</h3></NavLink>
+      }
     </div>
   );
 };

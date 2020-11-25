@@ -1,13 +1,27 @@
-//NavBar, QuestionAnswer
-import React from 'react';
+//PersonalDetails, FamilyDetails, FoodRestaurant
 
-export class InteractionMode extends React.Component {
-   render(){
-   return(
-      <div>
-      </div>
-   )
+
+import React from 'react';
+import {useSelector} from 'react-redux';
+import PersonalDetails from '../component/PersonalDetails';
+import FamilyDetails from '../component/FamilyDetails';
+import FoodRestaurant from '../component/FoodRestaurant';
+
+import'../assets/bestmate.css'
+
+const InteractionMode = () =>{
+ const interactionMode = useSelector(state => state.interactionType.interactionMode)
+    return(
+        <div>
+           <h3>
+               {interactionMode === "personalDetails" ? <PersonalDetails/> : ''}  
+               {interactionMode === "familyDetails" ? <FamilyDetails/>: ''}  
+               {/* {interactionMode === "foodDetails" ? <FoodRestaurant/>: ''}   */}
+               {/* {interactionMode === "questionansDetails" ? <QuestionAnswers/>: ''}   */}
+           </h3>
+        </div>
+    )
 }
-}
+
 
 export default InteractionMode;
