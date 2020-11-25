@@ -6,14 +6,14 @@ import {setUser, signOut} from '../actions/useraction'
  
 class UpdateUser extends React.Component {
 
-  constructor() {
-      super();
+  constructor(props) {
+      super(props);
       this.state = {
         user:{
-          name: "" ,
-          address: "",
-          age: "",
-          password:""
+          name: this.props.user.name ,
+          address: this.props.user.address,
+          age: this.props.user.age,
+          password:" "
         },
         token:"",
         clicked: false
@@ -38,10 +38,11 @@ class UpdateUser extends React.Component {
     .then(data => {
       console.log(data)
         this.setState({
-            user: data.user
+            user: data
         })
-        this.setState({ clicked: true });            
-    })
+        this.setState({ clicked: true });  
+        this.props.setUser(data)          
+        })
 
     .catch((error) => {
         console.error('Error:', error);
@@ -58,7 +59,7 @@ class UpdateUser extends React.Component {
     }
 
 render() {
-  // console.log(this.props.user)
+  // console.log(this.props.user.token)
   if (this.state.clicked) {
     return <Redirect to='/MainContainer' />
   }
@@ -68,13 +69,13 @@ render() {
         <form onSubmit={(e) => this.handleUpdate(e,user)}>
           {/* <h1>Update</h1> */}
           {/* <h2>Personal Details</h2> */}
-            <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)} value={this.state.name} />
+            <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)} value={this.state.user.name} />
             <label htmlFor="name">Name</label>
 
-            <input type="text" name="address" placeholder="address" onChange={(e) => this.handleChange(e)} value={this.state.address}/>
+            <input type="text" name="address" placeholder="address" onChange={(e) => this.handleChange(e)} value={this.state.user.address}/>
             <label htmlFor="">Address</label>
        
-            <input type="integer" name="age" placeholder="age" onChange={(e) => this.handleChange(e)} value={this.state.age} />
+            <input type="integer" name="age" placeholder="age" onChange={(e) => this.handleChange(e)} value={this.state.user.age} />
             <label htmlFor="age">Age</label>
        
             <input type="password" name="password" placeholder="Password" onChange={(e) => this.handleChange(e)} />
