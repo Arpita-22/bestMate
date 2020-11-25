@@ -16,12 +16,13 @@ const link = {
   color: 'white',
 }
 
-const Header = () => {
+const Header = ({signOut}) => {
   return (
     <div className="header">
       <NavLink to="/" exact style={link} >Home</NavLink>
       <NavLink to="/SignUp" exact style={link}> SignUp   </NavLink>
       <NavLink to="/Login" exact  style={link}>  Login </NavLink>
+      <NavLink to="/" exact  style={link}><h3 onClick={signOut}>Logout</h3></NavLink>
     </div>
   );
 };

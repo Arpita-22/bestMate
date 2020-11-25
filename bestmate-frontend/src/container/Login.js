@@ -42,7 +42,7 @@ handleLogin = (e) =>{
   })
   .then(response => response.json())
   .then(data => {
-      this.props.displayUser(data) 
+      // this.props.displayUser(data) 
       //dispatch true to redux state
       if(data.user){
       this.props.isLoggedAction(true);

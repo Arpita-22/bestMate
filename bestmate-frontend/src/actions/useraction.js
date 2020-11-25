@@ -12,3 +12,11 @@ export const setUser = (user) =>{
         user: user
     }
 }
+
+export const signOut = () =>{
+    console.log("trigerred signout")
+    localStorage.clear()
+    return {
+        type: 'logout'
+    }
+}
