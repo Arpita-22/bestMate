@@ -15,7 +15,8 @@ export class Login extends React.Component {
       user:{
         name: "" ,
         password:""
-    }
+    },
+    signedIn: true
   }
 }
 
@@ -44,6 +45,11 @@ handleLogin = (e) =>{
   .then(data => {
       // this.props.displayUser(data) 
       //dispatch true to redux state
+      console.log(data.message)
+      if (data.message){
+        this.state.signedIn = false
+        this.props.isLoggedAction(false);
+      }
       if(data.user){
       this.props.isLoggedAction(true);
       this.props.setUser(data.user)
@@ -62,6 +68,9 @@ handleLogin = (e) =>{
     if (this.props.isLogged) {
       return <Redirect to='/MainContainer' />
     }
+    // if (this.state.signedIn === false){
+    //   return <div>Please Sign up</div>
+    // }
     return (
       <form onSubmit={(e) => this.handleLogin(e)} >
         <h1>Login</h1>

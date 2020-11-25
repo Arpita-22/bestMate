@@ -18,36 +18,39 @@ const handleUpdate = () =>{
 
 }
 
-const handleDelete = (user) =>{
+const handleDelete = (user,signOut, isLoggedAction) =>{
    // const dispatch = useDispatch();
  fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
   method: 'DELETE',
 })
 .then(res => res.json()) // or res.json()
 .then(() => {
-   // () => dispatch(setUser())
-   window.localStorage.clear()
+   signOut()
+   isLoggedAction(false)
+   // user = {}
 }
 )
 }
 
-const NavBar = () => {
+const NavBar = ({signOut, isLoggedAction}) => {
    const user = useSelector(state => state.user.user);
    const dispatch = useDispatch();
+   console.log(user)
    return(
       <div>
-         <h1>Welcome {user.name} !</h1>
+         {/* <h1>Welcome {user.name} !</h1> */}
          <ul>
             <li>
                <button  className="button" onClick={() => dispatch(interactionAction("personalDetails"))}>Personal Details</button>
                <button  className="button" onClick={() => dispatch(interactionAction("familyDetails"))}>Family Details</button>
-               <button onClick={() => handleUpdate()}> Update User</button>
-               <button onClick={() => handleDelete(user)}> Delete User</button>
+               <button className="button" onClick={() => handleUpdate()}> Update User</button>
+               <button className="button" onClick={() => handleDelete(user,signOut,isLoggedAction)}> Delete User</button>
 
                {/* <button onClick={() => dispatch(interactionAction("foodDetails"))}>Food Details</button>
                <button onClick={() => dispatch(interactionAction("questionansDetails"))}>Question answers</button> */}
             </li>
          </ul>
+         <h1>Welcome {user.name} !</h1>
       </div>
    )
 }

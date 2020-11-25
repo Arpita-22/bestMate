@@ -9,9 +9,9 @@ const PersonalDetails = () =>{
     return(
         
         <div className="personalDetails">
-                <h1>{user.name}</h1>
-                <h1>{user.address}</h1>
-                <h1>{user.age}</h1>
+                {/* <h1>{user.name}</h1> */}
+                <h2>Address: {user.address}</h2>
+                <h2>Age: {user.age}</h2>
         </div>
     )
 }
