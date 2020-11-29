@@ -1,10 +1,12 @@
 //form + TermsCondition
 import React from 'react'
 import {connect} from 'react-redux';
-import { Redirect } from "react-router-dom";
+import { Redirect, link } from "react-router-dom";
 import { isLoggedAction } from '../actions/';
 import {store} from '../index.js'
 import {setUser,signOut} from '../actions/useraction'
+import AllowedFoods from './AllowedFoods'
+import {BrowserRouter as Router,Route} from 'react-router-dom';
 
 
 export class Login extends React.Component {
@@ -67,10 +69,14 @@ handleLogin = (e) =>{
 
   render() {
     if (this.props.isLogged) {
-      return <Redirect to='/MainContainer' />
+      // return <Redirect to='/MainContainer'  />
+      return <Redirect to='/AllowedFoods'  />
     }
     if(this.state.message === true){
-      return <div>Invalid Name or Password</div>
+      return (
+      <div>Invalid Name or Password</div>
+      // <Redirect to='/Login' />
+      )
     }
     return (
       <form onSubmit={(e) => this.handleLogin(e)} >
@@ -84,6 +90,7 @@ handleLogin = (e) =>{
           <label htmlFor="password">Password</label>
         </div>
         <input type="submit" value="Login" />
+        {/* <link to="/AllowedFoods" > AllowedFoods </link> */}
       </form>
     );
    }

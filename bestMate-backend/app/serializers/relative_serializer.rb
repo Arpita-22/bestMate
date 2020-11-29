@@ -1,5 +1,5 @@
 class RelativeSerializer < ActiveModel::Serializer
-  attributes :id, :name, :address, :age, :relationship, :distance, :notes
+  attributes :id, :name, :address, :age, :relationship, :distance, :notes, :user_id
 
   def notes
     object.notes

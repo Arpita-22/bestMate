@@ -11,6 +11,16 @@ class SignUp extends React.Component {
           name: "" ,
           address: "",
           age: "",
+          allowed_foods:[{
+            name:""
+          }],
+          relatives:[{
+            name:"",
+            address:"",
+            age:"",
+            relationship:"",
+            distance:""
+          }],
           password:""
         },
         token:"",
@@ -26,6 +36,34 @@ class SignUp extends React.Component {
         }
     });
   }
+
+  // handleRelativesChange = (e) =>{
+  //   // console.log(this.state.user.relatives)
+  //   const{name, value} = e.target
+  //   this.setState({
+  //     user:{...this.state.user,
+  //       relatives:[{
+  //         ...this.state.user.relatives,[e.target.name]:e.target.value
+  //       }],
+  //     }
+  //   })
+  //   console.log(this.state.user.relatives)
+  // }
+
+  // handleAllowedFoodsChange = (e, index) =>{
+  //   console.log(this.state.user.allowed_foods)
+  //   // const{name, value} = e.target
+  //   this.setState({
+  //     user:{...this.state.user,
+  //       allowed_foods:[
+  //         ...this.state.user.allowed_foods,e.target.value
+  //       ],
+  //     }
+  //   })
+  //   this.state.user.allowed_foods[index] = e.target.value
+  //   this.setState({user:{
+  //     allowed_foods:this.state.allowed_foods}})
+  // }
 
   handleSignUp = (e) =>{
       e.preventDefault();
@@ -52,21 +90,24 @@ class SignUp extends React.Component {
       
   }
 
+
+
     
   render() {
+
     if (this.state.signedUp) {
+      // return <Redirect to='/AllowedFoods' />
       return <Redirect to='/Login' />
     }
- 
     return (
       <div>
         <form onSubmit={(e) => this.handleSignUp(e)}>
           <h1>SignUp</h1>
-          {/* <h2>Personal Details</h2> */}
+          <h2>Personal Details</h2>
           <div>
             <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)} value={this.state.name} />
             <label htmlFor="name">Name</label>
-          </div>
+            </div>
           <div>
             <input type="text" name="address" placeholder="address" onChange={(e) => this.handleChange(e)} value={this.state.address}/>
             <label htmlFor="">Address</label>
@@ -79,6 +120,36 @@ class SignUp extends React.Component {
             <input type="password" name="password" placeholder="Password" onChange={(e) => this.handleChange(e)} />
             <label htmlFor="password">Password</label>
           </div>
+          {/* <h2>Family Details</h2>
+          <button onClick ={(e) => this.addRelative(e)}>Add Relative</button> */}
+          {/* {this.state.user.relatives.map((relative,index) =>{
+            return(
+              <div key={index}>
+                <input type="text" name="name" placeholder="name" onChange={(e) => this.handleRelativesChange(e)} value={this.state.name} />
+                <label htmlFor="name">Name</label>
+              </div>
+            )
+          })} */}
+          {/* <div>
+            <input type="text" name="name" placeholder="name" onChange={(e) => this.handleRelativesChange(e)} value={this.state.name} />
+            <label htmlFor="name">Name</label>
+          </div>
+          <div>
+            <input type="text" name="address" placeholder="address" onChange={(e) => this.handleRelativesChange(e)} value={this.state.address}/>
+            <label htmlFor="address">Address</label>
+          </div>
+          <div>
+            <input type="integer" name="age" placeholder="age" onChange={(e) => this.handleRelativesChange(e)} value={this.state.age} />
+            <label htmlFor="age">Age</label>
+          </div>
+          <div>
+          <input type="text" name="relationship" placeholder="relationship" onChange={(e) => this.handleRelativesChange(e)} value={this.state.relationship}/>
+            <label htmlFor="relationship">Relationship</label>
+            </div>
+          <div>
+            <input type="integer" name="distance" placeholder="distance" onChange={(e) => this.handleRelativesChange(e)} value={this.state.distance} />
+            <label htmlFor="distance">distance</label>
+          </div> */}
           <input type="submit" value="SignUp" />
         </form>
       </div>

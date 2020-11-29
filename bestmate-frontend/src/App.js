@@ -11,6 +11,8 @@ import InteractionMode from './container/InteractionMode';
 import FrontPage from './container/FrontPage';
 import {store} from './index.js'
 import {setUser, signOut} from './actions/useraction'
+import AllowedFoods from './container/AllowedFoods'
+import Relatives from './container/Relatives'
 
 
 class App extends React.Component {
@@ -55,6 +57,8 @@ class App extends React.Component {
           <Route exact path="/Login" render={props => <Login displayUser={this.displayUser}/> }  />
           {isLogged === false? <Route exact path="/SignUp" component={SignUp} /> : <Route exact path="/MainContainer" render={(props) => <MainContainer {...props} displayUser={this.displayUser} />} /> }
           {/* <Route exact path="/Logout" render={() => window.localStorage.clear()} /> */}
+          <Route exact path='/AllowedFoods' component={AllowedFoods} />
+          <Route exact path='/Relatives' component={Relatives} />
         </div>
       </Router>
     );

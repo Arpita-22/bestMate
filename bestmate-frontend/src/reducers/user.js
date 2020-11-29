@@ -4,8 +4,18 @@ const initialState={
         name:"",
         address:"",
         age: '',
-        allowed_foods:[],
-        relatives:[],
+        allowed_foods:[{
+            id:"",
+            name:""
+        }],
+        relatives:[{
+            id:"",
+            name:"",
+            address:"",
+            age:"",
+            relationship:"",
+            distance:''
+        }],
         password:"",
         token:""
 

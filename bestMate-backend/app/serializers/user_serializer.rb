@@ -1,6 +1,10 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :name, :address, :age
 
+  # def allowed_foods
+  #   object.allowed_foods
+  # end
+
   # def relatives
   #   object.relatives
   # end
