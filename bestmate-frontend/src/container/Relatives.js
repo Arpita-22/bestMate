@@ -33,8 +33,29 @@ class Relatives extends React.Component {
         }))
     }
 
+    handleChangeRelative = (e) =>{
+       let relatives = [...this.state.relatives]
+       relatives[e.target.dataset.id][e.target.className] = e.target.value
+       this.setState({relatives}, () => (this.state.relatives))
+    }
+
+    handleRemoveRelative = (e,idx) =>{
+        // console.log([idx])
+        this.state.relatives.splice([idx],1)
+        this.setState({
+            relatives:this.state.relatives
+        })
+        console.log(this.state.relatives)
+    }
+
+    handleSubmit = (e,relatives,user) =>{
+        e.preventDefault()
+        console.log(relatives, user)
+    }
+
     render(){
         let{relatives} = this.state
+        const{user} = this.props
         return(
             <div>
                 <h1>Relatives</h1>
@@ -46,19 +67,21 @@ class Relatives extends React.Component {
                        return(
                            <div key={idx}>
                                <label htmlFor={relativeId}>{`Relative${idx+1}`}</label>
-                               <input type="text" name={relativeId} data-id={idx} id={relativeId} className="name"/>
+                               <input type="text" name={relativeId} data-id={idx} id={relativeId} onChange={(e) => this.handleChangeRelative(e)}className="name"/>
                                <label htmlFor={addressId}>Address</label>
-                               <input type="text" name={addressId} data-id={idx} id={addressId} className="address"/>
+                               <input type="text" name={addressId} data-id={idx} id={addressId} onChange={(e) => this.handleChangeRelative(e)} className="address"/>
                                <label htmlFor={ageId}>Age</label>
-                               <input type="integer" name={ageId} data-id={idx} id={ageId} className="age"/>
+                               <input type="integer" name={ageId} data-id={idx} id={ageId} onChange={(e) => this.handleChangeRelative(e)} className="age"/>
                                <label htmlFor={relationshipId}>Relationship</label>
-                               <input type="text" name={relationshipId} data-id={idx} id={relationshipId} className="relationship"/>
+                               <input type="text" name={relationshipId} data-id={idx} id={relationshipId} onChange={(e) => this.handleChangeRelative(e)} className="relationship"/>
                                <label htmlFor={distanceId}>Distance</label>
-                               <input type="integer" name={distanceId} data-id={idx} id={distanceId} className="distance"/>
+                               <input type="integer" name={distanceId} data-id={idx} id={distanceId} onChange={(e) => this.handleChangeRelative(e)} className="distance"/>
+                               <button onClick={(e) => this.handleRemoveRelative(e,idx)}>Remove Relative</button>
                                </div>
                        )
                    })
                }
+               <button onClick={(e) => this.handleSubmit(e,relatives,user)}>Submit</button>
             </div>
         )
     }
@@ -84,4 +107,3 @@ const mapStateToProps = (state) => {
     mapDispatchToProps()
   )(Relatives);
 
-// export default Relatives
