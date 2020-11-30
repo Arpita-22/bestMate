@@ -21,7 +21,6 @@ class AllowedFoods extends React.Component {
     }
 
     handleAllowedFoodsChange = (e,index) =>{
-        // console.log(this.state.allowed_foods)
         this.state.allowed_foods[index] = e.target.value
         this.setState({
             allowed_foods:this.state.allowed_foods })
@@ -33,41 +32,37 @@ class AllowedFoods extends React.Component {
         this.setState({allowed_foods:this.state.allowed_foods})
     }
 
-    handleSubmit = (e,user) =>{
-        // console.log(this.state.allowed_foods)
-        const new_allowed_foods ={
-            name:this.state.allowed_foods,
-            user_id:user.id
-        }
-        fetch(`http://localhost:3000/api/v1/allowed_foods`, {
-            method: 'POST', 
-            headers: {
-            'Content-Type': 'application/json',
-            // 'Authorization':`Bearer ${this.state.token}`
-            },
-            body: JSON.stringify(
-                     {
-                        name:this.state.allowed_foods,
-                        user_id:user.id
+    handleSubmit = (e,allowed_foods,user) =>{
+        allowed_foods.map(allowed_food => {
+            fetch(`http://localhost:3000/api/v1/allowed_foods`, {
+                method: 'POST', 
+                headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization':`Bearer ${this.state.token}`
+                },
+                body: JSON.stringify(
+                    {
+                        name: allowed_food,
+                        user_id: user.id
                     }
-            ),
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data)
-            // this.setState({
-            //     user: data
-            // })
-            // this.setState({ clicked: true });  
-            // this.props.setUser(data)          
+                ),
             })
-    
-        .catch((error) => {
-            console.error('Error:', error);
+            .then(response => response.json())
+            .then(data => {
+              console.log(data)
+                // this.setState({
+                //     user: data
+                // })
+                // this.setState({ clicked: true });  
+                // this.props.setUser(data)          
+                })
+        
+            .catch((error) => {
+                console.error('Error:', error);
+            });
         });
     }
     render(){
-        // console.log(this.state.allowed_foods)
         let {allowed_foods} = this.state
         const{user} = this.props
         return(
@@ -83,7 +78,7 @@ class AllowedFoods extends React.Component {
             )
           })} 
           <hr/>
-          <button onClick={(e) => this.handleSubmit(e,user)}>Submit</button>
+          <button onClick={(e) => this.handleSubmit(e,allowed_foods,user)}>Submit</button>
             </div>
         )
     }
