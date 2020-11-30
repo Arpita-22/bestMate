@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom";
 import {connect} from 'react-redux';
 import {setUser,signOut} from '../actions/useraction'
 import { isLoggedAction } from '../actions/';
+import Relatives from './Relatives'
+import {BrowserRouter as Router,Route} from 'react-router-dom';
 
 class AllowedFoods extends React.Component {
     constructor(props){
@@ -10,8 +12,8 @@ class AllowedFoods extends React.Component {
         this.state={
         allowed_foods:[],
         clicked:false
+        }
     }
-}
 
 
 
@@ -49,12 +51,11 @@ class AllowedFoods extends React.Component {
             })
             .then(response => response.json())
             .then(data => {
-              console.log(data)
-                // this.setState({
-                //     user: data
-                // })
-                // this.setState({ clicked: true });  
-                // this.props.setUser(data)          
+                this.setState({
+                    user: data
+                })
+                this.setState({ clicked: true });  
+                this.props.setUser(data)          
                 })
         
             .catch((error) => {
@@ -63,12 +64,16 @@ class AllowedFoods extends React.Component {
         });
     }
     render(){
+        if (this.state.clicked === true){
+            return <Redirect to='/Relatives'  />
+        }
+        // console.log(this.props.user)
         let {allowed_foods} = this.state
         const{user} = this.props
         return(
             <div>
                 <h1>AllowedFoods</h1>
-            <button onClick ={(e) => this.addAllowedFood(e)}>Add Allowed Food</button> 
+                <button onClick ={(e) => this.addAllowedFood(e)}>Add Allowed Food</button> 
                 {this.state.allowed_foods.map((allowed_food,index) =>{
                 return(
                <div key={index}>
