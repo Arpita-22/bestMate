@@ -5,7 +5,10 @@ import {setUser,signOut} from '../actions/useraction'
 import { isLoggedAction } from '../actions/';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
 
+
+
 class Relatives extends React.Component {
+
     constructor(props){
         super(props)
         this.state={
@@ -41,16 +44,51 @@ class Relatives extends React.Component {
 
     handleRemoveRelative = (e,idx) =>{
         // console.log([idx])
-        this.state.relatives.splice([idx],1)
+        // this.state.relatives.splice([idx],1)
+        // this.setState({
+        //     relatives:this.state.relatives
+        // })
+
         this.setState({
-            relatives:this.state.relatives
+            relatives:this.state.relatives.filter((relative,ridx) => idx !== ridx)
         })
         console.log(this.state.relatives)
     }
 
-    handleSubmit = (e,relatives,user) =>{
+    handleSubmit = (e,relatives,user,idx) =>{
         e.preventDefault()
         console.log(relatives, user)
+        relatives.map(relative => {
+                    fetch(`http://localhost:3000/api/v1/relatives`, {
+                method: 'POST', 
+                headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization':`Bearer ${this.state.token}`
+                },
+                body: JSON.stringify({
+                    name:relative.name,
+                    address:relative.address,
+                    age:relative.age,
+                    relationship:relative.relationship,
+                    distance:relative.distance,
+                    user_id:user.id
+                }
+                ),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                this.setState({
+                    user: data
+                })
+                this.setState({ clicked: true });  
+                this.props.setUser(data)          
+                })
+        
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        })
     }
 
     render(){
