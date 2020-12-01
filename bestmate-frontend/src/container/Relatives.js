@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {setUser,signOut} from '../actions/useraction'
 import { isLoggedAction } from '../actions/';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
+import CreateNotes from './CreateNotes'
 
 
 
@@ -17,9 +18,10 @@ class Relatives extends React.Component {
             address:"",
             age:"",
             relationship:"",
-            distance:''
+            distance:'',
         }],
-        clicked:false
+        clicked:false,
+        noteClick:false
         }
     }
 
@@ -52,12 +54,10 @@ class Relatives extends React.Component {
         this.setState({
             relatives:this.state.relatives.filter((relative,ridx) => idx !== ridx)
         })
-        console.log(this.state.relatives)
     }
 
     handleSubmit = (e,relatives,user,idx) =>{
         e.preventDefault()
-        console.log(relatives, user)
         relatives.map(relative => {
                     fetch(`http://localhost:3000/api/v1/relatives`, {
                 method: 'POST', 
@@ -91,11 +91,20 @@ class Relatives extends React.Component {
         })
     }
 
+    handleAddNotes = () =>{
+        this.setState({
+            noteClick:true
+        })
+    }
+
     render(){
         let{relatives} = this.state
         const{user} = this.props
         if(this.state.clicked === true){
             return <Redirect to='/MainContainer'  />
+        }
+        if(this.state.noteClick === true){
+            return  <Redirect to='/CreateNotes'  />
         }
         return(
             <div>
@@ -108,16 +117,17 @@ class Relatives extends React.Component {
                        return(
                            <div key={idx}>
                                <label htmlFor={relativeId}>{`Relative${idx+1}`}</label>
-                               <input type="text" name={relativeId} data-id={idx} id={relativeId} onChange={(e) => this.handleChangeRelative(e)}className="name"/>
+                               <input type="text" name={relativeId} data-id={idx} id={relativeId} onChange={(e) => this.handleChangeRelative(e)}className="name" value={val.name}/>
                                <label htmlFor={addressId}>Address</label>
-                               <input type="text" name={addressId} data-id={idx} id={addressId} onChange={(e) => this.handleChangeRelative(e)} className="address"/>
+                               <input type="text" name={addressId} data-id={idx} id={addressId} onChange={(e) => this.handleChangeRelative(e)} className="address" value={val.address}/>
                                <label htmlFor={ageId}>Age</label>
-                               <input type="integer" name={ageId} data-id={idx} id={ageId} onChange={(e) => this.handleChangeRelative(e)} className="age"/>
+                               <input type="integer" name={ageId} data-id={idx} id={ageId} onChange={(e) => this.handleChangeRelative(e)} className="age" value={val.age}/>
                                <label htmlFor={relationshipId}>Relationship</label>
-                               <input type="text" name={relationshipId} data-id={idx} id={relationshipId} onChange={(e) => this.handleChangeRelative(e)} className="relationship"/>
+                               <input type="text" name={relationshipId} data-id={idx} id={relationshipId} onChange={(e) => this.handleChangeRelative(e)} className="relationship" value={val.relationship}/>
                                <label htmlFor={distanceId}>Distance</label>
-                               <input type="integer" name={distanceId} data-id={idx} id={distanceId} onChange={(e) => this.handleChangeRelative(e)} className="distance"/>
+                               <input type="integer" name={distanceId} data-id={idx} id={distanceId} onChange={(e) => this.handleChangeRelative(e)} className="distance" value={val.distance}/>
                                <button onClick={(e) => this.handleRemoveRelative(e,idx)}>Remove Relative</button>
+                               <button onClick={() => this.handleAddNotes()}>Create Notes</button>
                                </div>
                        )
                    })

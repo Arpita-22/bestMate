@@ -13,6 +13,7 @@ import {store} from './index.js'
 import {setUser, signOut} from './actions/useraction'
 import AllowedFoods from './container/AllowedFoods'
 import Relatives from './container/Relatives'
+import CreateNotes from './container/CreateNotes'
 
 
 class App extends React.Component {
@@ -59,6 +60,7 @@ class App extends React.Component {
           {/* <Route exact path="/Logout" render={() => window.localStorage.clear()} /> */}
           <Route exact path='/AllowedFoods' component={AllowedFoods} />
           <Route exact path='/Relatives' component={Relatives} />
+          <Route exact path='/CreateNotes' component={CreateNotes} />
         </div>
       </Router>
     );

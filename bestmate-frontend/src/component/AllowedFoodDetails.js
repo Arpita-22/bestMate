@@ -6,10 +6,16 @@ import {useSelector} from 'react-redux';
 
 const AllowedFoodDetails = () =>{
  const user = useSelector(state => state.user.user)
-  console.log(user)
     return(    
         <div className="AllowedFoodDetails">
-            <h1>food</h1>
+            {/* <h1>food</h1> */}
+            {user.allowed_foods.map(allowed_food => {
+                  return (
+                      <ul key={allowed_food.id}>
+                         <li> {allowed_food.name}</li> 
+                      </ul>
+                      )
+            })}
         </div>
     )
 }

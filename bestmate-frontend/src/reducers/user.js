@@ -14,7 +14,12 @@ const initialState={
             address:"",
             age:"",
             relationship:"",
-            distance:''
+            distance:'',
+            notes:[{
+                id:"",
+                description:"",
+                relative_id:""
+               }]
         }],
         password:"",
         token:""
