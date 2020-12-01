@@ -8,6 +8,7 @@ import FamilyDetails from '../component/FamilyDetails';
 import FoodRestaurant from '../component/FoodRestaurant';
 import UpdateUser from '../component/UpdateUser';
 import'../assets/bestmate.css'
+import AllowedFoodDetails from '../component/AllowedFoodDetails';
 
 const InteractionMode = () =>{
  const interactionMode = useSelector(state => state.interactionType.interactionMode)
@@ -17,6 +18,7 @@ const InteractionMode = () =>{
                {interactionMode === "personalDetails" ? <PersonalDetails/> : ''}  
                {interactionMode === "familyDetails" ? <FamilyDetails/>: ''}  
                {interactionMode === "UpdateUser" ? <UpdateUser/>: ''}  
+               {interactionMode === "AllowedFoodDetails" ? <AllowedFoodDetails/>: ''} 
                {/* {interactionMode === "foodDetails" ? <FoodRestaurant/>: ''}   */}
                {/* {interactionMode === "questionansDetails" ? <QuestionAnswers/>: ''}   */}
            </h3>

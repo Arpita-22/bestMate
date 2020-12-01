@@ -108,4 +108,3 @@ export default connect(
   mapDispatchToProps()
 )(UpdateUser);
 
-// export default UpdateUser;

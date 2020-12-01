@@ -77,7 +77,7 @@ class Relatives extends React.Component {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 this.setState({
                     user: data
                 })
@@ -94,6 +94,9 @@ class Relatives extends React.Component {
     render(){
         let{relatives} = this.state
         const{user} = this.props
+        if(this.state.clicked === true){
+            return <Redirect to='/MainContainer'  />
+        }
         return(
             <div>
                 <h1>Relatives</h1>

@@ -41,8 +41,8 @@ const NavBar = ({signOut, isLoggedAction}) => {
                <button className="button" onClick={() => dispatch(interactionAction("UpdateUser")) }> Update User</button>
                <button className="button" onClick={() => handleDelete(user,signOut,isLoggedAction)}> Delete User</button>
 
-               {/* <button onClick={() => dispatch(interactionAction("foodDetails"))}>Food Details</button>
-               <button onClick={() => dispatch(interactionAction("questionansDetails"))}>Question answers</button> */}
+               <button className="button"  onClick={() => dispatch(interactionAction("AllowedFoodDetails"))}>Allowed Food Details</button>
+               {/* <button onClick={() => dispatch(interactionAction("questionansDetails"))}>Question answers</button> */}
             </li>
          </ul>
          <h1>Welcome {user.name} !</h1>
@@ -70,4 +70,3 @@ const mapStateToProps = (state) => {
    mapDispatchToProps()
  )(NavBar);
 
-// export default NavBar;
