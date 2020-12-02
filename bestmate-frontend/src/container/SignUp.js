@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
+import {Grid} from 'semantic-ui-react'
 
  
 class SignUp extends React.Component {
@@ -71,11 +72,13 @@ class SignUp extends React.Component {
 
     if (this.state.signedUp) {
       // return <Redirect to='/AllowedFoods' />
-      return <Redirect to='/Login' />
+      return <Redirect to='/AllowedFoods' />
     }
     return (
+      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+      <Grid.Column style={{ maxWidth: 450 }}>
       <div>
-        <form onSubmit={(e) => this.handleSignUp(e)}>
+        <form  className="signUp"onSubmit={(e) => this.handleSignUp(e)}>
           <h1>SignUp</h1>
           <h2>Personal Details</h2>
           <div>
@@ -97,6 +100,8 @@ class SignUp extends React.Component {
           <input type="submit" value="SignUp" />
         </form>
       </div>
+      </Grid.Column>
+      </Grid>
     );
   }
 }

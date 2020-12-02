@@ -14,6 +14,7 @@ import {setUser, signOut} from './actions/useraction'
 import AllowedFoods from './container/AllowedFoods'
 import Relatives from './container/Relatives'
 import CreateNotes from './container/CreateNotes'
+import 'semantic-ui-css/semantic.min.css'
 
 
 class App extends React.Component {

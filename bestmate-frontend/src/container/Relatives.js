@@ -136,7 +136,7 @@ class Relatives extends React.Component {
         let{relatives} = this.state
         const{user} = this.props
         if(this.state.clicked === true){
-            return <Redirect to='/MainContainer'  />
+            return <Redirect to='/Login'  />
         }
         if(this.state.noteClick === true){
             return  (<div>

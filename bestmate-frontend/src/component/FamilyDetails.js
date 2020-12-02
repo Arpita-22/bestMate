@@ -9,16 +9,16 @@ const FamilyDetails = () =>{
     const user = useSelector(state => state.user.user)
     console.log(user.relatives)
     return(
-        <div className="FamilyDetails">
+        <div className="family-details">
             {user.relatives.map(relative => {
-                  return( <ul key={relative.id}>
-                    <li>Name:{relative.name}</li>
-                    <li>Address:{relative.address}</li>
-                    <li>Age:{relative.age}</li>
-                    <li>Relationship:{relative.relationship}</li>
-                    <li>Distance:{relative.distance}</li>
+                  return( <div className="ui bulleted list" key={relative.id}>
+                    <div className="item">Name:{relative.name}</div>
+                    <div >Address:{relative.address}</div>
+                    <div >Age:{relative.age}</div>
+                    <div>Relationship:{relative.relationship}</div>
+                    <div >Distance:{relative.distance}</div>
                     {/* <li onClick={() => handleNotes()}>Notes</li> */}
-                    </ul>
+                    </div>
                     )
             })}
             {/* <h3>

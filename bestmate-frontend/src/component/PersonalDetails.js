@@ -8,7 +8,7 @@ const PersonalDetails = () =>{
  const user = useSelector(state => state.user.user)
     return(
         
-        <div className="personalDetails">
+        <div className="personal-details">
                 {/* <h1>{user.name}</h1> */}
                 <h2>Address: {user.address}</h2>
                 <h2>Age: {user.age}</h2>

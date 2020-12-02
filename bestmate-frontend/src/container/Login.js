@@ -7,6 +7,7 @@ import {store} from '../index.js'
 import {setUser,signOut} from '../actions/useraction'
 import AllowedFoods from './AllowedFoods'
 import {BrowserRouter as Router,Route} from 'react-router-dom';
+import {Grid} from 'semantic-ui-react'
 
 
 export class Login extends React.Component {
@@ -70,7 +71,7 @@ handleLogin = (e) =>{
   render() {
     if (this.props.isLogged) {
       // return <Redirect to='/MainContainer'  />
-      return <Redirect to='/AllowedFoods'  />
+      return <Redirect to='/MainContainer'  />
     }
     if(this.state.message === true){
       return (
@@ -79,8 +80,10 @@ handleLogin = (e) =>{
       )
     }
     return (
-      <form onSubmit={(e) => this.handleLogin(e)} >
-        <h1>Login</h1>
+      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+         <Grid.Column style={{ maxWidth: 450 }}>
+      <form className="login" onSubmit={(e) => this.handleLogin(e)} >
+        <h1 style={{color:"teal"}}>Login</h1>
         <div>
           <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)}/>
           <label htmlFor="name">Name</label>
@@ -89,9 +92,11 @@ handleLogin = (e) =>{
           <input type="password" name="password" placeholder="Password" onChange={(e) => this.handleChange(e)} />
           <label htmlFor="password">Password</label>
         </div>
-        <input type="submit" value="Login" />
+        <input  type="submit" value="Login" />
         {/* <link to="/AllowedFoods" > AllowedFoods </link> */}
       </form>
+      </Grid.Column>
+      </Grid>
     );
    }
 }

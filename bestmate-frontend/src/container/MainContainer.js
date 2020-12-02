@@ -10,7 +10,7 @@ import NavBar from './NavBar';
 export class MainContainer extends React.Component {
   render(){
     return (
-    <div className="container">
+    <div className="master-detail-element">
       <NavBar displayUser={this.props.displayUser} />
       <InteractionMode />
     </div>
