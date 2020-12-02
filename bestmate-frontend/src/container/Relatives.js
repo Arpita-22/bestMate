@@ -19,6 +19,7 @@ class Relatives extends React.Component {
             age:"",
             relationship:"",
             distance:'',
+            notes:[]
         }],
         clicked:false,
         noteClick:false
@@ -33,7 +34,9 @@ class Relatives extends React.Component {
                 address:"",
                 age:"",
                 relationship:"",
-                distance:""
+                distance:"",
+                notes:[
+                ]
             }],
         }))
     }
@@ -91,10 +94,17 @@ class Relatives extends React.Component {
         })
     }
 
-    handleAddNotes = () =>{
+    handleAddNotes = (idx) =>{
         this.setState({
             noteClick:true
         })
+        //passing relatives to CreateNotes component
+        this.props.history.push({
+            pathname:"/CreateNotes",
+            state:{
+                relatives:this.state.relatives.filter((relative,ridx) =>  idx === ridx)
+             }
+           });
     }
 
     render(){
@@ -104,7 +114,11 @@ class Relatives extends React.Component {
             return <Redirect to='/MainContainer'  />
         }
         if(this.state.noteClick === true){
-            return  <Redirect to='/CreateNotes'  />
+            return  (<div>
+            <CreateNotes relative={this.state.relatives} />
+            <Redirect to='/CreateNotes'  />
+            </div>
+            )
         }
         return(
             <div>
@@ -127,8 +141,8 @@ class Relatives extends React.Component {
                                <label htmlFor={distanceId}>Distance</label>
                                <input type="integer" name={distanceId} data-id={idx} id={distanceId} onChange={(e) => this.handleChangeRelative(e)} className="distance" value={val.distance}/>
                                <button onClick={(e) => this.handleRemoveRelative(e,idx)}>Remove Relative</button>
-                               <button onClick={() => this.handleAddNotes()}>Create Notes</button>
-                               </div>
+                               <button onClick={() => this.handleAddNotes(idx)}>Add Notes</button>
+                            </div>
                        )
                    })
                }
