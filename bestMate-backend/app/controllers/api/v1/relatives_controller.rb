@@ -10,7 +10,7 @@ class  Api::V1::RelativesController < ApplicationController
 
     def create
     @relative = Relative.create(relative_params)
-    render json: {relative: RelativeSerializer.new(@relative)}
+    render json: {relative: RelativeSerializer.new(@relative)}, include:[:notes]
     end
 
     def update

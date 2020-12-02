@@ -1,0 +1,44 @@
+import React, { useState } from "react";
+import Modal from "react-modal";
+import CreateNotes from './CreateNotes'
+import '../assets/bestmate.css'
+
+
+
+Modal.setAppElement("#root");
+
+export default function App(props) {
+  const [isOpen, setIsOpen] = useState(false);
+  let notesSet = [];
+
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }
+
+  const handleSubmit = (e, relative) =>{
+    e.preventDefault()
+    relative[0].notes = notesSet;
+    toggleModal();
+    
+  }
+
+  const handleUpdate = (notes) =>{
+    notesSet = notes;
+  }
+
+  return (
+    <div className="App">
+      <button onClick={toggleModal}>Add notes</button>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={toggleModal}
+        contentLabel="My dialog"
+        className="mymodal"
+        overlayClassName="myoverlay">
+        <CreateNotes handleUpdate = {(e) => handleUpdate(e)}/>
+        <button onClick={toggleModal}>Cancel</button>
+        <button onClick={(e) => handleSubmit(e, props.relative)}>Save</button>
+      </Modal>
+    </div>
+  );
+}

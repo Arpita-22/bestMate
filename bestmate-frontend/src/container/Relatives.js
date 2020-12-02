@@ -5,7 +5,7 @@ import {setUser,signOut} from '../actions/useraction'
 import { isLoggedAction } from '../actions/';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
 import CreateNotes from './CreateNotes'
-
+import NotesModal from './NotesModal'
 
 
 class Relatives extends React.Component {
@@ -59,6 +59,30 @@ class Relatives extends React.Component {
         })
     }
 
+
+    addNotes = (relative, notes) =>{
+        notes.map(note => {
+            fetch(`http://localhost:3000/api/v1/notes`, {
+                method: 'POST', 
+                headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization':`Bearer ${this.state.token}`
+                },
+                body: JSON.stringify({
+                    relative_id: relative.id,
+                    description: note.description
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // console.log("~~~~~~~~~~~~~" + JSON.stringify(data));
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });        
+    }
+
     handleSubmit = (e,relatives,user,idx) =>{
         e.preventDefault()
         relatives.map(relative => {
@@ -75,12 +99,13 @@ class Relatives extends React.Component {
                     relationship:relative.relationship,
                     distance:relative.distance,
                     user_id:user.id
-                }
+                }   
                 ),
             })
             .then(response => response.json())
             .then(data => {
-                // console.log(data)
+                //console.log(data);
+                this.addNotes(data.relative, relative.notes);
                 this.setState({
                     user: data
                 })
@@ -102,9 +127,9 @@ class Relatives extends React.Component {
         this.props.history.push({
             pathname:"/CreateNotes",
             state:{
-                relatives:this.state.relatives.filter((relative,ridx) =>  idx === ridx)
-             }
-           });
+                relatives: this.state.relatives.filter((relative,ridx) =>  idx === ridx)
+            }
+        });
     }
 
     render(){
@@ -125,7 +150,7 @@ class Relatives extends React.Component {
                 <h1>Relatives</h1>
                <button onClick={(e)=> this.addRelatives(e)}>Add Relatives</button>
                {
-                   relatives.map((val,idx) =>{
+                   relatives.map((val, idx) =>{
                        let relativeId =`relative-${idx}`, addressId = `address-${idx}`, ageId = `age-${idx}`, 
                        relationshipId = `relationship-${idx}`, distanceId = `distance-${idx}`
                        return(
@@ -141,7 +166,8 @@ class Relatives extends React.Component {
                                <label htmlFor={distanceId}>Distance</label>
                                <input type="integer" name={distanceId} data-id={idx} id={distanceId} onChange={(e) => this.handleChangeRelative(e)} className="distance" value={val.distance}/>
                                <button onClick={(e) => this.handleRemoveRelative(e,idx)}>Remove Relative</button>
-                               <button onClick={() => this.handleAddNotes(idx)}>Add Notes</button>
+                               {/* <button onClick={() => this.handleAddNotes(idx)}>Add Notes</button>*/}
+                               <NotesModal relative = {this.state.relatives.filter((relative,ridx) =>  idx === ridx)}/>
                             </div>
                        )
                    })

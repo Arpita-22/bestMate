@@ -10,7 +10,7 @@ class  Api::V1::NotesController < ApplicationController
 
     def create
     @note = Note.create(note_params)
-    render json: {relative: NoteSerializer.new(@note)}
+    render json: {note: NoteSerializer.new(@note)}
     end
 
     def update
@@ -31,7 +31,7 @@ class  Api::V1::NotesController < ApplicationController
 
     private
     def note_params
-      params.require(:note).permit(:id, :description)
+      params.require(:note).permit(:id, :description,:relative_id)
     end
   
     def set_note
