@@ -13,7 +13,7 @@ import AllowedFoodDetails from '../component/AllowedFoodDetails';
 const InteractionMode = () =>{
  const interactionMode = useSelector(state => state.interactionType.interactionMode)
     return(
-        <div>
+        <div className="interaction-mode">
            <h3>
                {interactionMode === "personalDetails" ? <PersonalDetails/> : ''}  
                {interactionMode === "familyDetails" ? <FamilyDetails/>: ''}  

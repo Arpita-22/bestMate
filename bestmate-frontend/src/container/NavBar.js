@@ -32,13 +32,13 @@ const NavBar = ({signOut, isLoggedAction}) => {
    const user = useSelector(state => state.user.user);
    const dispatch = useDispatch();
    return(
-      <div className="ui vertical buttons">
-               <button  className="ui button" onClick={() => dispatch(interactionAction("personalDetails"))}>Personal Details</button>
-               <button  className="ui button" onClick={() => dispatch(interactionAction("familyDetails"))}>Family Details</button>
+      <div className="blue ui vertical buttons">
+               <button  className="ui button" style={{fontFamily:'Lora'}} onClick={() => dispatch(interactionAction("personalDetails"))}>Personal Details</button>
+               <button  className="ui button" style={{fontFamily:'Lora'}} onClick={() => dispatch(interactionAction("familyDetails"))}>Family Details</button>
                {/* <button className="button" onClick={() => handleUpdate(user)}> Update User</button> */}
-               <button className="ui button" onClick={() => dispatch(interactionAction("UpdateUser")) }> Update User</button>
-               <button className="ui button" onClick={() => handleDelete(user,signOut,isLoggedAction)}> Delete User</button>
-               <button className="ui button"  onClick={() => dispatch(interactionAction("AllowedFoodDetails"))}>Allowed Food Details</button>
+               <button className="ui button" style={{fontFamily:'Lora'}} onClick={() => dispatch(interactionAction("UpdateUser")) }> Update User</button>
+               <button className="ui button" style={{fontFamily:'Lora'}} onClick={() => handleDelete(user,signOut,isLoggedAction)}> Delete User</button>
+               <button className="ui button" style={{fontFamily:'Lora'}} onClick={() => dispatch(interactionAction("AllowedFoodDetails"))}>Allowed Food Details</button>
                {/* <button onClick={() => dispatch(interactionAction("questionansDetails"))}>Question answers</button> */}
          <h1 >Welcome {user.name} !</h1>
       </div>

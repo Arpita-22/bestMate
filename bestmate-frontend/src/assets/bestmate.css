@@ -1,32 +1,31 @@
-/* .app {
-    text-align: center;
-  } 
-  
-.app {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 10px);
-    margin: 10px 10px 0 10px;
-    background-color: powderblue;
-  }
-  
-  .container {
-    flex: 1;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-    align-items: center;
 
-  } */
+
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+
+  * {
+    font-family: 'Lora', serif;
+    /* background-color:#ffe9ec; */
+  } 
+
+  div {
+    color:teal;
+  }
+
+  div > h1{
+    font-family: 'Lora';
+    color:teal;
+  }
+
+  div > h2{
+    color:teal;
+    font-family: 'Lora', serif;
+  }
+
   
   body {
-    /* background-image: url('https://images.unsplash.com/photo-1575633240877-edd68950f4a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'); */
-    /* background-repeat: no-repeat;
-    width: 100%; */
     margin:0;
-    padding:0
+    padding:0;
+    background-color:#ffb7b6;
   }
 
   .personal-details{
@@ -38,10 +37,6 @@
   }
   .allowed-food-details{
     text-align: center;
-  }
-
-  .welcome{
-    text-align:center;
   }
 
   input[type=text], select {
@@ -88,53 +83,18 @@
   input[type=submit] {
     width: 100%;
     background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
+    color: rgb(175, 233, 209);
+    padding: 50px 50px;
+    margin-top: 50px ;
     border: none;
     border-radius: 4px;
     cursor: pointer;
   }
   
   input[type=submit]:hover {
-    background-color: #45a049;
+    background-color: #bde4bf;
   }
   
-  /* div {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-  } */
-
-  /* .update{
-    flex: 1;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    overflow: hidden;
-
-  } */
-
-  /* .button{
-    width: 50px;
-    border-radius: 100px;
-    margin-right: 10px;
-    padding: 5px 35px;
-    border: 0px;
-    background-image: linear-gradient(to right top, #8C33E3, #696CE8, #4A9EEC);
-    background-repeat: no-repeat;
-    color: white;
-    font-size: 10px;
-    letter-spacing: 0.5px;
-    display: flex;
-    justify-content: left;
-    flex-direction: column;
-
-  } */
-
-
-
   .mymodal {
     position: fixed;
     top: 50%;
@@ -173,15 +133,29 @@
     box-sizing: border-box;
   }
 
-  /* .signUp  {
-    font-size: 1em;
-    border: 1px dashed grey;
-    box-sizing: border-box;
-    resize: none;
-  } */
-  
 
-  /* .NavBar {
-    width:10%;
-    overflow: scroll;
+  .header {
+    width: 100%;
+    background-image: linear-gradient(to right top, #b5a1e2, #e9d57d, #4dc0cf);
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: space-around;
+    margin-bottom: 10px;
+  }
+
+  /* .interaction-mode{
+    background-color:#ffb7b6;
+     background-color:#ffe9ec; 
   } */
+  .maste-detail-element{
+    /* background-color:#ffe9ec;  */
+    background-color:#f4b6ff; 
+  }
+
+  .app{
+    /* background-color:#ffe9ec;  */
+    /* background-color:#d9f7f7; */
+    background-color:#ffffed;  
+  }

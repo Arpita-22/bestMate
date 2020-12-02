@@ -30,7 +30,7 @@ const Header = ({logout, isUserLoggedIn}) => {
       <Menu.Item style={{fontSize:24}} position="right">
       {
         !isUserLoggedIn ? <NavLink to="/Login" exact > Login </NavLink> : 
-        <NavLink to="/" exact ><h2 onClick={logout}>Logout</h2></NavLink>
+        <NavLink to="/" exact ><h2 style={{fontFamily: 'Lora'}} onClick={logout}>Logout</h2></NavLink>
       }
       </Menu.Item>
       </Menu>

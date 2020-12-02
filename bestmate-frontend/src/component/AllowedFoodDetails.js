@@ -11,9 +11,9 @@ const AllowedFoodDetails = () =>{
             {/* <h1>food</h1> */}
             {user.allowed_foods.map(allowed_food => {
                   return (
-                      <ul className="ui list" key={allowed_food.id}>
-                         <li className="item"> {allowed_food.name}</li> 
-                      </ul>
+                      <div className="ui list" key={allowed_food.id}>
+                         <div className="item"> {allowed_food.name}</div> 
+                      </div>
                       )
             })}
         </div>

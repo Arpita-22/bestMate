@@ -83,7 +83,7 @@ handleLogin = (e) =>{
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
          <Grid.Column style={{ maxWidth: 450 }}>
       <form className="login" onSubmit={(e) => this.handleLogin(e)} >
-        <h1 style={{color:"teal"}}>Login</h1>
+        <h1 style={{color:"teal",fontFamily: 'Lora'}}>Login</h1>
         <div>
           <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)}/>
           <label htmlFor="name">Name</label>

@@ -12,7 +12,7 @@ export class MainContainer extends React.Component {
     return (
     <div className="master-detail-element">
       <NavBar displayUser={this.props.displayUser} />
-      <InteractionMode />
+      <InteractionMode  />
     </div>
   );
   }
