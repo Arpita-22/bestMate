@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { isLoggedAction } from '../actions/';
 import {connect} from 'react-redux';
 import {setUser, signOut} from '../actions/useraction'
+import {Grid} from 'semantic-ui-react'
  
 class UpdateUser extends React.Component {
 
@@ -16,7 +17,8 @@ class UpdateUser extends React.Component {
           password:" "
         },
         token:"",
-        clicked: false
+        clicked: false,
+        readOnly: true
       };
     }
 
@@ -51,6 +53,7 @@ class UpdateUser extends React.Component {
 
     handleChange = (e) =>{
       const{name, value} = e.target
+      const readOnly = this.state.readOnly;
       this.setState({
           user:{
               ...this.state.user, [e.target.name]: e.target.value
@@ -58,32 +61,50 @@ class UpdateUser extends React.Component {
       });
     }
 
+    makeUpdate = (e) =>{
+      e.preventDefault()
+      const readOnly = this.state.readOnly; 
+      this.setState({ readOnly: !readOnly });  
+    }
+    
 render() {
   // console.log(this.props.user.token)
   if (this.state.clicked) {
     return <Redirect to='/MainContainer' />
   }
+  console.log(this.state.readOnly)
   const{user} = this.props
     return (
+      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+      <Grid.Column style={{ maxWidth: 450 }}>
       <div className="update">
         <form onSubmit={(e) => this.handleUpdate(e,user)}>
           {/* <h1>Update</h1> */}
           {/* <h2>Personal Details</h2> */}
-            <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)} value={this.state.user.name} />
             <label htmlFor="name">Name</label>
+            <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)} value={this.state.user.name} readOnly={this.state.readOnly}/>
 
-            <input type="text" name="address" placeholder="address" onChange={(e) => this.handleChange(e)} value={this.state.user.address}/>
             <label htmlFor="">Address</label>
-       
-            <input type="integer" name="age" placeholder="age" onChange={(e) => this.handleChange(e)} value={this.state.user.age} />
+            <input type="text" name="address" placeholder="address" onChange={(e) => this.handleChange(e)} value={this.state.user.address} readOnly={this.state.readOnly}/>
+
             <label htmlFor="age">Age</label>
-       
-            <input type="password" name="password" placeholder="Password" onChange={(e) => this.handleChange(e)} />
+            <input type="integer" name="age" placeholder="age" onChange={(e) => this.handleChange(e)} value={this.state.user.age} readOnly={this.state.readOnly}/>
+
             <label htmlFor="password">Password</label>
+            <input type="password" name="password" placeholder="Password" onChange={(e) => this.handleChange(e)} readOnly={this.state.readOnly}/>
          
-          <input type="submit" value="Update" />
+            {this.state.readOnly === true ?
+              <input type="submit" onClick={(e) => this.makeUpdate(e)} value="Update information" />  : ''}
+  
+          {this.state.readOnly === false ?
+              <input type="submit" value="Submit" />  : ''}
+
+          {this.state.readOnly === false ?
+              <input type="submit" onClick={(e) => this.makeUpdate(e)} value="Cancel" />  : ''}
         </form>
       </div>
+      </Grid.Column>
+      </Grid>
     );
   }
 }
