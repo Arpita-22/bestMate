@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {setUser,signOut} from '../actions/useraction'
 import { isLoggedAction } from '../actions/';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
+import {Menu,Icon} from 'semantic-ui-react'
+
 
 
 class CreateNotes extends React.Component {
@@ -58,23 +60,29 @@ class CreateNotes extends React.Component {
         const {notes} = this.state
         //const relative =  this.props.location.state.relatives[0]
         return(
+            <Menu secondary pointing>
             <div>
                <h1>Create Notes</h1>
-               <button onClick={(e)=> this.addNotes(e)}>Add Notes</button>
+               <Menu.Item>
+               <button onClick={(e)=> this.addNotes(e)}><Icon  name="plus"></Icon></button>
+               </Menu.Item>
                {
                    notes.map((val, idx) =>{
                        let noteId =`note-${idx}`
                        return(
                            <div key={idx}>
                                <label htmlFor={noteId}>{`Note${idx+1}`}</label>
-                               <input type="text" name={noteId} data-id={idx} id={noteId} onChange={(e) => this.handleChangeNote(e)}className="description" value={val.description}/>
-                               <button onClick={(e) => this.handleRemoveNote(e,idx)}>Remove Note</button>
+                               <input type="text" name={noteId} data-id={idx} id={noteId} placeholder="note" onChange={(e) => this.handleChangeNote(e)}className="description" value={val.description}/>
+                               <Menu.Item>
+                               <button onClick={(e) => this.handleRemoveNote(e,idx)}><Icon  name="minus"></Icon></button>
+                               </Menu.Item>
                             </div>
                        )
                    })
                }
                {/* <button onClick={(e) => this.handleSubmit(e,notes,relative)}>Submit</button> */}
             </div>
+            </Menu>
         )
     }
 }

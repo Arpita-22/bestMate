@@ -1,5 +1,6 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
+import {Grid} from 'semantic-ui-react'
 
 const handleNotes = () =>{
     console.log("notes")
@@ -7,7 +8,7 @@ const handleNotes = () =>{
 
 const FamilyDetails = () =>{
     const user = useSelector(state => state.user.user)
-    console.log(user.relatives)
+    console.log(user.relatives[0].notes[0].description)
     return(
         <div className="family-details">
             {user.relatives.map(relative => {
@@ -17,6 +18,13 @@ const FamilyDetails = () =>{
                     <div >Age:{relative.age}</div>
                     <div>Relationship:{relative.relationship}</div>
                     <div >Distance:{relative.distance}</div>
+                    {relative.notes.map(note =>{
+                        return(
+                        <div key={note.id}> 
+                            Note:{note.description}
+                        </div>
+                        )
+                    })}
                     {/* <li onClick={() => handleNotes()}>Notes</li> */}
                     </div>
                     )

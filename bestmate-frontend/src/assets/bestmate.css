@@ -63,6 +63,58 @@
     margin-top: 10px;
   }
 
+  #login{
+    font-family: 'Lora', serif;
+    background-color: #246eaa; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  #sign-up{
+    font-family: 'Lora', serif;
+    background-color: #246eaa; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+
+  #cancel-modal{
+    font-family: 'Lora', serif;
+    background-color: #246eaa; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin-top: 20px;
+  }
+
+  #save-notes{
+    font-family: 'Lora', serif;
+    background-color: #0b500b; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin-top: 20px;
+  }
+
   
 
   body {

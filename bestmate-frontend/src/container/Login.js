@@ -71,7 +71,7 @@ handleLogin = (e) =>{
   render() {
     if (this.props.isLogged) {
       // return <Redirect to='/MainContainer'  />
-      return <Redirect to='/MainContainer'  />
+      return <Redirect to='/AllowedFoods'  />
     }
     if(this.state.message === true){
       return (
@@ -83,16 +83,16 @@ handleLogin = (e) =>{
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
          <Grid.Column style={{ maxWidth: 450 }}>
       <form className="login" onSubmit={(e) => this.handleLogin(e)} >
-        <h1 style={{color:"teal",fontFamily: 'Lora'}}>Login</h1>
+        <h1 style={{color:"midnightblue",fontFamily: 'Lora'}}>Login</h1>
         <div>
-          <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)}/>
           <label htmlFor="name">Name</label>
+          <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)}/>
         </div>
         <div>
-          <input type="password" name="password" placeholder="Password" onChange={(e) => this.handleChange(e)} />
           <label htmlFor="password">Password</label>
+          <input type="password" name="password" placeholder="Password" onChange={(e) => this.handleChange(e)} />
         </div>
-        <input  type="submit" value="Login" />
+        <input id="login" type="submit" value="Login" />
         {/* <link to="/AllowedFoods" > AllowedFoods </link> */}
       </form>
       </Grid.Column>

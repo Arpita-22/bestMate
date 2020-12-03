@@ -33,6 +33,7 @@ const NavBar = ({signOut, isLoggedAction}) => {
    const dispatch = useDispatch();
    return(
       <div className="blue ui vertical buttons">
+         <h1 >Welcome {user.name} !</h1>
                <button  className="ui button" style={{fontFamily:'Lora'}} onClick={() => dispatch(interactionAction("personalDetails"))}>Personal Details</button>
                <button  className="ui button" style={{fontFamily:'Lora'}} onClick={() => dispatch(interactionAction("familyDetails"))}>Family Details</button>
                {/* <button className="button" onClick={() => handleUpdate(user)}> Update User</button> */}
@@ -40,7 +41,6 @@ const NavBar = ({signOut, isLoggedAction}) => {
                <button className="ui button" style={{fontFamily:'Lora'}} onClick={() => handleDelete(user,signOut,isLoggedAction)}> Delete User</button>
                <button className="ui button" style={{fontFamily:'Lora'}} onClick={() => dispatch(interactionAction("AllowedFoodDetails"))}>Allowed Food Details</button>
                {/* <button onClick={() => dispatch(interactionAction("questionansDetails"))}>Question answers</button> */}
-         <h1 >Welcome {user.name} !</h1>
       </div>
    )
 }

@@ -35,7 +35,8 @@ class AllowedFoods extends React.Component {
         this.setState({allowed_foods:this.state.allowed_foods})
     }
 
-    handleSubmit = (e,allowed_foods,user) =>{
+    handleSubmit = (e,allowed_foods, user) =>{
+        console.log("11111111111", user);
         allowed_foods.map(allowed_food => {
             fetch(`http://localhost:3000/api/v1/allowed_foods`, {
                 method: 'POST', 
@@ -83,7 +84,7 @@ class AllowedFoods extends React.Component {
                 {this.state.allowed_foods.map((allowed_food,index) =>{
                 return(
                <div key={index}>
-               <input onChange={(e) => this.handleAllowedFoodsChange(e,index)}  value={allowed_food} />
+               <input placeholder="allowed food" onChange={(e) => this.handleAllowedFoodsChange(e,index)}  value={allowed_food} />
                <Menu.Item>
                 <button id="remove-allowed-food" onClick={() => this.handleRemoveAllowedFood(index)}><Icon name="minus"></Icon></button>
                 </Menu.Item>

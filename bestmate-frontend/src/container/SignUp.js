@@ -72,32 +72,32 @@ class SignUp extends React.Component {
 
     if (this.state.signedUp) {
       // return <Redirect to='/AllowedFoods' />
-      return <Redirect to='/AllowedFoods' />
+      return <Redirect to='/Login' />
     }
     return (
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
       <div>
         <form  className="signUp"onSubmit={(e) => this.handleSignUp(e)}>
-          <h1 style={{fontFamily:'Lora'}}>SignUp</h1>
-          <h2 style={{fontFamily:'Lora'}}>Personal Details</h2>
+          <h1 style={{color:"midnightblue",fontFamily:'Lora'}}>SignUp</h1>
+          <h2 style={{color:"midnightblue",fontFamily:'Lora'}}>Personal Details</h2>
           <div>
-            <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)} value={this.state.name} />
             <label htmlFor="name">Name</label>
+            <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)} value={this.state.name} />
             </div>
           <div>
-            <input type="text" name="address" placeholder="address" onChange={(e) => this.handleChange(e)} value={this.state.address}/>
             <label htmlFor="">Address</label>
+            <input type="text" name="address" placeholder="address" onChange={(e) => this.handleChange(e)} value={this.state.address}/>
           </div>
           <div>
-            <input type="integer" name="age" placeholder="age" onChange={(e) => this.handleChange(e)} value={this.state.age} />
             <label htmlFor="age">Age</label>
+            <input type="integer" name="age" placeholder="age" onChange={(e) => this.handleChange(e)} value={this.state.age} />
           </div>
           <div>
-            <input type="password" name="password" placeholder="Password" onChange={(e) => this.handleChange(e)} />
             <label htmlFor="password">Password</label>
+            <input type="password" name="password" placeholder="Password" onChange={(e) => this.handleChange(e)} />
           </div>
-          <input type="submit" value="SignUp" />
+          <input id="sign-up" type="submit" value="SignUp" />
         </form>
       </div>
       </Grid.Column>

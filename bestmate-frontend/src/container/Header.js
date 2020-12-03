@@ -8,15 +8,6 @@ import { NavLink } from 'react-router-dom';
 import {Menu} from 'semantic-ui-react'
 
 
-// const link = {
-//   width: '100px',
-//   padding: '12px',
-//   margin: '0 6px 6px',
-//   background: 'grey',
-//   textDecoration: 'none',
-//   color: 'white',
-// }
-
 const Header = ({logout, isUserLoggedIn}) => {
   return (
     <div className="header">

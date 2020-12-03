@@ -77,7 +77,12 @@ class Relatives extends React.Component {
             .then(response => response.json())
             .then(data => {
                 // console.log("~~~~~~~~~~~~~" + JSON.stringify(data));
-            })
+                this.setState({
+                    user: data
+                })
+                this.setState({ clicked: true });  
+                this.props.setUser(data)          
+                })
             .catch((error) => {
                 console.error('Error:', error);
             });
@@ -137,7 +142,7 @@ class Relatives extends React.Component {
         let{relatives} = this.state
         const{user} = this.props
         if(this.state.clicked === true){
-            return <Redirect to='/Login'  />
+            return <Redirect to='/MainContainer'  />
         }
         if(this.state.noteClick === true){
             return  (<div>
@@ -151,7 +156,7 @@ class Relatives extends React.Component {
             <Grid.Column style={{ maxWidth: 450 }}>
                 <Menu secondary pointing>
             <div className="relatives">
-                <h1>Relatives</h1>
+                <h1 style={{color:"midnightblue"}}>Relatives</h1>
                 <Menu.Item>
                <button onClick={(e)=> this.addRelatives(e)}><Icon  name="plus"></Icon></button>
                </Menu.Item>
