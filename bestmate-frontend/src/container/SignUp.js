@@ -79,8 +79,8 @@ class SignUp extends React.Component {
       <Grid.Column style={{ maxWidth: 450 }}>
       <div>
         <form  className="signUp"onSubmit={(e) => this.handleSignUp(e)}>
-          <h1>SignUp</h1>
-          <h2>Personal Details</h2>
+          <h1 style={{fontFamily:'Lora'}}>SignUp</h1>
+          <h2 style={{fontFamily:'Lora'}}>Personal Details</h2>
           <div>
             <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)} value={this.state.name} />
             <label htmlFor="name">Name</label>

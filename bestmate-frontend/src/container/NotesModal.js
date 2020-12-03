@@ -28,7 +28,7 @@ export default function App(props) {
 
   return (
     <div className="App">
-      <button onClick={toggleModal}>Add notes</button>
+      <button id="add-notes" onClick={toggleModal}>Add notes</button>
       <Modal
         isOpen={isOpen}
         onRequestClose={toggleModal}
@@ -36,8 +36,8 @@ export default function App(props) {
         className="mymodal"
         overlayClassName="myoverlay">
         <CreateNotes handleUpdate = {(e) => handleUpdate(e)}/>
-        <button onClick={toggleModal}>Cancel</button>
-        <button onClick={(e) => handleSubmit(e, props.relative)}>Save</button>
+        <button id="cancel-modal"onClick={toggleModal}>Cancel</button>
+        <button id="save-notes" onClick={(e) => handleSubmit(e, props.relative)}>Save</button>
       </Modal>
     </div>
   );

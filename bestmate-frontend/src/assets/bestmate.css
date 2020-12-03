@@ -12,7 +12,7 @@
   }
 
   div > h1{
-    font-family: 'Lora';
+    font-family: 'Lora',serif;
     color:teal;
   }
 
@@ -21,7 +21,50 @@
     font-family: 'Lora', serif;
   }
 
+  /* div.allowed-foods > button{
+ 
+  } */
+
+  #submit-allowed-foods{
+    font-family: 'Lora', serif;
+    background-color: #246eaa; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+
+  #submit-relatives{
+    font-family: 'Lora', serif;
+    background-color: #0b500b; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+
+  #add-notes{
+    font-family: 'Lora', serif;
+    /* background-color: #0b500b;  */
+    background-color: #246eaa;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
   
+
   body {
     margin:0;
     padding:0;
@@ -126,8 +169,26 @@
   } */
 
   .signUp input {
+    font-size: 12px;
+    font-weight: 350;
+    border: 1px dashed grey;
+    margin: 0.5em 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+
+  .allowed-foods input {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 350;
+    border: 1px dashed grey;
+    margin: 0.5em 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+
+  .relatives input {
+    font-size: 12px;
+    font-weight: 350;
     border: 1px dashed grey;
     margin: 0.5em 0;
     box-sizing: border-box;

@@ -5,6 +5,7 @@ import {setUser,signOut} from '../actions/useraction'
 import { isLoggedAction } from '../actions/';
 import Relatives from './Relatives'
 import {BrowserRouter as Router,Route} from 'react-router-dom';
+import {Grid,Menu,Icon} from 'semantic-ui-react'
 
 class AllowedFoods extends React.Component {
     constructor(props){
@@ -71,20 +72,32 @@ class AllowedFoods extends React.Component {
         let {allowed_foods} = this.state
         const{user} = this.props
         return(
-            <div>
+            <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+            <Grid.Column style={{ maxWidth: 450 }}>
+            <Menu secondary pointing>
+            <div className="allowed-foods">
                 <h1>AllowedFoods</h1>
-                <button onClick ={(e) => this.addAllowedFood(e)}>Add Allowed Food</button> 
+                <Menu.Item>
+                <button  id="add-allowed-food"  onClick ={(e) => this.addAllowedFood(e)}><Icon  name="plus"></Icon></button> 
+                </Menu.Item>
                 {this.state.allowed_foods.map((allowed_food,index) =>{
                 return(
                <div key={index}>
                <input onChange={(e) => this.handleAllowedFoodsChange(e,index)}  value={allowed_food} />
-                <button onClick={() => this.handleRemoveAllowedFood(index)}>Remove Allowed Food</button>
+               <Menu.Item>
+                <button id="remove-allowed-food" onClick={() => this.handleRemoveAllowedFood(index)}><Icon name="minus"></Icon></button>
+                </Menu.Item>
               </div>
             )
           })} 
           <hr/>
-          <button onClick={(e) => this.handleSubmit(e,allowed_foods,user)}>Submit</button>
+          <Menu.Item>
+          <button id="submit-allowed-foods" onClick={(e) => this.handleSubmit(e,allowed_foods,user)}>Submit</button>
+          </Menu.Item>
             </div>
+            </Menu>
+            </Grid.Column>
+            </Grid>
         )
     }
 }

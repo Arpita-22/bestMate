@@ -6,6 +6,7 @@ import { isLoggedAction } from '../actions/';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
 import CreateNotes from './CreateNotes'
 import NotesModal from './NotesModal'
+import {Grid,Menu,Icon} from 'semantic-ui-react'
 
 
 class Relatives extends React.Component {
@@ -146,9 +147,14 @@ class Relatives extends React.Component {
             )
         }
         return(
-            <div>
+            <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+            <Grid.Column style={{ maxWidth: 450 }}>
+                <Menu secondary pointing>
+            <div className="relatives">
                 <h1>Relatives</h1>
-               <button onClick={(e)=> this.addRelatives(e)}>Add Relatives</button>
+                <Menu.Item>
+               <button onClick={(e)=> this.addRelatives(e)}><Icon  name="plus"></Icon></button>
+               </Menu.Item>
                {
                    relatives.map((val, idx) =>{
                        let relativeId =`relative-${idx}`, addressId = `address-${idx}`, ageId = `age-${idx}`, 
@@ -156,24 +162,31 @@ class Relatives extends React.Component {
                        return(
                            <div key={idx}>
                                <label htmlFor={relativeId}>{`Relative${idx+1}`}</label>
-                               <input type="text" name={relativeId} data-id={idx} id={relativeId} onChange={(e) => this.handleChangeRelative(e)}className="name" value={val.name}/>
+                               <input type="text" name={relativeId} data-id={idx} id={relativeId} placeholder="name" onChange={(e) => this.handleChangeRelative(e)}className="name" value={val.name}/>
                                <label htmlFor={addressId}>Address</label>
-                               <input type="text" name={addressId} data-id={idx} id={addressId} onChange={(e) => this.handleChangeRelative(e)} className="address" value={val.address}/>
+                               <input type="text" name={addressId} data-id={idx} id={addressId} placeholder="address" onChange={(e) => this.handleChangeRelative(e)} className="address" value={val.address}/>
                                <label htmlFor={ageId}>Age</label>
-                               <input type="integer" name={ageId} data-id={idx} id={ageId} onChange={(e) => this.handleChangeRelative(e)} className="age" value={val.age}/>
+                               <input type="integer" name={ageId} data-id={idx} id={ageId} placeholder="age" onChange={(e) => this.handleChangeRelative(e)} className="age" value={val.age}/>
                                <label htmlFor={relationshipId}>Relationship</label>
-                               <input type="text" name={relationshipId} data-id={idx} id={relationshipId} onChange={(e) => this.handleChangeRelative(e)} className="relationship" value={val.relationship}/>
+                               <input type="text" name={relationshipId} data-id={idx} id={relationshipId} placeholder="relationship" onChange={(e) => this.handleChangeRelative(e)} className="relationship" value={val.relationship}/>
                                <label htmlFor={distanceId}>Distance</label>
-                               <input type="integer" name={distanceId} data-id={idx} id={distanceId} onChange={(e) => this.handleChangeRelative(e)} className="distance" value={val.distance}/>
-                               <button onClick={(e) => this.handleRemoveRelative(e,idx)}>Remove Relative</button>
+                               <input type="integer" name={distanceId} data-id={idx} id={distanceId} placeholder="distance" onChange={(e) => this.handleChangeRelative(e)} className="distance" value={val.distance}/>
+                               <Menu.Item>
+                               <button onClick={(e) => this.handleRemoveRelative(e,idx)}><Icon  name="minus"></Icon></button>
+                               </Menu.Item>
                                {/* <button onClick={() => this.handleAddNotes(idx)}>Add Notes</button>*/}
                                <NotesModal relative = {this.state.relatives.filter((relative,ridx) =>  idx === ridx)}/>
                             </div>
                        )
                    })
                }
-               <button onClick={(e) => this.handleSubmit(e,relatives,user)}>Submit</button>
+               <Menu.Item>
+               <button  id="submit-relatives" onClick={(e) => this.handleSubmit(e,relatives,user)}>Submit</button>
+               </Menu.Item>
             </div>
+            </Menu>
+            </Grid.Column>
+            </Grid>
         )
     }
 }
