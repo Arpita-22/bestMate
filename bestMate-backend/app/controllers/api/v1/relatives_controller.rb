@@ -1,6 +1,6 @@
 class  Api::V1::RelativesController < ApplicationController
     before_action :set_relative, only: [:show,:update,:destroy]
-    skip_before_action :authorized, only: [:create, :index, :destroy, :update]
+    skip_before_action :authorized, only: [:create, :update, :destroy, :show]
 
     def index
     @relatives = Relative.all
@@ -14,7 +14,7 @@ class  Api::V1::RelativesController < ApplicationController
     end
 
     def update
-    @relative = Relative.find_or_create_by(params[:id])
+    @relative = Relative.find(params[:id])
     @relative.update(relative_params)
     render json: @relative, status: 200, include:[:user]
     end
@@ -35,6 +35,6 @@ class  Api::V1::RelativesController < ApplicationController
     end
   
     def set_relative
-      @relative = Relative.find(params[:user_id])
+      @relative = Relative.find(params[:id])
     end
 end

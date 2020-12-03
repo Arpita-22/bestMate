@@ -1,6 +1,6 @@
 class  Api::V1::NotesController < ApplicationController
     before_action :set_note, only: [:show,:update,:destroy]
-    skip_before_action :authorized, only: [:create, :index, :destroy, :update]
+    skip_before_action :authorized, only: [:create, :index, :destroy, :update, :show]
 
     def index
     @notes = Note.all
@@ -14,8 +14,8 @@ class  Api::V1::NotesController < ApplicationController
     end
 
     def update
-    @note = Note.find_or_create_by(params[:id])
-    @note.update(relative_params)
+    @note = Note.find(params[:id])
+    @note.update(note_params)
     render json: @note, status: 200, include:[:user]
     end
 
@@ -35,6 +35,6 @@ class  Api::V1::NotesController < ApplicationController
     end
   
     def set_note
-      @note = Note.find(params[:relative_id])
+      @note = Note.find(params[:id])
     end
 end
