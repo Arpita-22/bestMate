@@ -13,13 +13,13 @@ class  Api::V1::AllowedFoodsController < ApplicationController
     end
 
     def update
-    @allowed_food = AllowedFood.find_or_create_by(params[:id])
+    @allowed_food = AllowedFood.find(params[:id])
     @allowed_food.update(allowed_food_params)
-    render json: @allowed_food, status: 200, include:[:user]
+    render json: @allowed_food, status: 200
     end
 
     def destroy
-    @allowed_food = allowed_food(params[:id])
+    @allowed_food = AllowedFood.find(params[:id])
     @allowed_food.destroy
     render json: {message:"Zap! Note deleted"}
     end
@@ -34,6 +34,6 @@ class  Api::V1::AllowedFoodsController < ApplicationController
     end
   
     def set_allowed_food
-      @allowed_food = AllowedFood.find(params[:user_id])
+      @allowed_food = AllowedFood.find(params[:id])
     end
 end
