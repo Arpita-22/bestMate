@@ -20,7 +20,7 @@ class  Api::V1::NotesController < ApplicationController
     end
 
     def destroy
-    @note = note(params[:id])
+    @note = Note.find(params[:id])
     @note.destroy
     render json: {message:"Zap! Note deleted"}
     end

@@ -7,6 +7,7 @@ import {BrowserRouter as Router,Route} from 'react-router-dom';
 import CreateNotes from './CreateNotes'
 import NotesModal from './NotesModal'
 import {Grid,Menu,Icon} from 'semantic-ui-react'
+import { createStore } from 'redux';
 
 
 class Relatives extends React.Component {
@@ -110,15 +111,18 @@ class Relatives extends React.Component {
             })
             .then(response => response.json())
             .then(data => {
-                //console.log(data);
+                console.log("4444444", data);
                 this.addNotes(data.relative, relative.notes);
                 // this.setState({
                 //     relatives: data.relatives
                 // })
                 this.setState({ clicked: true });  
-                this.props.relatives(data)          
-                })
-        
+                //this.props.relatives(data.relative)          
+                
+                let createRelatives = [];
+                createRelatives.push(data.relative);
+                this.props.relatives(createRelatives);
+            })
             .catch((error) => {
                 console.error('Error:', error);
             });
@@ -146,7 +150,7 @@ class Relatives extends React.Component {
     render(){
         let{relatives} = this.state
         const{user} = this.props
-        console.log(user)
+        // console.log(user)
         if(this.state.clicked === true){
             return <Redirect to='/MainContainer'  />
         }

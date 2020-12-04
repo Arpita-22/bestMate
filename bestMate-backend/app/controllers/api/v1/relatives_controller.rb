@@ -20,7 +20,7 @@ class  Api::V1::RelativesController < ApplicationController
     end
 
     def destroy
-    @relative = relative(params[:id])
+    @relative = Relative.find(params[:id])
     @relative.destroy
     render json: {message:"Zap! Note deleted"}
     end

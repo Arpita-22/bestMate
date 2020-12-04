@@ -22,6 +22,7 @@ export const allowedFoods = (allowedFoods) =>{
 }
 
 export const relatives = (relatives) =>{
+    console.log("LLLLLLLL", relatives);
     return {
         type: 'updateRelatives',
         relatives: relatives
@@ -34,4 +35,3 @@ export const notes = (notes) =>{
         notes: notes
     }
 }
-

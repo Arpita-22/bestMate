@@ -42,6 +42,7 @@ class FamilyDetails extends React.Component{
 
     handleUpdate = (e,relative) =>{
         e.preventDefault()
+        alert(JSON.stringify(relative));
         fetch(`http://localhost:3000/api/v1/relatives/${relative.id}`, {
             method: 'PATCH', 
             headers: {
@@ -55,17 +56,24 @@ class FamilyDetails extends React.Component{
         })
         .then(response => response.json())
         .then(data => {
-            //console.log("11111111RELA", data)
-            this.props.relatives(data)          
-            this.updateNote(this.state.notes)
+            let updatedRelatives = [];
+            this.state.relatives.map((relative) => {
+                if(relative.id === data.id){
+                    updatedRelatives.push(data);
+                } else {
+                    updatedRelatives.push(relative);
+                }                
+            });
+            this.props.relatives(updatedRelatives)
+            this.updateNote(relative)
         })
         .catch((error) => {
             console.error('Error:', error);
         });
     }
 
-    updateNote = (notes) =>{
-        notes.map(note =>{
+    updateNote = (relative) =>{
+        this.state.notes.map(note =>{
             fetch(`http://localhost:3000/api/v1/notes/${note.id}`, {
                 method: 'PATCH', 
                 headers: {
@@ -79,10 +87,26 @@ class FamilyDetails extends React.Component{
             })
             .then(response => response.json())
             .then(data => {
-                console.log("22222222NOTES", this.state.relatives)
-                this.props.notes(data);
-                
-                //this.props.relative(data);         
+                //update family details component state
+                let updatedNotes = [];
+                this.state.notes.map((note) => {
+                    if(note.id === data.id){
+                        updatedNotes.push(data);
+                    } else {
+                        updatedNotes.push(note);
+                    }                
+                });
+
+                //update note for the specific relative
+                let updatedRelatives = [];
+                this.state.relatives.map((relativeFromState) => {
+                    if(relativeFromState.id === relative.id){
+                        relativeFromState.notes = updatedNotes;
+                    }
+                    updatedRelatives.push(relativeFromState);
+                });
+                //this.props.notes(updatedRelatives);
+                this.props.relatives(updatedRelatives);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -91,9 +115,33 @@ class FamilyDetails extends React.Component{
         })
     }
 
+    handleDeleteNote = (e, note) =>{
+        console.log(e,note)
+        fetch(`http://localhost:3000/api/v1/notes/${note.id}`, {
+            method: 'DELETE',
+          })
+          .then(res => res.json()) 
+          .then(() => {
+              this.props.notes()
+          }
+          )
+    }
+
+    handleDeleteRelative = (e,relative) =>{
+        console.log(e,relative)
+        fetch(`http://localhost:3000/api/v1/relatives/${relative.id}`, {
+            method: 'DELETE',
+          })
+          .then(res => res.json()) 
+          .then(() => {
+              this.props.relatives()
+          }
+          )
+    }
+
     render(){
         // const {user} = this.props.user
-        console.log("~~~~~~~~~~~~~~~~~~~~", this.state.relatives);
+        console.log("~~~~~~~~~IN RENDER family details~~~~~~~~~~~", JSON.stringify(this.props.user.relatives));
     return(
             <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
@@ -119,15 +167,15 @@ class FamilyDetails extends React.Component{
                                         <div key={idx}>
                                           <label htmlFor={relativeId}>{`Note${idx+1}`}</label>
                                             <input type="text" name={noteId} data-id={idx} id={noteId} placeholder="description" onChange={(e) => this.handleChangeNotes(e,relative)}className="description" value={note.description} />
-                                            {/* <button onClick={(e) =>this.handleDeleteNote(e,note)}>Delete Note</button> */}
+                                            <button onClick={(e) =>this.handleDeleteNote(e,note)}>Delete Note</button>
 
                                         </div>
                                   )
                               })}
-                              <button onClick={(e) => this.handleUpdate(e,relative)}>Update</button>
-                              {/* <button onClick={(e) => this.handleDeleteRelative(e,relative)}>Delete Relative</button> */}
+                              <button id="update-`${idx}`" onClick={(e) => this.handleUpdate(e, relative)}>Update</button>
+                              <button onClick={(e) => this.handleDeleteRelative(e,relative)}>Delete Relative</button>
                             </div>
-                )})}
+                        )})}
                         <button onClick={this.handleShowMore}>Show more!</button>
         </div>
         </Grid.Column>

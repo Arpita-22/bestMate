@@ -7,11 +7,13 @@ export const isLoggedAction = (loggedIn) =>{
         payload: loggedIn
     }
 }
- export const userAction = (user) =>{
-     return{
-     type: 'setUser',
-     payload: user
-     }
- }
+//  export const userAction = (user) =>{
+//      return{
+//      type: 'setUser',
+//      payload: user
+//     }
+//  }
+
+
 
 export default isLoggedAction

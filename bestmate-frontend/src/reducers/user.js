@@ -31,7 +31,7 @@ const initialState={
 const userReducer = (state = initialState, action) =>{
     switch(action.type){
         case 'fetchUser':
-            return {...state,user: action.user}
+            return {...state, user: action.user}
         case 'displayUser':
             return {user:state.user}
             // return action.payload
@@ -42,26 +42,41 @@ const userReducer = (state = initialState, action) =>{
                         ...state.user,allowed_foods:action.allowedFoods
                     }}
         case "updateRelatives":
-            return{...state, user:{
-                 ...state.user, relatives: [{...state.user.relatives}, action.relatives]
+            // return{...state, user :{
+            //      ...state.user, relatives: [{...state.user.relatives}, action.relatives]
+            // }}
+            return{...state, user :{
+                 ...state.user, relatives: action.relatives
             }}
         case "updateNotes":
-            console.log("!!!!!!!!!!!!!!!!", state.user)
             // return{...state,user:{
             //     ...state.user,relatives:{
             //         ...state.user.relatives.map((relative) => relative.id === action.note.relative_id)
             //     }
             // }}
-            return{
-                ...state, user:{
-                    ...state.user, relatives:[{
-                        ...state.user.relatives, [action.notes.relativeId]: {
-                            ...state.user.relatives[action.notes.relativeId],
-                            notes:action.notes
-                        }
-                    }]
-                }
-            }
+            
+            // return{
+            //     ...state, user:{
+            //         ...state.user, relatives:[{
+            //             ...state.user.relatives, [action.notes.relative_id]: {
+            //                 ...state.user.relatives[action.notes.relative_id],
+            //                 notes:action.notes
+            //             }
+            //         }]
+            //     }
+            // }
+
+            return{...state, user :{
+                ...state.user, relatives: action.relatives
+            }}
+
+            case "deleteUser":
+                return
+            case "deleteRelative":
+                return
+            case "deleteNote":
+                return
+                
         default:
             return state
     }

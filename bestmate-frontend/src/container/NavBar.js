@@ -7,27 +7,30 @@ import { Redirect } from "react-router-dom";
 import { isLoggedAction } from '../actions/';
 import {store} from '../index';
 import {connect} from 'react-redux';
-import {setUser, signOut,allowedFoods,relatives,notes} from '../actions/useraction'
+import {setUser, signOut, allowedFoods, relatives, notes} from '../actions/useraction'
 
 
 
 
-const handleDelete = (user,signOut, isLoggedAction) =>{
- fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
-  method: 'DELETE',
-})
-.then(res => res.json()) 
-.then(() => {
-   signOut()
-   isLoggedAction(false)
-}
-)
+const handleDelete = (user, signOut, isLoggedAction, setUser, allowedFoods, relatives, notes) =>{
+  fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
+    method: 'DELETE',
+  })
+  .then(res => res.json()) 
+  .then(() => {
+    isLoggedAction(false)
+    signOut('')
+    allowedFoods('')
+    relatives('')
+    notes('')
+    setUser('')
+  })
 }
 
 const NavBar = ({signOut, isLoggedAction}) => {
    const user = useSelector(state => state.user.user);
    const dispatch = useDispatch();
-  //  console.log(user)
+    //console.log(user, "kkkkkkk")
    return(
       <div className="blue ui vertical buttons">
          <h1 >Welcome {user.name} !</h1>
@@ -35,7 +38,7 @@ const NavBar = ({signOut, isLoggedAction}) => {
                <button  className="ui button" style={{fontFamily:'Lora'}} onClick={() => dispatch(interactionAction("familyDetails"))}>Family Details</button>
                {/* <button className="button" onClick={() => handleUpdate(user)}> Update User</button> */}
                <button className="ui button" style={{fontFamily:'Lora'}} onClick={() => dispatch(interactionAction("UpdateUser")) }> Update User</button>
-               <button className="ui button" style={{color: 'red',fontFamily:'Lora'}} onClick={() => handleDelete(user,signOut,isLoggedAction)}> Delete User</button>
+               <button className="ui button" style={{color: 'red',fontFamily:'Lora'}} onClick={() => handleDelete(user, signOut, isLoggedAction, setUser, allowedFoods, relatives, notes)}> Delete User</button>
                <button className="ui button" style={{fontFamily:'Lora'}} onClick={() => dispatch(interactionAction("AllowedFoodDetails"))}>Allowed Food Details</button>
                {/* <button onClick={() => dispatch(interactionAction("questionansDetails"))}>Question answers</button> */}
       </div>
