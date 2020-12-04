@@ -10,13 +10,13 @@ class  Api::V1::RelativesController < ApplicationController
 
     def create
     @relative = Relative.create(relative_params)
-    render json: {relative: RelativeSerializer.new(@relative)}, include:[:notes]
+    render json: {relative: RelativeSerializer.new(@relative)}
     end
 
     def update
     @relative = Relative.find(params[:id])
     @relative.update(relative_params)
-    render json: @relative, status: 200, include:[:user]
+    render json: @relative, status: 200
     end
 
     def destroy

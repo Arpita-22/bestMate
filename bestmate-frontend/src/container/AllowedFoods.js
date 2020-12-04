@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
 import {connect} from 'react-redux';
-import {setUser,signOut} from '../actions/useraction'
+import {setUser,signOut,allowedFoods} from '../actions/useraction'
 import { isLoggedAction } from '../actions/';
 import Relatives from './Relatives'
 import {BrowserRouter as Router,Route} from 'react-router-dom';
@@ -36,7 +36,7 @@ class AllowedFoods extends React.Component {
     }
 
     handleSubmit = (e,allowed_foods, user) =>{
-        console.log("11111111111", user);
+        // console.log("11111111111", user);
         allowed_foods.map(allowed_food => {
             fetch(`http://localhost:3000/api/v1/allowed_foods`, {
                 method: 'POST', 
@@ -53,11 +53,11 @@ class AllowedFoods extends React.Component {
             })
             .then(response => response.json())
             .then(data => {
-                this.setState({
-                    user: data
-                })
+                // this.setState({
+                //     user: data
+                // })
                 this.setState({ clicked: true });  
-                this.props.setUser(data)          
+                this.props.allowedFoods(data)          
                 })
         
             .catch((error) => {
@@ -65,6 +65,12 @@ class AllowedFoods extends React.Component {
             });
         });
     }
+
+    handleReturn = (e) =>{
+        e.preventDefault()
+        this.setState({ clicked: true })
+    }
+
     render(){
         if (this.state.clicked === true){
             return <Redirect to='/Relatives'  />
@@ -94,6 +100,7 @@ class AllowedFoods extends React.Component {
           <hr/>
           <Menu.Item>
           <button id="submit-allowed-foods" onClick={(e) => this.handleSubmit(e,allowed_foods,user)}>Submit</button>
+          <button onClick={(e) => this.handleReturn(e)}>No more to add</button>
           </Menu.Item>
             </div>
             </Menu>
@@ -114,7 +121,8 @@ const mapStateToProps = (state) => {
     return {
       isLoggedAction,
       setUser,
-      signOut
+      signOut,
+      allowedFoods
     };
   };
    

@@ -1,3 +1,5 @@
+import { relatives } from "../actions/useraction"
+
 const initialState={
      user:{
         id:'',
@@ -33,8 +35,33 @@ const userReducer = (state = initialState, action) =>{
         case 'displayUser':
             return {user:state.user}
             // return action.payload
-            case "logout":
-                return initialState
+        case "logout":
+            return initialState
+        case "updateAllowedFoods":
+            return {...state,user:{
+                        ...state.user,allowed_foods:action.allowedFoods
+                    }}
+        case "updateRelatives":
+            return{...state, user:{
+                 ...state.user, relatives: [{...state.user.relatives}, action.relatives]
+            }}
+        case "updateNotes":
+            console.log("!!!!!!!!!!!!!!!!", state.user)
+            // return{...state,user:{
+            //     ...state.user,relatives:{
+            //         ...state.user.relatives.map((relative) => relative.id === action.note.relative_id)
+            //     }
+            // }}
+            return{
+                ...state, user:{
+                    ...state.user, relatives:[{
+                        ...state.user.relatives, [action.notes.relativeId]: {
+                            ...state.user.relatives[action.notes.relativeId],
+                            notes:action.notes
+                        }
+                    }]
+                }
+            }
         default:
             return state
     }

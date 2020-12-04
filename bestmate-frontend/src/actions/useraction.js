@@ -13,3 +13,25 @@ export const signOut = () =>{
         type: 'logout'
     }
 }
+
+export const allowedFoods = (allowedFoods) =>{
+    return {
+        type: 'updateAllowedFoods',
+        allowedFoods: allowedFoods
+    }
+}
+
+export const relatives = (relatives) =>{
+    return {
+        type: 'updateRelatives',
+        relatives: relatives
+    }
+}
+
+export const notes = (notes) =>{
+    return {
+        type: 'updateNotes',
+        notes: notes
+    }
+}
+

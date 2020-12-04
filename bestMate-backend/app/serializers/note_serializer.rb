@@ -1,4 +1,4 @@
 class NoteSerializer < ActiveModel::Serializer
-  attributes :id, :description
-  belongs_to :relative
+  attributes :id, :description, :relative_id
+  # belongs_to :relative
 end

@@ -7,14 +7,10 @@ import { Redirect } from "react-router-dom";
 import { isLoggedAction } from '../actions/';
 import {store} from '../index';
 import {connect} from 'react-redux';
-import {setUser, signOut} from '../actions/useraction'
+import {setUser, signOut,allowedFoods,relatives,notes} from '../actions/useraction'
 
 
 
-
-// const handleUpdate = (user) =>{
-// console.log(user)
-// }
 
 const handleDelete = (user,signOut, isLoggedAction) =>{
  fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
@@ -31,6 +27,7 @@ const handleDelete = (user,signOut, isLoggedAction) =>{
 const NavBar = ({signOut, isLoggedAction}) => {
    const user = useSelector(state => state.user.user);
    const dispatch = useDispatch();
+  //  console.log(user)
    return(
       <div className="blue ui vertical buttons">
          <h1 >Welcome {user.name} !</h1>
@@ -56,7 +53,10 @@ const mapStateToProps = (state) => {
    return {
      isLoggedAction,
      setUser,
-     signOut
+     signOut,
+     allowedFoods,
+     relatives,
+     notes
    };
  };
   

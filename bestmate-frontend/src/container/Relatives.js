@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from "react-router-dom";
 import {connect} from 'react-redux';
-import {setUser,signOut} from '../actions/useraction'
+import {setUser,signOut,allowedFoods,relatives,notes} from '../actions/useraction'
 import { isLoggedAction } from '../actions/';
 import {BrowserRouter as Router,Route} from 'react-router-dom';
 import CreateNotes from './CreateNotes'
@@ -77,11 +77,11 @@ class Relatives extends React.Component {
             .then(response => response.json())
             .then(data => {
                 // console.log("~~~~~~~~~~~~~" + JSON.stringify(data));
-                this.setState({
-                    user: data
-                })
+                // this.setState({
+                //     notes: data
+                // })
                 this.setState({ clicked: true });  
-                this.props.setUser(data)          
+                this.props.notes(data)          
                 })
             .catch((error) => {
                 console.error('Error:', error);
@@ -112,11 +112,11 @@ class Relatives extends React.Component {
             .then(data => {
                 //console.log(data);
                 this.addNotes(data.relative, relative.notes);
-                this.setState({
-                    user: data
-                })
+                // this.setState({
+                //     relatives: data.relatives
+                // })
                 this.setState({ clicked: true });  
-                this.props.setUser(data)          
+                this.props.relatives(data)          
                 })
         
             .catch((error) => {
@@ -138,9 +138,15 @@ class Relatives extends React.Component {
         });
     }
 
+    handleReturn = (e) =>{
+        e.preventDefault()
+        this.setState({ clicked: true })
+    }
+
     render(){
         let{relatives} = this.state
         const{user} = this.props
+        console.log(user)
         if(this.state.clicked === true){
             return <Redirect to='/MainContainer'  />
         }
@@ -187,6 +193,7 @@ class Relatives extends React.Component {
                }
                <Menu.Item>
                <button  id="submit-relatives" onClick={(e) => this.handleSubmit(e,relatives,user)}>Submit</button>
+               <button onClick={(e) => this.handleReturn(e)}>No more to add</button>
                </Menu.Item>
             </div>
             </Menu>
@@ -207,7 +214,10 @@ const mapStateToProps = (state) => {
     return {
       isLoggedAction,
       setUser,
-      signOut
+      signOut,
+      allowedFoods,
+      relatives,
+      notes
     };
   };
    

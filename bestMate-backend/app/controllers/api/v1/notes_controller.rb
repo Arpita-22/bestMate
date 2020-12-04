@@ -16,7 +16,7 @@ class  Api::V1::NotesController < ApplicationController
     def update
     @note = Note.find(params[:id])
     @note.update(note_params)
-    render json: @note, status: 200, include:[:user]
+    render json: @note, status: 200,includes:[:relatives]
     end
 
     def destroy
@@ -31,7 +31,7 @@ class  Api::V1::NotesController < ApplicationController
 
     private
     def note_params
-      params.require(:note).permit(:id, :description,:relative_id)
+      params.require(:note).permit(:id, :description, :relative_id)
     end
   
     def set_note
