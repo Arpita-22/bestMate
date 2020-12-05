@@ -12,13 +12,11 @@ class AllowedFoodDetails extends React.Component{
         super(props)
         this.state={
         allowed_foods:this.props.user.allowed_foods,
-        readOnly:true
+          readOnly:true
         }
     }
 
     handleChange = (e, idx) =>{
-      // console.log(e.target.value, idx)
-      // console.log(this.state.allowed_foods)
       let allowed_foods = [...this.state.allowed_foods]
       allowed_foods[e.target.dataset.id][e.target.className] = e.target.value
       this.setState({allowed_foods}, () => (this.state.allowed_foods)) 
@@ -26,35 +24,31 @@ class AllowedFoodDetails extends React.Component{
 
     handleUpdate = (e, allowed_foods) =>{
       e.preventDefault()
-      console.log(allowed_foods)
       allowed_foods.map(allowed_food =>{
         fetch(`http://localhost:3000/api/v1/allowed_foods/${allowed_food.id}`, {
           method: 'PATCH', 
           headers: {
-          'Content-Type': 'application/json',
-          // 'Authorization':`Bearer ${this.state.token}`
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
               allowed_food
-          }
-          ),
-      })
-      .then(response => response.json())
-      .then(data => {
-        // console.log(data)
-          let updatedAllowedFoods = [];
-          this.state.allowed_foods.map((allowed_food) => {
-              if(allowed_food.id === data.id){
-                updatedAllowedFoods.push(data);
-              } else {
-                updatedAllowedFoods.push(allowed_food);
-              }                
-          });
-          this.props.allowedFoods(updatedAllowedFoods)
-      })
-      .catch((error) => {
-          console.error('Error:', error);
-      });
+          }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            let updatedAllowedFoods = [];
+            this.state.allowed_foods.map((allowed_food) => {
+                if(allowed_food.id === data.id){
+                  updatedAllowedFoods.push(data);
+                } else {
+                  updatedAllowedFoods.push(allowed_food);
+                }                
+            });
+            this.props.allowedFoods(updatedAllowedFoods)
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
       })
     }
 
@@ -71,6 +65,7 @@ class AllowedFoodDetails extends React.Component{
     }
 
 render(){
+    console.log("!!!!!!!!!!!!!!", this.props.user)
     return(  
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>  
@@ -84,7 +79,7 @@ render(){
                       <button onClick={(e) =>this.handleDelete(e,allowed_food)}>Delete Allowed Food</button>
 
                   </div>
-                      )
+                )
             })}
             <button onClick={(e) => this.handleUpdate(e, this.state.allowed_foods)}>Update</button>
         </div>

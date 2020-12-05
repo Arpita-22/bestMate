@@ -7,7 +7,6 @@ export const setUser = (user) =>{
 }
 
 export const signOut = () =>{
-    // console.log("trigerred signout")
     localStorage.clear()
     return {
         type: 'logout'
@@ -22,7 +21,6 @@ export const allowedFoods = (allowedFoods) =>{
 }
 
 export const relatives = (relatives) =>{
-    console.log("LLLLLLLL", relatives);
     return {
         type: 'updateRelatives',
         relatives: relatives

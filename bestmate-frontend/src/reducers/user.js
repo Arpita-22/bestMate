@@ -38,8 +38,8 @@ const userReducer = (state = initialState, action) =>{
         case "logout":
             return initialState
         case "updateAllowedFoods":
-            return {...state,user:{
-                        ...state.user,allowed_foods:action.allowedFoods
+            return {...state, user:{
+                        ...state.user, allowed_foods: action.allowedFoods
                     }}
         case "updateRelatives":
             // return{...state, user :{

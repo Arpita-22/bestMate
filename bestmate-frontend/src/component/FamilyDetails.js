@@ -29,8 +29,6 @@ class FamilyDetails extends React.Component{
     handleChange = (e,idx) =>{
         let relatives = [...this.state.relatives]
         relatives[e.target.dataset.id][e.target.className] = e.target.value
-        // let n = relatives.map((relative, idx) => idx === e.target.dataset.id ?  {...relative,[relative.target.name]:[e.target.name]}: relative)
-        // this.setState({relatives:n}, () => (this.state.relatives)) 
         this.setState({relatives}, () => (this.state.relatives)) 
     }
 
@@ -46,13 +44,11 @@ class FamilyDetails extends React.Component{
         fetch(`http://localhost:3000/api/v1/relatives/${relative.id}`, {
             method: 'PATCH', 
             headers: {
-            'Content-Type': 'application/json',
-            // 'Authorization':`Bearer ${this.state.token}`
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 relative
-            }
-            ),
+            }),
         })
         .then(response => response.json())
         .then(data => {
@@ -77,13 +73,11 @@ class FamilyDetails extends React.Component{
             fetch(`http://localhost:3000/api/v1/notes/${note.id}`, {
                 method: 'PATCH', 
                 headers: {
-                'Content-Type': 'application/json',
-                // 'Authorization':`Bearer ${this.state.token}`
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     note
-                }
-                ),
+                }),
             })
             .then(response => response.json())
             .then(data => {
@@ -105,7 +99,6 @@ class FamilyDetails extends React.Component{
                     }
                     updatedRelatives.push(relativeFromState);
                 });
-                //this.props.notes(updatedRelatives);
                 this.props.relatives(updatedRelatives);
             })
             .catch((error) => {
@@ -140,48 +133,45 @@ class FamilyDetails extends React.Component{
     }
 
     render(){
-        // const {user} = this.props.user
-        console.log("~~~~~~~~~IN RENDER family details~~~~~~~~~~~", JSON.stringify(this.props.user.relatives));
-    return(
+        return(
             <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-            <Grid.Column style={{ maxWidth: 450 }}>
-            <div className="family-details">
-                {this.state.relatives.slice(0, this.state.showRelatives).map((relative,idx) => {
-                      let relativeId =`relative-${idx}`, addressId = `address-${idx}`, ageId = `age-${idx}`, 
-                      relationshipId = `relationship-${idx}`, distanceId = `distance-${idx}`
-                      return(
-                          <div key={idx}>
-                              <label htmlFor={relativeId}>{`Relative${idx+1}`}</label>
-                              <input type="text" name={relativeId} data-id={idx} id={relativeId} placeholder="name" onChange={(e) => this.handleChange(e,idx)}className="name" value={relative.name} />
-                              <label htmlFor={addressId}>Address</label>
-                              <input type="text" name={addressId} data-id={idx} id={addressId} placeholder="address" onChange={(e) => this.handleChange(e,idx)} className="address" value={relative.address} />
-                              <label htmlFor={ageId}>Age</label>
-                              <input type="integer" name={ageId} data-id={idx} id={ageId} placeholder="age" onChange={(e) => this.handleChange(e,idx)} className="age" value={relative.age} />
-                              <label htmlFor={relationshipId}>Relationship</label>
-                              <input type="text" name={relationshipId} data-id={idx} id={relationshipId} placeholder="relationship" onChange={(e) => this.handleChange(e,idx)} className="relationship" value={relative.relationship} />
-                              <label htmlFor={distanceId}>Distance</label>
-                              <input type="integer" name={distanceId} data-id={idx} id={distanceId} placeholder="distance" onChange={(e) => this.handleChange(e,idx)} className="distance" value={relative.distance} />
-                              {relative.notes.map((note,idx) =>{
-                                  let noteId=`description-${idx}`
-                                  return(
-                                        <div key={idx}>
-                                          <label htmlFor={relativeId}>{`Note${idx+1}`}</label>
-                                            <input type="text" name={noteId} data-id={idx} id={noteId} placeholder="description" onChange={(e) => this.handleChangeNotes(e,relative)}className="description" value={note.description} />
-                                            <button onClick={(e) =>this.handleDeleteNote(e,note)}>Delete Note</button>
+                <Grid.Column style={{ maxWidth: 450 }}>
+                    <div className="family-details">
+                        {this.props.user.relatives.slice(0, this.state.showRelatives).map((relative,idx) => {
+                            let relativeId =`relative-${idx}`, addressId = `address-${idx}`, ageId = `age-${idx}`, 
+                            relationshipId = `relationship-${idx}`, distanceId = `distance-${idx}`
+                            return(
+                                <div key={idx}>
+                                    <label htmlFor={relativeId}>{`Relative${idx+1}`}</label>
+                                    <input type="text" name={relativeId} data-id={idx} id={relativeId} placeholder="name" onChange={(e) => this.handleChange(e,idx)}className="name" value={relative.name} />
+                                    <label htmlFor={addressId}>Address</label>
+                                    <input type="text" name={addressId} data-id={idx} id={addressId} placeholder="address" onChange={(e) => this.handleChange(e,idx)} className="address" value={relative.address} />
+                                    <label htmlFor={ageId}>Age</label>
+                                    <input type="integer" name={ageId} data-id={idx} id={ageId} placeholder="age" onChange={(e) => this.handleChange(e,idx)} className="age" value={relative.age} />
+                                    <label htmlFor={relationshipId}>Relationship</label>
+                                    <input type="text" name={relationshipId} data-id={idx} id={relationshipId} placeholder="relationship" onChange={(e) => this.handleChange(e,idx)} className="relationship" value={relative.relationship} />
+                                    <label htmlFor={distanceId}>Distance</label>
+                                    <input type="integer" name={distanceId} data-id={idx} id={distanceId} placeholder="distance" onChange={(e) => this.handleChange(e,idx)} className="distance" value={relative.distance} />
+                                    {relative.notes && relative.notes.map((note,idx) =>{
+                                        let noteId=`description-${idx}`
+                                        return(
+                                                <div key={idx}>
+                                                <label htmlFor={relativeId}>{`Note${idx+1}`}</label>
+                                                    <input type="text" name={noteId} data-id={idx} id={noteId} placeholder="description" onChange={(e) => this.handleChangeNotes(e,relative)}className="description" value={note.description} />
+                                                    <button onClick={(e) =>this.handleDeleteNote(e,note)}>Delete Note</button>
 
-                                        </div>
-                                  )
-                              })}
-                              <button id="update-`${idx}`" onClick={(e) => this.handleUpdate(e, relative)}>Update</button>
-                              <button onClick={(e) => this.handleDeleteRelative(e,relative)}>Delete Relative</button>
-                            </div>
-                        )})}
-                        <button onClick={this.handleShowMore}>Show more!</button>
-        </div>
-        </Grid.Column>
-      </Grid>
-    )
-    }
+                                                </div>
+                                        )
+                                    })}
+                                    <button id="update-`${idx}`" onClick={(e) => this.handleUpdate(e, relative)}>Update</button>
+                                    <button onClick={(e) => this.handleDeleteRelative(e,relative)}>Delete Relative</button>
+                                </div>
+                            )})}
+                            <button onClick={this.handleShowMore}>Show more!</button>
+                    </div>
+                </Grid.Column>
+        </Grid>
+    )}
 }
 
 const mapStateToProps = (state) => {

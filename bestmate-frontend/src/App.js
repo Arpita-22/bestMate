@@ -28,15 +28,15 @@ class App extends React.Component {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
+          'Accept': 'application/json',
           'Authorization': `Bearer ${token}`
         }
       })
-        .then(resp => resp.json())
-        .then(data => {
-          this.props.setUser(data.user)
-          this.props.isLoggedAction(true);
-        })
+      .then(resp => resp.json())
+      .then(data => {
+        this.props.setUser(data.user)
+        this.props.isLoggedAction(true);
+      })
     }
   }
 
@@ -46,7 +46,6 @@ class App extends React.Component {
     this.props.signOut();
     this.props.isLoggedAction(false);
   }
-
 
   render(){
     const isLogged = this.props.isLogged
