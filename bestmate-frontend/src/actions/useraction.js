@@ -1,5 +1,6 @@
 
 export const setUser = (user) =>{
+    console.log(user)
     return {
         type:'fetchUser',
         user: user
@@ -15,6 +16,7 @@ export const signOut = () =>{
 }
 
 export const allowedFoods = (allowedFoods) =>{
+    console.log(allowedFoods)
     return {
         type: 'updateAllowedFoods',
         allowedFoods: allowedFoods
@@ -22,7 +24,7 @@ export const allowedFoods = (allowedFoods) =>{
 }
 
 export const relatives = (relatives) =>{
-    console.log("LLLLLLLL", relatives);
+    console.log(relatives)
     return {
         type: 'updateRelatives',
         relatives: relatives
@@ -30,6 +32,7 @@ export const relatives = (relatives) =>{
 }
 
 export const notes = (notes) =>{
+    console.log(notes)
     return {
         type: 'updateNotes',
         notes: notes

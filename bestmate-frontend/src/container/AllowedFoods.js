@@ -30,15 +30,20 @@ class AllowedFoods extends React.Component {
     }
 
     handleRemoveAllowedFood = (index) =>{
-        this.state.allowed_foods.splice(index,1)
+        // this.state.allowed_foods.splice(index,1)
 
-        this.setState({allowed_foods:this.state.allowed_foods})
+        // this.setState({allowed_foods:this.state.allowed_foods})
+        this.setState({
+            allowed_foods:this.state.allowed_foods.filter((allowed_food,afidx) => index !== afidx)
+        })
     }
 
-    handleSubmit = (e,allowed_foods, user) =>{
+    handleSubmit = async(e,allowed_foods, user) =>{
         // console.log("11111111111", user);
-        allowed_foods.map(allowed_food => {
-            fetch(`http://localhost:3000/api/v1/allowed_foods`, {
+        console.log(allowed_foods)
+        await allowed_foods.forEach(allowed_food => {
+            console.log(allowed_food)
+             fetch(`http://localhost:3000/api/v1/allowed_foods`, {
                 method: 'POST', 
                 headers: {
                 'Content-Type': 'application/json',
@@ -53,11 +58,15 @@ class AllowedFoods extends React.Component {
             })
             .then(response => response.json())
             .then(data => {
+                console.log("333333333" + JSON.stringify(data), data.allowed_food, data)
                 // this.setState({
-                //     user: data
+                //     allowed_foods:[...this.state.allowed_foods,data.allowed_food]
                 // })
-                this.setState({ clicked: true });  
-                this.props.allowedFoods(data)          
+                this.setState({ clicked: true }); 
+                
+                // let createAllowedFoods = [];
+                // createAllowedFoods.push(data.allowed_food);
+                // this.props.allowedFoods(data.allowed_food)          
                 })
         
             .catch((error) => {

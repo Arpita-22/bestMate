@@ -10,7 +10,7 @@ import { Forbidden } from './container/errors/Forbidden';
 import InteractionMode from './container/InteractionMode';
 import FrontPage from './container/FrontPage';
 import {store} from './index.js'
-import {setUser, signOut} from './actions/useraction'
+import {setUser, signOut, allowedFoods,relatives,notes} from './actions/useraction'
 import AllowedFoods from './container/AllowedFoods'
 import Relatives from './container/Relatives'
 import CreateNotes from './container/CreateNotes'
@@ -36,6 +36,8 @@ class App extends React.Component {
         .then(data => {
           this.props.setUser(data.user)
           this.props.isLoggedAction(true);
+          // this.props.allowedFoods(data.user.allowedFoods)
+          // this.props.relatives(data.user.relatives)
         })
     }
   }
@@ -79,7 +81,10 @@ const mapDispatchToProps = () => {
   return {
     isLoggedAction,
     setUser,
-    signOut
+    signOut,
+    relatives,
+    notes,
+    allowedFoods
   };
 };
  

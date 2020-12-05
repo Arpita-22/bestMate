@@ -5,6 +5,6 @@ class RelativeSerializer < ActiveModel::Serializer
     object.notes
   end
 
-  belongs_to :user
+  # belongs_to :user
   # has_many :notes
 end

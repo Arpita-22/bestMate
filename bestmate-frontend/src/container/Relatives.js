@@ -77,12 +77,27 @@ class Relatives extends React.Component {
             })
             .then(response => response.json())
             .then(data => {
-                // console.log("~~~~~~~~~~~~~" + JSON.stringify(data));
+                console.log("~~~~~~~~~~~~~" + JSON.stringify(data), data.note, data);
                 // this.setState({
-                //     notes: data
+                //     notes:[...this.state.notes, data.note]
                 // })
-                this.setState({ clicked: true });  
-                this.props.notes(data)          
+                // let createNotes = [];
+                // createNotes.push(data.note);
+                // this.setState({
+                //     notes: createNotes
+                // })
+                this.setState({ clicked: true }); 
+                // let Notes = [];
+
+                // //update note for the specific relative
+                // let updatedRelatives = [];
+                // this.state.relatives.map((relativeFromState) => {
+                //     if(relativeFromState.id === relative.id){
+                //         relativeFromState.notes = updatedNotes;
+                //     }
+                //     updatedRelatives.push(relativeFromState);
+                // }); 
+                this.props.notes(data.note)          
                 })
             .catch((error) => {
                 console.error('Error:', error);
@@ -90,9 +105,9 @@ class Relatives extends React.Component {
         });        
     }
 
-    handleSubmit = (e,relatives,user,idx) =>{
+    handleSubmit = async(e,relatives,user) =>{
         e.preventDefault()
-        relatives.map(relative => {
+        await relatives.forEach(relative => {
                     fetch(`http://localhost:3000/api/v1/relatives`, {
                 method: 'POST', 
                 headers: {
@@ -111,10 +126,10 @@ class Relatives extends React.Component {
             })
             .then(response => response.json())
             .then(data => {
-                console.log("4444444", data);
+                console.log("4444444", data, data.relative);
                 this.addNotes(data.relative, relative.notes);
                 // this.setState({
-                //     relatives: data.relatives
+                //     relatives:[...this.state.relatives,data.relatives]
                 // })
                 this.setState({ clicked: true });  
                 //this.props.relatives(data.relative)          

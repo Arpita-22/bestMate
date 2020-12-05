@@ -20,7 +20,12 @@ class SignUp extends React.Component {
             address:"",
             age:"",
             relationship:"",
-            distance:""
+            distance:"",
+            notes:[{
+              id:"",
+              description:"",
+              // relative_id:""
+             }]
           }],
           password:""
         },
@@ -53,6 +58,7 @@ class SignUp extends React.Component {
       })
       .then(response => response.json())
       .then(data => {
+        console.log(data,  data.user)
           this.setState({
               user: data.user
           })

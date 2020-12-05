@@ -64,6 +64,10 @@ class FamilyDetails extends React.Component{
                     updatedRelatives.push(relative);
                 }                
             });
+
+            this.setState({
+                relatives:[...this.state.relatives, data]
+            })
             this.props.relatives(updatedRelatives)
             this.updateNote(relative)
         })
@@ -106,6 +110,9 @@ class FamilyDetails extends React.Component{
                     updatedRelatives.push(relativeFromState);
                 });
                 //this.props.notes(updatedRelatives);
+                this.setState({
+                    notes:[...this.state.notes, data]
+                })
                 this.props.relatives(updatedRelatives);
             })
             .catch((error) => {

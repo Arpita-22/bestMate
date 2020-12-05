@@ -71,11 +71,12 @@ class AllowedFoodDetails extends React.Component{
     }
 
 render(){
+  console.log(this.state.allowed_foods)
     return(  
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>  
         <div className="allowed-food-details">
-            {this.props.user.allowed_foods.map((allowed_food,idx) => {
+            {this.state.allowed_foods.map((allowed_food,idx) => {
                 let allowed_foodId =`AllowedFood-${idx}`
                   return (
                     <div key={idx}>
