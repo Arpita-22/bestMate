@@ -2,8 +2,6 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 
 
-
-
 const PersonalDetails = () =>{
  const user = useSelector(state => state.user.user)
     return(
