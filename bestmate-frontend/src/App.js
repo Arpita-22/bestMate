@@ -40,8 +40,6 @@ class App extends React.Component {
     }
   }
 
-  // action that would call the reducer action do not need map
-  
   logout = () => {
     this.props.signOut();
     this.props.isLoggedAction(false);
@@ -52,12 +50,10 @@ class App extends React.Component {
     return (
       <Router>
         <div className="app" >
-          {/* <Header signOut={this.props.signOut}/> */}
           <Header logout={this.logout} isUserLoggedIn={isLogged}/>
           <Route exact path="/" component={FrontPage}/>
           <Route exact path="/Login" render={props => <Login displayUser={this.displayUser}/> }  />
           {isLogged === false? <Route exact path="/SignUp" component={SignUp} /> : <Route exact path="/MainContainer" render={(props) => <MainContainer {...props} displayUser={this.displayUser} />} /> }
-          {/* <Route exact path="/Logout" render={() => window.localStorage.clear()} /> */}
           <Route exact path='/AllowedFoods' component={AllowedFoods} />
           <Route exact path='/Relatives' component={Relatives} />
           <Route exact path='/CreateNotes' component={CreateNotes} />

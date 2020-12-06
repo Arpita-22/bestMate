@@ -65,7 +65,6 @@ class AllowedFoodDetails extends React.Component{
     }
 
 render(){
-    console.log("!!!!!!!!!!!!!!", this.props.user)
     return(  
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>  

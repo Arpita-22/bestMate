@@ -15,7 +15,8 @@ export class Login extends React.Component {
         name: "" ,
         password:""
       },
-      message:false
+      message: false,
+      userDetailsProvided: false
     }
   }
 
@@ -48,10 +49,13 @@ export class Login extends React.Component {
           })
         }
         if(data.user){
+          this.setState({
+            userDetailsProvided: data.user.allowed_foods.length !== 0
+          })
           this.props.isLoggedAction(true);
-          this.props.setUser(data.user)
-          const token = data.jwt
-          localStorage.setItem("token", token)
+          this.props.setUser(data.user);
+          const token = data.jwt;
+          localStorage.setItem("token", token);          
         }
     })
     .catch((error) => {
@@ -59,11 +63,13 @@ export class Login extends React.Component {
     });
   }
 
-
   render() {
     if (this.props.isLogged) {
-      // return <Redirect to='/MainContainer'  />
-      return <Redirect to='/AllowedFoods'  />
+      if(this.state.userDetailsProvided) {
+        return <Redirect to='/MainContainer'/>        
+      } else {
+        return <Redirect to='/AllowedFoods'/>
+      }
     }
     if(this.state.message === true){
       return (

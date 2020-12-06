@@ -25,7 +25,6 @@ const initialState={
         }],
         password:"",
         token:""
-
     }
 }
 const userReducer = (state = initialState, action) =>{
@@ -34,7 +33,6 @@ const userReducer = (state = initialState, action) =>{
             return {...state, user: action.user}
         case 'displayUser':
             return {user:state.user}
-            // return action.payload
         case "logout":
             return initialState
         case "updateAllowedFoods":
@@ -42,41 +40,13 @@ const userReducer = (state = initialState, action) =>{
                         ...state.user, allowed_foods: action.allowedFoods
                     }}
         case "updateRelatives":
-            // return{...state, user :{
-            //      ...state.user, relatives: [{...state.user.relatives}, action.relatives]
-            // }}
             return{...state, user :{
                  ...state.user, relatives: action.relatives
             }}
         case "updateNotes":
-            // return{...state,user:{
-            //     ...state.user,relatives:{
-            //         ...state.user.relatives.map((relative) => relative.id === action.note.relative_id)
-            //     }
-            // }}
-            
-            // return{
-            //     ...state, user:{
-            //         ...state.user, relatives:[{
-            //             ...state.user.relatives, [action.notes.relative_id]: {
-            //                 ...state.user.relatives[action.notes.relative_id],
-            //                 notes:action.notes
-            //             }
-            //         }]
-            //     }
-            // }
-
             return{...state, user :{
                 ...state.user, relatives: action.relatives
             }}
-
-            case "deleteUser":
-                return
-            case "deleteRelative":
-                return
-            case "deleteNote":
-                return
-                
         default:
             return state
     }
