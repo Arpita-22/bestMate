@@ -12,6 +12,7 @@ Note.destroy_all
 Relative.destroy_all
 Restaurant.destroy_all
 User.destroy_all
+QuestionAnswer.destroy_all
 
 u1 = User.create(name: "Anita", address: "Seattle", age: 60, password: "Anita@60" )
 
@@ -38,5 +39,9 @@ fr1 = FoodRestaurant.create(allowed_food_id: af1.id, restaurant_id: ra1.id)
 fr2 = FoodRestaurant.create(allowed_food_id: af2.id , restaurant_id: ra2.id)
 fr3 = FoodRestaurant.create(allowed_food_id: af4.id, restaurant_id: ra2.id)
 fr4 = FoodRestaurant.create(allowed_food_id: af3.id, restaurant_id: ra3.id)
+
+qa1 = QuestionAnswer.create(question: "how are you?", answer:"I am good")
+qa2 = QuestionAnswer.create(question: "How is the weather today?", answer:"The weather is good")
+qa3 = QuestionAnswer.create(question: "Hello?", answer:"Hi")
 
 

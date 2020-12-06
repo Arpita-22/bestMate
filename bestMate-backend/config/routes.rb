@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         resources :allowed_foods
         resources :restaurants
         resources :food_restaurants
+        resources :question_answers
         post '/login', to: 'auth#create'
         get '/profile', to: 'users#show'
       end
