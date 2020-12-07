@@ -35,9 +35,9 @@ export default function App(props) {
         contentLabel="My dialog"
         className="mymodal"
         overlayClassName="myoverlay">
-          <CreateNotes handleUpdate = {(e) => handleUpdate(e)}/>
-          <button id="cancel-modal"onClick={toggleModal}>Cancel</button>
-          <button id="save-notes" onClick={(e) => handleSubmit(e, props.relative)}>Save</button>
+        <CreateNotes handleUpdate = {(e) => handleUpdate(e)}/>
+        <button id="cancel-modal"onClick={toggleModal}>Cancel</button>
+        <button id="save-notes" onClick={(e) => handleSubmit(e, props.relative)}>Save</button>
       </Modal>
     </div>
   );
