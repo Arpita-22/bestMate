@@ -76,7 +76,7 @@ class AllowedFoods extends React.Component {
                         <div className="allowed-foods">
                             <h1>AllowedFoods</h1>
                             <Menu.Item>
-                                <button  id="add-allowed-food"  onClick ={(e) => this.addAllowedFood(e)}><Icon  name="plus"></Icon></button> 
+                                <button  id="add-allowed-food"  onClick ={(e) => this.addAllowedFood(e)}><Icon basic name="plus"></Icon></button> 
                             </Menu.Item>
                             {this.state.allowed_foods.map((allowed_food,index) =>{
                                 return(

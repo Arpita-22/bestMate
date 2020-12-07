@@ -75,35 +75,34 @@ render() {
   console.log(this.state.readOnly)
   const{user} = this.props
     return (
-      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-      <Grid.Column style={{ maxWidth: 450 }}>
-      <div className="update">
-        <form onSubmit={(e) => this.handleUpdate(e,user)}>
-          {/* <h1>Update</h1> */}
-          {/* <h2>Personal Details</h2> */}
-            <label htmlFor="name">Name</label>
-            <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)} value={this.state.user.name} readOnly={this.state.readOnly}/>
+      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='top'>
+        <Grid.Column style={{ maxWidth: 450 }}>
+            <div className="update">
+              <form onSubmit={(e) => this.handleUpdate(e,user)}>
+                <h1 style={{color:"midnightblue",fontFamily:"Lora"}}>Update Personal Details</h1>
+                  <label htmlFor="name">Name</label>
+                  <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)} value={this.state.user.name} readOnly={this.state.readOnly}/>
 
-            <label htmlFor="">Address</label>
-            <input type="text" name="address" placeholder="address" onChange={(e) => this.handleChange(e)} value={this.state.user.address} readOnly={this.state.readOnly}/>
+                  <label htmlFor="">Address</label>
+                  <input type="text" name="address" placeholder="address" onChange={(e) => this.handleChange(e)} value={this.state.user.address} readOnly={this.state.readOnly}/>
 
-            <label htmlFor="age">Age</label>
-            <input type="integer" name="age" placeholder="age" onChange={(e) => this.handleChange(e)} value={this.state.user.age} readOnly={this.state.readOnly}/>
+                  <label htmlFor="age">Age</label>
+                  <input type="integer" name="age" placeholder="age" onChange={(e) => this.handleChange(e)} value={this.state.user.age} readOnly={this.state.readOnly}/>
 
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password" placeholder="Password" onChange={(e) => this.handleChange(e)} readOnly={this.state.readOnly}/>
-         
-            {this.state.readOnly === true ?
-              <input type="submit" onClick={(e) => this.makeUpdate(e)} value="Update information" />  : ''}
-  
-          {this.state.readOnly === false ?
-              <input type="submit" value="Submit" />  : ''}
+                  <label htmlFor="password">Password</label>
+                  <input type="password" name="password" placeholder="Password" onChange={(e) => this.handleChange(e)} readOnly={this.state.readOnly}/>
+              
+                  {this.state.readOnly === true ?
+                    <input type="submit" onClick={(e) => this.makeUpdate(e)} value="Update information" />  : ''}
+        
+                {this.state.readOnly === false ?
+                    <input type="submit" value="Submit" />  : ''}
 
-          {this.state.readOnly === false ?
-              <input type="submit" onClick={(e) => this.makeUpdate(e)} value="Cancel" />  : ''}
-        </form>
-      </div>
-      </Grid.Column>
+                {this.state.readOnly === false ?
+                    <input type="submit" onClick={(e) => this.makeUpdate(e)} value="Cancel" />  : ''}
+              </form>
+          </div>
+        </Grid.Column>
       </Grid>
     );
   }

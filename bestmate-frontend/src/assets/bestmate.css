@@ -25,19 +25,7 @@
  
   } */
 
-  #submit-allowed-foods{
-    font-family: 'Lora', serif;
-    background-color: #246eaa; 
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-  }
-
-  #submit-relatives{
+  button{
     font-family: 'Lora', serif;
     background-color: #0b500b; 
     border: none;
@@ -46,20 +34,16 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 16px;   
   }
 
+  #submit-allowed-foods{
+    background-color: #246eaa; 
+  }
+
+
   #add-notes{
-    font-family: 'Lora', serif;
-    /* background-color: #0b500b;  */
     background-color: #246eaa;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
     margin-top: 10px;
   }
 
@@ -72,51 +56,103 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 10px; 
     margin-top: 20px;
   }
 
   #sign-up{
     font-family: 'Lora', serif;
-    background-color: #246eaa; 
+    background-color: #246eaa;
     border: none;
     color: white;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 10px; 
     margin-top: 20px;
   }
 
   #cancel-modal{
-    font-family: 'Lora', serif;
     background-color: #246eaa; 
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 10px;
     margin-top: 20px;
   }
 
   #save-notes{
-    font-family: 'Lora', serif;
-    background-color: #0b500b; 
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-size: 10px;
     margin-top: 20px;
   }
 
-  
+  #delete-note{
+    background-color: #e2342e; 
+    font-size: 10px;
+    margin-top: 20px;
+  }
 
+  #update-relative{
+    background-color: #246eaa; 
+    font-size: 10px;
+    margin-top: 20px;
+  }
+
+  #delete-relative{
+    background-color: #e2342e; 
+    font-size: 10px;
+    margin-top: 20px;
+  }
+
+
+  #show-more{
+    background-color: #246eaa; 
+    font-size: 10px;
+    margin-top: 20px;
+  }
+  
+  #delete-food{
+    background-color: #e2342e; 
+    font-size: 10px;
+    margin-top: 20px;
+  }
+
+  #update-food{
+    background-color: #246eaa; 
+    font-size: 10px;
+    margin-top: 20px;
+  }
+
+  #allowed-food{
+    font-size: 10px;
+    margin-top: 20px;
+  }
+
+  #relative{
+    font-size: 10px;
+    margin-top: 20px;
+  }
+
+ #make-update-food{
+  background-color: #246eaa; 
+  font-size: 10px;
+  margin-top: 20px;
+ }
+
+ #make-update-relative{
+  background-color: #246eaa; 
+  font-size: 10px;
+  margin-top: 20px;
+ }
+
+ #cancel-food{
+  font-size: 10px;
+  margin-top: 20px; 
+ }
+
+ #cancel-relative{
+  font-size: 10px;
+  margin-top: 20px; 
+ }
+ 
   body {
     margin:0;
     padding:0;
@@ -125,14 +161,21 @@
 
   .personal-details{
     text-align: center;
+    margin-top: 25px;
   }
 
   .family-details{
     text-align: center;
+    font-family: 'Lora', serif;
   }
   .allowed-food-details{
     text-align: center;
+    font-family: 'Lora', serif;
   }
+
+  /* .update > h1{
+    font-family: 'Lora', serif;
+  } */
 
   input[type=text], select {
     width: 100%;
@@ -142,6 +185,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    font-family: 'Lora', serif;
   }
 
   input[type=password], select {
@@ -167,9 +211,9 @@
   
   input[type=submit] {
     width: 100%;
-    background-color: #4CAF50;
+    background-color: #274b29;
     color: rgb(175, 233, 209);
-    padding: 50px 50px;
+    padding: 10px 10px;
     margin-top: 50px ;
     border: none;
     border-radius: 4px;
@@ -232,12 +276,12 @@
   }
 
   .update input {
-    font-size: 12px;
+    font-size: 24px;
     font-weight: 350;
     border: 1px dashed grey;
     margin: 0.5em 0;
     box-sizing: border-box;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: -50px -20px;
   }
 
@@ -258,6 +302,8 @@
   } */
   .maste-detail-element{
     /* background-color:#ffe9ec;  */
+    margin:auto;
+    /* padding:0; */
     background-color:#f4b6ff; 
   }
 
@@ -265,4 +311,9 @@
     /* background-color:#ffe9ec;  */
     /* background-color:#d9f7f7; */
     background-color:#ffffed;  
+  }
+
+  .interaction-mode{
+   display:inline-block;
+   margin-left:25%;
   }

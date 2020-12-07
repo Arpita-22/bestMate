@@ -2,6 +2,7 @@ import React , { useState }  from 'react'
 import { useSpeechSynthesis, useSpeechRecognition } from 'react-speech-kit';
 import {useSelector} from 'react-redux';
 import AnswerHelper from '../helpers/AnswerHelper';
+import Map from './Map';
 
 const SpeechInteraction = () => {
     const [value, setValue] = useState('');

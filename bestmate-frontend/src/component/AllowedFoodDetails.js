@@ -3,6 +3,8 @@ import { isLoggedAction } from '../actions/';
 import {connect} from 'react-redux';
 import {setUser,signOut,allowedFoods} from '../actions/useraction'
 import {Grid} from 'semantic-ui-react'
+import { Redirect } from "react-router-dom";
+import AllowedFoods from '../container/AllowedFoods';
 
 
 
@@ -12,7 +14,8 @@ class AllowedFoodDetails extends React.Component{
         super(props)
         this.state={
         allowed_foods:this.props.user.allowed_foods,
-          readOnly:true
+          readOnly:true,
+          clicked:false
         }
     }
 
@@ -54,33 +57,55 @@ class AllowedFoodDetails extends React.Component{
 
     handleDelete = (e, allowed_food) =>{
       console.log(e, allowed_food)
+      e.preventDefault()
       fetch(`http://localhost:3000/api/v1/allowed_foods/${allowed_food.id}`, {
         method: 'DELETE',
       })
       .then(res => res.json()) 
       .then(() => {
-          this.props.allowedFoods()
-      }
-      )
+          let updatedAllowedFoods = this.state.allowed_foods.filter(allowedFood => allowedFood.id !== allowed_food.id) 
+          this.props.allowedFoods(updatedAllowedFoods)   
+      })
+    }
+
+    handleReturn = (e) =>{
+      e.preventDefault()
+      this.setState({
+        clicked:true
+      })
+    }
+
+    makeUpdate = (e) =>{
+      e.preventDefault()
+      const readOnly = this.state.readOnly; 
+      this.setState({ readOnly: !readOnly });  
     }
 
 render(){
+  if(this.state.clicked === true){
+    return <Redirect to='/AllowedFoods' />
+  }
     return(  
-        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='top'>
         <Grid.Column style={{ maxWidth: 450 }}>  
         <div className="allowed-food-details">
-            {this.props.user.allowed_foods.map((allowed_food,idx) => {
+          <h1 style={{color:"midnightblue"}} >Update Food Details</h1>
+            {this.props.user.allowed_foods && this.props.user.allowed_foods.map((allowed_food,idx) => {
                 let allowed_foodId =`AllowedFood-${idx}`
                   return (
                     <div key={idx}>
                     <label htmlFor={allowed_foodId}>{`AllowedFood${idx+1}`}</label>
-                      <input type="text" name={allowed_foodId} data-id={idx} id={allowed_foodId} placeholder="name" onChange={(e) => this.handleChange(e,idx)}className="name" value={allowed_food.name} />
-                      <button onClick={(e) =>this.handleDelete(e,allowed_food)}>Delete Allowed Food</button>
+                      <input type="text" name={allowed_foodId} data-id={idx} id={allowed_foodId} placeholder="name" onChange={(e) => this.handleChange(e,idx)}className="name" value={allowed_food.name} readOnly={this.state.readOnly}/>
+                      <button id="delete-food" onClick={(e) =>this.handleDelete(e,allowed_food)}>Delete Allowed Food</button>
 
                   </div>
                 )
             })}
-            <button onClick={(e) => this.handleUpdate(e, this.state.allowed_foods)}>Update</button>
+            {this.state.readOnly === true?<button id="make-update-food" onClick={(e) => this.makeUpdate(e)}>Do you want to update?</button>:''}
+            {this.state.readOnly === false? <button id="update-food" onClick={(e) => this.handleUpdate(e, this.state.allowed_foods)}>Update</button>:''}
+            {this.state.readOnly === false? <button id="cancel-food" onClick={(e) => this.makeUpdate(e)}>Cancel</button>:''}
+            <button id="allowed-food" onClick={(e) => this.handleReturn(e)}>Add Allowed Food</button>
+            <AllowedFoods/>
         </div>
         </Grid.Column>
         </Grid>
