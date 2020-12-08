@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {setUser,signOut,relatives,notes} from '../actions/useraction'
 import {Grid} from 'semantic-ui-react'
 import { Redirect } from "react-router-dom";
+import NotesModal from '../container/NotesModal'
+import CreateNotes from '../container/CreateNotes'
 
 
 
@@ -14,7 +16,7 @@ class FamilyDetails extends React.Component{
         this.state={
             relatives: this.props.user.relatives,
             notes:[],
-            showRelatives:2,
+            showRelatives: 2,
             readOnly:true,
             clicked:false
         }
@@ -42,7 +44,7 @@ class FamilyDetails extends React.Component{
 
     handleUpdate = (e,relative) =>{
         e.preventDefault()
-        alert(JSON.stringify(relative));
+        // alert(JSON.stringify(relative));
         fetch(`http://localhost:3000/api/v1/relatives/${relative.id}`, {
             method: 'PATCH', 
             headers: {
@@ -60,7 +62,8 @@ class FamilyDetails extends React.Component{
                     updatedRelatives.push(data);
                 } else {
                     updatedRelatives.push(relative);
-                }                
+                } 
+                this.setState({relatives:updatedRelatives})               
             });
             this.props.relatives(updatedRelatives)
             this.updateNote(relative)
@@ -71,43 +74,80 @@ class FamilyDetails extends React.Component{
     }
 
     updateNote = (relative) =>{
+        this.setState({notes:relative.notes})
+        // console.log(this.state.notes)
         this.state.notes.map(note =>{
-            fetch(`http://localhost:3000/api/v1/notes/${note.id}`, {
-                method: 'PATCH', 
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+            if(note.id){
+                fetch(`http://localhost:3000/api/v1/notes/${note.id}`, {
+                    method: 'PATCH', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        note
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // console.log(data)
+                    //update family details component state
+                    let updatedNotes = [];
+                    this.state.notes.map((note) => {
+                        if(note.id === data.id){
+                            updatedNotes.push(data);
+                        } else {
+                            updatedNotes.push(note);
+                        } 
+                        this.setState({notes:this.updateNotes})               
+                    });
+
+                    //update note for the specific relative
+                    let updatedRelatives = [];
+                    this.state.relatives.map((relativeFromState) => {
+                        if(relativeFromState.id === relative.id){
+                            relativeFromState.notes = updatedNotes;
+                        }
+                        updatedRelatives.push(relativeFromState);
+                    });
+                    this.setState({relatives:updatedRelatives})
+                    this.props.relatives(updatedRelatives);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }
+            else{
+                let createdNotes = []
+                fetch(`http://localhost:3000/api/v1/notes`, {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                 body: JSON.stringify({
-                    note
+                    relative_id: relative.id,
+                    description: note.description
                 }),
             })
             .then(response => response.json())
             .then(data => {
-                //update family details component state
-                let updatedNotes = [];
-                this.state.notes.map((note) => {
-                    if(note.id === data.id){
-                        updatedNotes.push(data);
-                    } else {
-                        updatedNotes.push(note);
-                    }                
-                });
-
-                //update note for the specific relative
+                // this.setState({notes: data.note})
+                createdNotes.push(data.note)
                 let updatedRelatives = [];
                 this.state.relatives.map((relativeFromState) => {
                     if(relativeFromState.id === relative.id){
-                        relativeFromState.notes = updatedNotes;
+                        relativeFromState.notes = createdNotes;
                     }
                     updatedRelatives.push(relativeFromState);
                 });
                 this.props.relatives(updatedRelatives);
+
             })
             .catch((error) => {
                 console.error('Error:', error);
-            });
+            }); 
+        }
+    })
 
-        })
     }
 
     handleDeleteNote = (e, noteToDelete, relative) =>{
@@ -139,7 +179,9 @@ class FamilyDetails extends React.Component{
         })
         .then(res => res.json()) 
         .then(() => {
-            this.props.relatives('')
+            let updatedRelatives = this.props.user.relatives.filter(relativeInner => relativeInner.id !== relative.id) 
+            this.props.relatives(updatedRelatives)
+            // this.props.relatives('')
         })
     }
 
@@ -160,7 +202,6 @@ class FamilyDetails extends React.Component{
         if(this.state.clicked === true){
             return <Redirect to='/Relatives' />
         }
-        
         return(
             <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='top'>
                 <Grid.Column style={{ maxWidth: 450 }}>
@@ -184,13 +225,14 @@ class FamilyDetails extends React.Component{
                                     {relative.notes && relative.notes.map((note,idx) =>{
                                         let noteId=`description-${idx}`
                                         return(
-                                                <div key={idx}>
-                                                <label htmlFor={relativeId}>{`Note${idx+1}`}</label>
-                                                    <input type="text" name={noteId} data-id={idx} id={noteId} placeholder="description" onChange={(e) => this.handleChangeNotes(e,relative)}className="description" value={note.description} readOnly={this.state.readOnly}/>
-                                                    <button id="delete-note"onClick={(e) =>this.handleDeleteNote(e, note, relative)}>Delete Note</button>
-                                                </div>
+                                            <div key={idx}>
+                                            <label htmlFor={relativeId}>{`Note${idx+1}`}</label>
+                                                <input type="text" name={noteId} data-id={idx} id={noteId} placeholder="description" onChange={(e) => this.handleChangeNotes(e,relative)}className="description" value={note.description} readOnly={this.state.readOnly}/>
+                                                <button id="delete-note"onClick={(e) =>this.handleDeleteNote(e, note, relative)}>Delete Note</button>
+                                            </div>
                                         )
                                     })}
+                                    {this.state.readOnly === true? '': <NotesModal relative = {relative}/>}
                                     {this.state.readOnly === true?<button id="make-update-relative" onClick={(e) => this.makeUpdate(e)}>Do you want to update?</button>:''}
                                     {this.state.readOnly === false?<button id="update-relative" onClick={(e) => this.handleUpdate(e, relative)}>Update</button>: ''}
                                     {this.state.readOnly === false?<button id="cancel-relative" onClick={(e) => this.makeUpdate(e)}>Cancel</button>:''}

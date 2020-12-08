@@ -55,6 +55,7 @@ class Relatives extends React.Component {
 
 
     addNotes = (relative, notes) =>{
+        let notesAdded = [];
         notes.map(note => {
             fetch(`http://localhost:3000/api/v1/notes`, {
                 method: 'POST', 
@@ -68,17 +69,17 @@ class Relatives extends React.Component {
             })
             .then(response => response.json())
             .then(data => {
-                return data;
+                notesAdded.push(data.note);
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
-        });        
+        });
+        return notesAdded;        
     }
 
     handleSubmit = (e,relatives, user) =>{
         e.preventDefault()
-        let createRelatives = [];
         relatives.map(relative => {
                 fetch(`http://localhost:3000/api/v1/relatives`, {
                     method: 'POST', 
@@ -97,17 +98,22 @@ class Relatives extends React.Component {
             })
             .then(response => response.json())
             .then(data => {
-                this.setState({ clicked: true }); 
+                //console.log("################", JSON.stringify(data.relative));                
                 const notesAdded = this.addNotes(data.relative, relative.notes);
                 data.relative.notes = notesAdded;
-                createRelatives.push(data.relative);
-                // this.setState({ clicked: true });  
+                if(user.relatives) {
+                    user.relatives.push(data.relative);           
+                } else {
+                    user.relatives = data.relative;
+                }
+                this.setState({ clicked: true });  
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
-            this.props.relatives(createRelatives);
         })
+        this.props.relatives(user.relatives);
+        this.props.setUser(user);        
     }
 
     handleAddNotes = (idx) =>{
@@ -168,7 +174,7 @@ class Relatives extends React.Component {
                                                     <label htmlFor={distanceId}>Distance</label>
                                                     <input type="integer" name={distanceId} data-id={idx} id={distanceId} placeholder="distance" onChange={(e) => this.handleChangeRelative(e)} className="distance" value={val.distance}/>
                                                     <Menu.Item>
-                                                        <button onClick={(e) => this.handleRemoveRelative(e,idx)}><Icon basic name="minus"></Icon></button>
+                                                        <button onClick={(e) => this.handleRemoveRelative(e,idx)}><Icon  name="minus"></Icon></button>
                                                     </Menu.Item>
                                                     <NotesModal relative = {this.state.relatives.filter((relative,ridx) =>  idx === ridx)}/>
                                                 </div>

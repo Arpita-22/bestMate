@@ -88,6 +88,8 @@
     background-color: #e2342e; 
     font-size: 10px;
     margin-top: 20px;
+    position: absolute; 
+    right: -90px;
   }
 
   #update-relative{
@@ -149,6 +151,11 @@
  }
 
  #cancel-relative{
+  font-size: 10px;
+  margin-top: 20px; 
+ }
+
+ #add-notes{
   font-size: 10px;
   margin-top: 20px; 
  }

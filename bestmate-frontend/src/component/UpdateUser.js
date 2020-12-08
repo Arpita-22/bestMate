@@ -25,7 +25,6 @@ class UpdateUser extends React.Component {
 
     handleUpdate = (e,user) =>{
       e.preventDefault()
-      console.log(this.state.user)
       fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
         method: 'PATCH', 
         headers: {
@@ -38,7 +37,6 @@ class UpdateUser extends React.Component {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
         this.setState({
             user: data
         })
@@ -72,7 +70,6 @@ render() {
   if (this.state.clicked) {
     return <Redirect to='/MainContainer' />
   }
-  console.log(this.state.readOnly)
   const{user} = this.props
     return (
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='top'>

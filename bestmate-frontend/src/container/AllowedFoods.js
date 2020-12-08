@@ -26,13 +26,16 @@ class AllowedFoods extends React.Component {
     }
 
     handleRemoveAllowedFood = (index) =>{
-        this.state.allowed_foods.splice(index,1)
+        this.state.allowed_foods.splice(index, 1)
         this.setState({allowed_foods:this.state.allowed_foods})
     }
 
     handleSubmit = (e, allowed_foods, user) =>{
         e.preventDefault();
         let allowedFoodsModified = [];
+        user.allowed_foods.forEach(food =>{
+            allowedFoodsModified.push(food);
+        });
         allowed_foods.map(allowed_food => {
             fetch(`http://localhost:3000/api/v1/allowed_foods`, {
                 method: 'POST', 
@@ -48,19 +51,22 @@ class AllowedFoods extends React.Component {
             })
             .then(response => response.json())
             .then(data => {
-                this.setState({ clicked: true });  
-                allowedFoodsModified.push(data.allowed_food);
+                allowedFoodsModified.push(data.allowed_food);                
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
         });
-        this.props.allowedFoods(allowedFoodsModified);          
+        this.setState({
+            clicked: true,
+            allowed_foods: allowedFoodsModified
+       });  
+       this.props.allowedFoods(allowedFoodsModified)        
     }
 
     handleReturn = (e) =>{
         e.preventDefault()
-        this.setState({ clicked: true })
+        this.setState({ clicked: !this.state.clicked })
     }
 
     render(){
@@ -76,7 +82,7 @@ class AllowedFoods extends React.Component {
                         <div className="allowed-foods">
                             <h1>AllowedFoods</h1>
                             <Menu.Item>
-                                <button  id="add-allowed-food"  onClick ={(e) => this.addAllowedFood(e)}><Icon basic name="plus"></Icon></button> 
+                                <button  id="add-allowed-food"  onClick ={(e) => this.addAllowedFood(e)}><Icon  name="plus"></Icon></button> 
                             </Menu.Item>
                             {this.state.allowed_foods.map((allowed_food,index) =>{
                                 return(
@@ -91,6 +97,8 @@ class AllowedFoods extends React.Component {
                             <hr/>
                             <Menu.Item>
                                 <button id="submit-allowed-foods" onClick={(e) => this.handleSubmit(e, allowed_foods, user)}>Submit</button>
+                                </Menu.Item>
+                                <Menu.Item>
                                 <button onClick={(e) => this.handleReturn(e)}>No more to add</button>
                             </Menu.Item>
                         </div>

@@ -63,6 +63,12 @@ export class Login extends React.Component {
     });
   }
 
+  componentDidMount(){
+    this.setState({
+      message: false
+    }); 
+  }
+
   render() {
     if (this.props.isLogged) {
       if(this.state.userDetailsProvided) {
@@ -71,16 +77,12 @@ export class Login extends React.Component {
         return <Redirect to='/AllowedFoods'/>
       }
     }
-    if(this.state.message === true){
-      return (
-        <div>Invalid Name or Password</div>
-      )
-    }
     return (
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
           <form className="login" onSubmit={(e) => this.handleLogin(e)} >
             <h1 style={{color:"midnightblue",fontFamily: 'Lora'}}>Login</h1>
+            <div style={{color: 'red'}}>{this.state.message === true? 'Invalid Name or Password':''}</div>
             <div>
               <label htmlFor="name">Name</label>
               <input type="text" name="name" placeholder="name" onChange={(e) => this.handleChange(e)}/>

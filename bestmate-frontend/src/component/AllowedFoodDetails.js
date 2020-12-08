@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {setUser,signOut,allowedFoods} from '../actions/useraction'
 import {Grid} from 'semantic-ui-react'
 import { Redirect } from "react-router-dom";
-import NotesModal from '../container/NotesModal'
+// import NotesModal from '../container/NotesModal'
 
 
 class AllowedFoodDetails extends React.Component{
@@ -24,7 +24,7 @@ class AllowedFoodDetails extends React.Component{
     }
 
     handleUpdate = (e, allowed_foods) =>{
-      e.preventDefault()
+      // e.preventDefault()
       allowed_foods.map(allowed_food =>{
         fetch(`http://localhost:3000/api/v1/allowed_foods/${allowed_food.id}`, {
           method: 'PATCH', 
@@ -37,14 +37,16 @@ class AllowedFoodDetails extends React.Component{
         })
         .then(response => response.json())
         .then(data => {
+            // console.log(this.state.allowed_foods)
             let updatedAllowedFoods = [];
-            this.state.allowed_foods.map((allowed_food) => {
+            this.state.allowed_foods.forEach((allowed_food) => {
                 if(allowed_food.id === data.id){
                   updatedAllowedFoods.push(data);
                 } else {
                   updatedAllowedFoods.push(allowed_food);
                 }                
             });
+            this.setState({allowed_foods:updatedAllowedFoods})
             this.props.allowedFoods(updatedAllowedFoods)
         })
         .catch((error) => {
@@ -54,14 +56,15 @@ class AllowedFoodDetails extends React.Component{
     }
 
     handleDelete = (e, allowed_food) =>{
-      console.log(e, allowed_food)
-      e.preventDefault()
+      // e.preventDefault()
       fetch(`http://localhost:3000/api/v1/allowed_foods/${allowed_food.id}`, {
         method: 'DELETE',
       })
       .then(res => res.json()) 
       .then(() => {
+        // console.log(this.state.allowed_foods)
           let updatedAllowedFoods = this.state.allowed_foods.filter(allowedFood => allowedFood.id !== allowed_food.id) 
+          this.setState({allowed_foods:updatedAllowedFoods})
           this.props.allowedFoods(updatedAllowedFoods)   
       })
     }
@@ -69,45 +72,45 @@ class AllowedFoodDetails extends React.Component{
     handleReturn = (e) =>{
       e.preventDefault()
       this.setState({
-        clicked:true
+        clicked:!this.state.clicked
       })
     }
 
     makeUpdate = (e) =>{
-      e.preventDefault()
       const readOnly = this.state.readOnly; 
       this.setState({ readOnly: !readOnly });  
     }
 
-render(){
-  if(this.state.clicked === true){
-    return <Redirect to='/AllowedFoods' />
-  }
+  render(){
+    if(this.state.clicked === true){
+      return <Redirect to='/AllowedFoods' />
+    }
     return(  
-        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='top'>
-          <Grid.Column style={{ maxWidth: 450 }}>  
-            <div className="allowed-food-details">
-              <h1 style={{color:"midnightblue"}} >Update Food Details</h1>
-                {this.props.user.allowed_foods && this.props.user.allowed_foods.map((allowed_food,idx) => {
-                    let allowed_foodId =`AllowedFood-${idx}`
-                      return (
-                        <div key={idx}>
-                        <label htmlFor={allowed_foodId}>{`AllowedFood${idx+1}`}</label>
-                          <input type="text" name={allowed_foodId} data-id={idx} id={allowed_foodId} placeholder="name" onChange={(e) => this.handleChange(e,idx)}className="name" value={allowed_food.name} readOnly={this.state.readOnly}/>
-                          <button id="delete-food" onClick={(e) =>this.handleDelete(e,allowed_food)}>Delete Allowed Food</button>
+      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='top'>
+        <Grid.Column style={{ maxWidth: 450 }}>  
+          <div className="allowed-food-details">
+            <h1 style={{color:"midnightblue"}} >Update Food Details</h1>
+              {this.props.user.allowed_foods && this.props.user.allowed_foods.map((allowed_food,idx) => {
+                  let allowed_foodId =`AllowedFood-${idx}`
+                    return (
+                      <div key={idx}>
+                      <label htmlFor={allowed_foodId}>{`AllowedFood${idx+1}`}</label>
+                        <input type="text" name={allowed_foodId} data-id={idx} id={allowed_foodId} placeholder="name" onChange={(e) => this.handleChange(e,idx)}className="name" value={allowed_food.name}readOnly={this.state.readOnly}/>
+                        <button id="delete-food" onClick={(e) =>this.handleDelete(e,allowed_food)}>Delete Allowed Food</button>
 
-                      </div>
-                    )
-                })}
-                {this.state.readOnly === true?<button id="make-update-food" onClick={(e) => this.makeUpdate(e)}>Do you want to update?</button>:''}
-                {this.state.readOnly === false? <button id="update-food" onClick={(e) => this.handleUpdate(e, this.state.allowed_foods)}>Update</button>:''}
-                {this.state.readOnly === false? <button id="cancel-food" onClick={(e) => this.makeUpdate(e)}>Cancel</button>:''}
-                <button id="allowed-food" onClick={(e) => this.handleReturn(e)}>Add Allowed Food</button>
-            </div>
-          </Grid.Column>
-        </Grid>
+                    </div>
+                  )
+              })}
+              {this.state.readOnly === true?<button id="make-update-food" onClick={(e) => this.makeUpdate(e)}>Do you want to update?</button>:''}
+              {this.state.readOnly === false? <button id="update-food" onClick={(e) => this.handleUpdate(e, this.state.allowed_foods)}>Update</button>:''}
+              {this.state.readOnly === false? <button id="cancel-food" onClick={(e) => this.makeUpdate(e)}>Cancel</button>:''}
+              {/* <button id="update-food" onClick={(e) => this.handleUpdate(e, this.state.allowed_foods)}>Update</button> */}
+              <button id="allowed-food" onClick={(e) => this.handleReturn(e)}>Add Allowed Food</button>
+          </div>
+        </Grid.Column>
+      </Grid>
     )
-}
+  }
 }
 
 const mapStateToProps = (state) => {

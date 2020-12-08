@@ -15,7 +15,7 @@ import {Grid} from 'semantic-ui-react'
 
 const InteractionMode = () =>{
     const interactionMode = useSelector(state => state.interactionType.interactionMode);
-    console.log("===============INTERACITON_MODE===============", interactionMode);
+    //console.log("===============INTERACITON_MODE===============", interactionMode);
     return(
         // <Grid textAlign='center' style={{ height: '5vh' }} verticalAlign='top'>
         //     <Grid.Column style={{ maxWidth: 450 }}> 

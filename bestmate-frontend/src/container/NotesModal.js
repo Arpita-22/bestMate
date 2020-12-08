@@ -17,9 +17,12 @@ export default function App(props) {
 
   const handleSubmit = (e, relative) =>{
     e.preventDefault()
-    relative[0].notes = notesSet;
-    toggleModal();
-    
+    if(relative.notes){
+      relative.notes.push(notesSet[0]);
+    } else {
+      relative[0].notes = notesSet;
+    }
+    toggleModal();    
   }
 
   const handleUpdate = (notes) =>{

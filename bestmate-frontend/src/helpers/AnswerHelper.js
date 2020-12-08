@@ -2,23 +2,24 @@
 //This is just a direct string match.. can be much more!!
 const AnswerHelper = (question, user) => {
     if(question.includes("relative")){
-        let relatives = "";
+        let relativesString = "";
+        console.log("!!!!!!!!!!!!!!", user);
         user.relatives.map(relative =>{
             if(relative){
-                relatives += relative.name + " ";
+                relativesString += relative.name + ", ";
             }            
         });
-        if(!relatives || relatives.length === 0){
+        if(!relativesString || relativesString.length === 0){
             return "You have no relatives."
         } else {
-            return "Your relatives are " + relatives; 
+            return "Your relatives are " + relativesString; 
         }
     }
     if(question.includes("food")){
         let foods = "";
         user.allowed_foods.map(food =>{
             if(food){
-                foods += food.name + " ";
+                foods += food.name + ", ";
             }            
         });
         if(!foods || foods.length === 0){
