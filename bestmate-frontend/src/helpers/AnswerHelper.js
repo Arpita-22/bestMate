@@ -3,7 +3,6 @@
 const AnswerHelper = (question, user) => {
     if(question.includes("relative")){
         let relativesString = "";
-        console.log("!!!!!!!!!!!!!!", user);
         user.relatives.map(relative =>{
             if(relative){
                 relativesString += relative.name + ", ";

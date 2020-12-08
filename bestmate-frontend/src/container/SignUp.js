@@ -71,7 +71,6 @@ class SignUp extends React.Component {
   render() {
 
     if (this.state.signedUp) {
-      // return <Redirect to='/AllowedFoods' />
       return <Redirect to='/Login' />
     }
     return (

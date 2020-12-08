@@ -4,7 +4,6 @@
 
   * {
     font-family: 'Lora', serif;
-    /* background-color:#ffe9ec; */
   } 
 
   div {
@@ -21,9 +20,6 @@
     font-family: 'Lora', serif;
   }
 
-  /* div.allowed-foods > button{
- 
-  } */
 
   button{
     font-family: 'Lora', serif;
@@ -159,6 +155,10 @@
   font-size: 10px;
   margin-top: 20px; 
  }
+
+ #start-interaction{
+  background-color:black;
+ }
  
   body {
     margin:0;
@@ -180,9 +180,6 @@
     font-family: 'Lora', serif;
   }
 
-  /* .update > h1{
-    font-family: 'Lora', serif;
-  } */
 
   input[type=text], select {
     width: 100%;
@@ -303,20 +300,12 @@
     margin-bottom: 10px;
   }
 
-  /* .interaction-mode{
-    background-color:#ffb7b6;
-     background-color:#ffe9ec; 
-  } */
   .maste-detail-element{
-    /* background-color:#ffe9ec;  */
     margin:auto;
-    /* padding:0; */
     background-color:#f4b6ff; 
   }
 
   .app{
-    /* background-color:#ffe9ec;  */
-    /* background-color:#d9f7f7; */
     background-color:#ffffed;  
   }
 

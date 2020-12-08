@@ -97,8 +97,7 @@ class Relatives extends React.Component {
                 ),
             })
             .then(response => response.json())
-            .then(data => {
-                //console.log("################", JSON.stringify(data.relative));                
+            .then(data => {                
                 const notesAdded = this.addNotes(data.relative, relative.notes);
                 data.relative.notes = notesAdded;
                 if(user.relatives) {

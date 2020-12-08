@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {setUser,signOut,allowedFoods} from '../actions/useraction'
 import {Grid} from 'semantic-ui-react'
 import { Redirect } from "react-router-dom";
-// import NotesModal from '../container/NotesModal'
+
 
 
 class AllowedFoodDetails extends React.Component{
@@ -37,7 +37,6 @@ class AllowedFoodDetails extends React.Component{
         })
         .then(response => response.json())
         .then(data => {
-            // console.log(this.state.allowed_foods)
             let updatedAllowedFoods = [];
             this.state.allowed_foods.forEach((allowed_food) => {
                 if(allowed_food.id === data.id){
@@ -62,7 +61,6 @@ class AllowedFoodDetails extends React.Component{
       })
       .then(res => res.json()) 
       .then(() => {
-        // console.log(this.state.allowed_foods)
           let updatedAllowedFoods = this.state.allowed_foods.filter(allowedFood => allowedFood.id !== allowed_food.id) 
           this.setState({allowed_foods:updatedAllowedFoods})
           this.props.allowedFoods(updatedAllowedFoods)   
@@ -104,7 +102,6 @@ class AllowedFoodDetails extends React.Component{
               {this.state.readOnly === true?<button id="make-update-food" onClick={(e) => this.makeUpdate(e)}>Do you want to update?</button>:''}
               {this.state.readOnly === false? <button id="update-food" onClick={(e) => this.handleUpdate(e, this.state.allowed_foods)}>Update</button>:''}
               {this.state.readOnly === false? <button id="cancel-food" onClick={(e) => this.makeUpdate(e)}>Cancel</button>:''}
-              {/* <button id="update-food" onClick={(e) => this.handleUpdate(e, this.state.allowed_foods)}>Update</button> */}
               <button id="allowed-food" onClick={(e) => this.handleReturn(e)}>Add Allowed Food</button>
           </div>
         </Grid.Column>

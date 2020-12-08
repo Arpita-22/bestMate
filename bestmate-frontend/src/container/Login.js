@@ -42,7 +42,6 @@ export class Login extends React.Component {
     })
     .then(response => response.json())
     .then(data => {
-        //dispatch true to redux state
         if (data.message){
           this.setState({
             message:!this.state.message

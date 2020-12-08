@@ -29,7 +29,6 @@ class UpdateUser extends React.Component {
         method: 'PATCH', 
         headers: {
         'Content-Type': 'application/json',
-        // 'Authorization':`Bearer ${this.state.token}`
         },
         body: JSON.stringify(
             {user:this.state.user}
@@ -66,7 +65,6 @@ class UpdateUser extends React.Component {
     }
     
 render() {
-  // console.log(this.props.user.token)
   if (this.state.clicked) {
     return <Redirect to='/MainContainer' />
   }

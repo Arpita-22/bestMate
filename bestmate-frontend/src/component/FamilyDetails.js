@@ -44,7 +44,6 @@ class FamilyDetails extends React.Component{
 
     handleUpdate = (e,relative) =>{
         e.preventDefault()
-        // alert(JSON.stringify(relative));
         fetch(`http://localhost:3000/api/v1/relatives/${relative.id}`, {
             method: 'PATCH', 
             headers: {
@@ -75,7 +74,6 @@ class FamilyDetails extends React.Component{
 
     updateNote = (relative) =>{
         this.setState({notes:relative.notes})
-        // console.log(this.state.notes)
         this.state.notes.map(note =>{
             if(note.id){
                 fetch(`http://localhost:3000/api/v1/notes/${note.id}`, {
@@ -89,7 +87,6 @@ class FamilyDetails extends React.Component{
                 })
                 .then(response => response.json())
                 .then(data => {
-                    // console.log(data)
                     //update family details component state
                     let updatedNotes = [];
                     this.state.notes.map((note) => {
@@ -130,7 +127,6 @@ class FamilyDetails extends React.Component{
             })
             .then(response => response.json())
             .then(data => {
-                // this.setState({notes: data.note})
                 createdNotes.push(data.note)
                 let updatedRelatives = [];
                 this.state.relatives.map((relativeFromState) => {
@@ -181,7 +177,6 @@ class FamilyDetails extends React.Component{
         .then(() => {
             let updatedRelatives = this.props.user.relatives.filter(relativeInner => relativeInner.id !== relative.id) 
             this.props.relatives(updatedRelatives)
-            // this.props.relatives('')
         })
     }
 

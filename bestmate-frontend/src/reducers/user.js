@@ -36,7 +36,6 @@ const userReducer = (state = initialState, action) =>{
         case "logout":
             return initialState
         case "updateAllowedFoods":
-            console.log(action.allowedFoods)
             return {...state, user:{
                         ...state.user, allowed_foods: action.allowedFoods
                     }}

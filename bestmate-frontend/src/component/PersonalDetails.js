@@ -7,7 +7,6 @@ const PersonalDetails = () =>{
     return(
         
         <div className="personal-details">
-                {/* <h1>{user.name}</h1> */}
                 <h2>Address: {user.address}</h2>
                 <h2>Age: {user.age}</h2>
         </div>
