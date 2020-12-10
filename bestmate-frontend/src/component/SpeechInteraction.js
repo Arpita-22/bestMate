@@ -2,7 +2,6 @@ import React , { useState }  from 'react'
 import { useSpeechSynthesis, useSpeechRecognition } from 'react-speech-kit';
 import {useSelector} from 'react-redux';
 import AnswerHelper from '../helpers/AnswerHelper';
-import Map from './Map';
 import {Menu,Icon} from 'semantic-ui-react'
 
 const SpeechInteraction = () => {
@@ -23,7 +22,6 @@ const SpeechInteraction = () => {
             getAnswer(hear)
             .then(resp => resp.json())
             .then(data => {
-                //document.getElementById("text").textContent = "hello";
                 if(data.length > 0) {
                     speakAnswers(data[0].answer);    
                 } else {
