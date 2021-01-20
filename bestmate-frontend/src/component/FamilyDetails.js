@@ -44,7 +44,7 @@ class FamilyDetails extends React.Component{
 
     handleUpdate = (e,relative) =>{
         e.preventDefault()
-        fetch(`http://localhost:3000/api/v1/relatives/${relative.id}`, {
+        fetch(`https://secure-lake-64435.herokuapp.com/api/v1/relatives/${relative.id}`, {
             method: 'PATCH', 
             headers: {
                 'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ class FamilyDetails extends React.Component{
         this.setState({notes:relative.notes})
         this.state.notes.map(note =>{
             if(note.id){
-                fetch(`http://localhost:3000/api/v1/notes/${note.id}`, {
+                fetch(`https://secure-lake-64435.herokuapp.com/api/v1/notes/${note.id}`, {
                     method: 'PATCH', 
                     headers: {
                         'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ class FamilyDetails extends React.Component{
             }
             else{
                 let createdNotes = []
-                fetch(`http://localhost:3000/api/v1/notes`, {
+                fetch(`https://secure-lake-64435.herokuapp.com/api/v1/notes`, {
                     method: 'POST', 
                     headers: {
                         'Content-Type': 'application/json',
@@ -148,7 +148,7 @@ class FamilyDetails extends React.Component{
 
     handleDeleteNote = (e, noteToDelete, relative) =>{
         e.preventDefault();
-        fetch(`http://localhost:3000/api/v1/notes/${noteToDelete.id}`, {
+        fetch(`https://secure-lake-64435.herokuapp.com/api/v1/notes/${noteToDelete.id}`, {
             method: 'DELETE',
         })
         .then(res => res.json()) 
@@ -170,7 +170,7 @@ class FamilyDetails extends React.Component{
 
     handleDeleteRelative = (e,relative) =>{
         e.preventDefault()
-        fetch(`http://localhost:3000/api/v1/relatives/${relative.id}`, {
+        fetch(`https://secure-lake-64435.herokuapp.com/api/v1/relatives/${relative.id}`, {
             method: 'DELETE',
         })
         .then(res => res.json()) 

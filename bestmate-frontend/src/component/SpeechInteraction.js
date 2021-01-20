@@ -38,7 +38,7 @@ const SpeechInteraction = () => {
     }
     
     const getAnswer = async (question) => {
-        return await fetch(`http://localhost:3000/api/v1/question_answers?askedQ=${question}`);
+        return await fetch(`https://secure-lake-64435.herokuapp.com/api/v1/question_answers?askedQ=${question}`);
     }
     
     const speakAnswers = async (answer) => {

@@ -42,7 +42,7 @@ class SignUp extends React.Component {
 
   handleSignUp = (e) =>{
       e.preventDefault();
-      fetch('http://localhost:3000/api/v1/users', {
+      fetch('https://secure-lake-64435.herokuapp.com/api/v1/users', {
           method: 'POST', 
           headers: {
           'Content-Type': 'application/json',

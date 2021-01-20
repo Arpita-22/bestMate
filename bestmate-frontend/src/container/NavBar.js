@@ -13,7 +13,7 @@ import {setUser, signOut, allowedFoods, relatives, notes} from '../actions/usera
 
 
 const handleDelete = (user, signOut, isLoggedAction, setUser, allowedFoods, relatives, notes) =>{
-  fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
+  fetch(`https://secure-lake-64435.herokuapp.com/api/v1/users/${user.id}`, {
     method: 'DELETE',
   })
   .then(res => res.json()) 

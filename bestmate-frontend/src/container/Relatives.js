@@ -57,7 +57,7 @@ class Relatives extends React.Component {
     addNotes = (relative, notes) =>{
         let notesAdded = [];
         notes.map(note => {
-            fetch(`http://localhost:3000/api/v1/notes`, {
+            fetch(`https://secure-lake-64435.herokuapp.com/api/v1/notes`, {
                 method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ class Relatives extends React.Component {
     handleSubmit = (e,relatives, user) =>{
         e.preventDefault()
         relatives.map(relative => {
-                fetch(`http://localhost:3000/api/v1/relatives`, {
+                fetch(`https://secure-lake-64435.herokuapp.com/api/v1/relatives`, {
                     method: 'POST', 
                     headers: {
                         'Content-Type': 'application/json',

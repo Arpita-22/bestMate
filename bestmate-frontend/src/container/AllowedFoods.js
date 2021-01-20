@@ -37,7 +37,7 @@ class AllowedFoods extends React.Component {
             allowedFoodsModified.push(food);
         });
         allowed_foods.map(allowed_food => {
-            fetch(`http://localhost:3000/api/v1/allowed_foods`, {
+            fetch(`https://secure-lake-64435.herokuapp.com/api/v1/allowed_foods`, {
                 method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json',

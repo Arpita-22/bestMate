@@ -25,7 +25,7 @@ class UpdateUser extends React.Component {
 
     handleUpdate = (e,user) =>{
       e.preventDefault()
-      fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
+      fetch(`https://secure-lake-64435.herokuapp.com/api/v1/users/${user.id}`, {
         method: 'PATCH', 
         headers: {
         'Content-Type': 'application/json',

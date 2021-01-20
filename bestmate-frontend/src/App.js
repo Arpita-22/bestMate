@@ -24,7 +24,7 @@ class App extends React.Component {
     const token = localStorage.getItem("token");
     if (token){
       //make fetch request to backend route profile or whichever route with authorization set user state
-      return fetch("http://localhost:3000/api/v1/users/profile", {
+      return fetch("https://secure-lake-64435.herokuapp.com/api/v1/users/profile", {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',

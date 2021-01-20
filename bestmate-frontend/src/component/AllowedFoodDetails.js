@@ -26,7 +26,7 @@ class AllowedFoodDetails extends React.Component{
     handleUpdate = (e, allowed_foods) =>{
       // e.preventDefault()
       allowed_foods.map(allowed_food =>{
-        fetch(`http://localhost:3000/api/v1/allowed_foods/${allowed_food.id}`, {
+        fetch(`https://secure-lake-64435.herokuapp.com/api/v1/allowed_foods/${allowed_food.id}`, {
           method: 'PATCH', 
           headers: {
             'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ class AllowedFoodDetails extends React.Component{
 
     handleDelete = (e, allowed_food) =>{
       // e.preventDefault()
-      fetch(`http://localhost:3000/api/v1/allowed_foods/${allowed_food.id}`, {
+      fetch(`https://secure-lake-64435.herokuapp.com/api/v1/allowed_foods/${allowed_food.id}`, {
         method: 'DELETE',
       })
       .then(res => res.json()) 
